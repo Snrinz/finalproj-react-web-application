@@ -1,6 +1,5 @@
 .App {
   text-align: center;
-  /* font-family: Century Gothic, sans-serif; */
 }
 
 body {
@@ -65,6 +64,7 @@ body {
 .movie-card {
   display: grid;
   justify-items: center;
+  box-shadow: 0 10px 10px 0 rgba(202, 202, 202, 0.486);
   max-width: 80%;
   border-radius: 4px;
   border: 1px solid #ccc;
@@ -122,7 +122,9 @@ body {
 
 /* DetailMovie */
 .detail-movie-section {
-
+  display: flex;
+  justify-content: space-around;
+  font-size: small;
 }
 .image-detail-wrapped {
   /* display: flex; */
@@ -131,5 +133,58 @@ body {
 #image-detail-movie {
   display: flex;
   display: block;
+  max-width: 30%;
+  /* margin-right: 10px; */
+}
+.description-section {
+  display: block;
   max-width: 50%;
+}
+.descrip {
+  display: inline-flex;
+}
+
+/* Comment */
+.comment-section {
+  display: block;
+  margin: 5px auto;
+  max-width: 90%;
+}
+#usrname {
+  cursor: pointer;
+  font-weight: bold;
+}
+#date-post, #time {
+  font-size: small;
+}
+hr {
+  border: 0.5px dashed rgb(231, 231, 231);
+}
+.comment-about{
+  border: 1px solid rgb(231, 231, 231);
+  border-radius: 4px;
+  display: flex;
+}
+.comment-user {
+  margin-right: 10px;
+  padding: 20px;
+  background-color: rgb(243, 243, 243);
+  /* flex: 0.4; */
+}
+.information-user {
+  display: grid;
+}
+.comment-user .information-user {
+  margin-top: 10px;
+  text-align: center;
+}
+#text-comment {
+  font-size: small;
+}
+#img-user-comment {
+  display: block;
+  display: flex;
+  max-width: 30%;
+  border-radius: 4px;
+  margin: 0px auto;
 }

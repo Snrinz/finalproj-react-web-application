@@ -16,7 +16,7 @@ export default class MovieCard extends Component {
                 {/* <FontAwesomeIcon id="star" icon={faStar} /> 
                 <p style={{display: 'inline'}} id="rank">10.0</p> */}
                 <NavLink to="/detail-movie/frozen2" className="name-movie">
-                    <strong>Frozen-2</strong>
+                    <strong>Frozen 2</strong>
                 </NavLink>
 
                 <WatchListButton></WatchListButton>              
