@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import imgMovie from './img/Frozen-2.jpg'
 import Comment from './Comment'
+import Post from './Post';
 
 export default class DetailMovie extends Component {
     render() {
@@ -9,6 +10,10 @@ export default class DetailMovie extends Component {
         return (
         <div>
             <h3>ID: {match.params.test}</h3>
+
+            <div className="grid-section">
+            
+            
 
             <div className="detail-movie-section">
                 {/* <div className="image-detail-wrapped"> */}
@@ -56,19 +61,14 @@ export default class DetailMovie extends Component {
             <Comment />
             <Comment />
             <Comment />
+
+            <Post />
+
+
+            </div>
          
         </div>
-            // <div className="detail-movie-section">
-            //     <p>{match.params.test}</p>
-            //     {/* <span>
-            //         มาหน้าใหม่แล้วจ้า
-            //     </span>
-            //     <button>fdsfsdfsdfsdf</button>
-            //     <Link to="/">GOOOO!!!!</Link>
-            //     Trending On Air */}
 
-                
-            // </div>
         )
     }
 }

@@ -45,10 +45,10 @@ body {
   box-sizing: border-box;
 }
 
-.watch-button:focus, #searchfield {
+.watch-button:focus, #searchfield, textarea {
   outline: 0;
 }
-#movie-image:hover, .watch-button:hover, .watch-button:active {
+#movie-image:hover, .watch-button:hover, .watch-button:active, input[type=submit]{
   cursor: pointer;
 }
 
@@ -64,11 +64,14 @@ body {
 .movie-card {
   display: grid;
   justify-items: center;
-  box-shadow: 0 10px 10px 0 rgba(202, 202, 202, 0.486);
   max-width: 80%;
   border-radius: 4px;
   border: 1px solid #ccc;
   background-color: rgb(255, 255, 255);
+  transition: .3s;
+}
+.movie-card:hover {
+  box-shadow: 0 10px 10px 0 rgba(202, 202, 202, 0.486);
 }
 /* hover แบบ zoom */
 /* .img-wrapper {  
@@ -99,7 +102,7 @@ body {
 .name-movie:hover, .name-movie:active {
   color: rgb(151, 150, 150)
 }
-.watch-button{
+.watch-button, input[type=submit]{
   color: rgb(100, 99, 99);
   font-weight: bolder;
   border: none;
@@ -107,7 +110,7 @@ body {
   background-color: rgba(0, 128, 0, 0);
   transition: 0.3s;
 }
-.watch-button:hover, .watch-button:active {
+.watch-button:hover, .watch-button:active, input[type=submit]:hover, input[type=submit]:active {
   color: rgb(124, 124, 124);
 }
 
@@ -121,10 +124,14 @@ body {
 }
 
 /* DetailMovie */
+.grid-section {
+  display: grid;
+}
 .detail-movie-section {
   display: flex;
   justify-content: space-around;
   font-size: small;
+  margin-bottom: 50px;
 }
 .image-detail-wrapped {
   /* display: flex; */
@@ -134,7 +141,7 @@ body {
   display: flex;
   display: block;
   max-width: 30%;
-  /* margin-right: 10px; */
+  box-shadow: 0 10px 10px 0 rgba(202, 202, 202, 0.486);
 }
 .description-section {
   display: block;
@@ -187,4 +194,24 @@ hr {
   max-width: 30%;
   border-radius: 4px;
   margin: 0px auto;
+}
+
+/* Post */
+.post-section {
+  display: block;
+}
+textarea{
+  display: block;
+  width: 90%;
+  height: 200px;
+  padding: 12px 20px;
+  margin: 20px auto;
+  border: 1px solid rgb(231, 231, 231);
+  border-radius: 4px;
+  box-sizing: border-box;
+  resize: vertical;
+}
+input[type=submit] {
+  background-color: lawngreen;
+  padding: 10px;
 }

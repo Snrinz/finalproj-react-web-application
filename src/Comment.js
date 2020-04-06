@@ -9,14 +9,14 @@ export default class Comment extends Component {
                 <div class="comment-section">
                     <div class="comment-about">                        
                         <div class="comment-user">       
-                            <img id="img-user-comment" src={defaultUser} />
+                            <img id="img-user-comment" src={defaultUser} alt="sth" />
                             <div class="information-user">
                                 <span id="usrname">User</span>
                                 <span id="date-post">19 Feb 2020</span>
                                 <span id="time">1 hour ago</span>  
                             </div>                            
                         </div>
-                        <p id="text-comment">ขอฟรีได้ปะคะ อยากได้มากเลย จะเอา</p>
+                        <p id="text-comment">หนังสนุกมากเลย ภาพสวย เพลงเพราะ แต่ร้องบ่อยไปหน่อย</p>
                     </div>
                 </div>
                 
