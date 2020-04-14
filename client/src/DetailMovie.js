@@ -1,0 +1,111 @@
+import React, { Component } from 'react'
+import imgMovie from './img/Frozen-2.jpg'
+// import Comment from './Comment'
+// import Post from './Post';
+
+//library for Comment.js
+import defaultUser from './img/default_user.png'
+
+
+export default class DetailMovie extends Component {
+    render() {
+        let {match} = this.props;
+
+        return (
+        <div>
+            <h3>ID: {match.params.test}</h3>
+
+            <div className="grid-section">
+            
+            
+
+            <div className="detail-movie-section">
+                {/* <div className="image-detail-wrapped"> */}
+                <img id="image-detail-movie" src={imgMovie} alt="sth" />
+                {/* </div> */}
+                <div className="description-section">
+
+                    <div className="descrip">
+                        <h2>โฟรเซ่น 2 ผจญภัยปริศนาราชินีหิมะ (Frozen 2)</h2>
+                    </div>
+
+                    <hr style={{opacity: '0'}} />
+                    <div className="descrip">
+                        <p>แนวประเภท: </p>
+                        <p>อนิเมชั่น / ผจญภัย / ตลก</p>
+                    </div>
+                    <hr />
+                    
+                    <div className="descrip">
+                        <p>ผู้กำกับ: </p>
+                        <p style={{alignSelf: 'center'}}>Chris Buck, Jennifer Lee</p>
+                    </div>
+                    <hr />
+                    
+                    <div className="descrip">
+                        <p>บทภาพยนตร์: </p>
+                        <p style={{alignSelf: 'center'}}>Chris Buck, Jennifer Lee, Marc Smith, Robert Lopez, Kristen Anderson-Lopez</p>
+                    </div>
+
+                    <hr />   
+                    <p>เรื่องย่อ: </p>
+                    <div className="descrip">
+                        <span>
+                        เรื่องราวการผจญภัยของเจ้าหญิง เอลซ่า ที่ต้องการหาคาตอบจากเสียงเรียกปริศนาที่เธอได้ยินเพียงลำพัง 
+                        และเธอต้องออกเดินทางสู่ผืนป่าอาถรรพ์อันกว้างใหญ่ที่ถูกปกคุมด้วยหมอกที่ไม่มีใครเข้าไปได้และไม่มีใครออกมาได้เป็นเวลาหลายปี 
+                        เจ้าหญิง เอลซ่า เดินทางไปยังป่าพร้อมกับน้องสาว อันนา ที่ควงแฟนหนุ่ม คริสทอฟ พร้อมกับสัตว์คู่ใจอย่าง สเวน ไปด้วย และยังมี โอลาฟ 
+                        รูปปั้นหิมะที่มีชีวิตร่วมออกเดินทางในครั้งนี้ เจ้าหญิง เอลซ่า ต้องการหาคาตอบของเสียงและหาคาตอบว่าทาไมเธอถึงได้เกิดมาพร้อมกับพลังวิเศษ 
+                        และได้รู้ความลับของความขัดแย้งระหว่าง เอเรนเดล กับ นอร์ธัลดรา ที่อาจจะเปลี่ยนแปลงชีวิตและนาไปสู่คาตอบที่แท้จริงของเธอ
+                        </span>
+                    </div>
+                </div>    
+                 
+            </div>
+
+            <Comment />
+            <Comment />
+            <Comment />
+
+            <Post />
+
+
+            </div>
+         
+        </div>
+
+        )
+    }
+}
+
+const Comment = () => {
+    return (
+        <div>
+
+            <div class="comment-section">
+                <div class="comment-about">                        
+                    <div class="comment-user">       
+                        <img id="img-user-comment" src={defaultUser} alt="sth" />
+                        <div class="information-user">
+                            <span id="usrname">User</span>
+                            <span id="date-post">19 Feb 2020</span>
+                            <span id="time">1 hour ago</span>  
+                        </div>                            
+                    </div>
+                    <p id="text-comment">หนังสนุกมากเลย ภาพสวย เพลงเพราะ แต่ร้องบ่อยไปหน่อย</p>
+                </div>
+            </div>
+            
+        </div>
+    )
+}
+
+const Post = () => {
+    return (
+        <div className="post-section">
+            <textarea name="text-post" placeholder="Type text in here . ." /> 
+            
+            <input type="submit" value="SUBMIT" />
+
+        </div>
+    )
+}
