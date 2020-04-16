@@ -6,10 +6,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 //library for MovieCard
 import { NavLink } from 'react-router-dom'
-import imgMovie from './img/Frozen-2.jpg'
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-// import { faStar } from "@fortawesome/free-solid-svg-icons"
-
+import { faStar } from "@fortawesome/free-solid-svg-icons"
 
 export default class Trending extends Component {
     state = {
@@ -62,10 +60,11 @@ const MovieCard = (props) => {
                 alt={movie.poster_path}></img>
             </NavLink>
             
-            {/* <FontAwesomeIcon id="star" icon={faStar} /> 
-            <p style={{display: 'inline'}} id="rank">10.0</p> */}
+            <div class="rating-section">
+                <FontAwesomeIcon  id="star" icon={faStar} /> {movie.vote_average}
+            </div>
 
-            <NavLink to={`/detail-movie/${movie.id}`} className="name-movie">
+            <NavLink to={`/detail-movie/${movie.id}`} id="name-movie">
                 <strong>{movie.title}</strong>
             </NavLink>
 
