@@ -16,19 +16,22 @@ app.get('/', (req, res) => {
     res.end("Hello World"); 
  })
 
+ app.get('/products/:tagId', function(req, res) {
+    res.send("tagId is set to " + req.params.tagId);
+  });  
+
 const Products = [ 
-    {category: 'Sporting Goods', price: '$49.99', stocked: true, name: 'Football', sku:'1234'}, 
-    {category: 'Sporting Goods', price: '$9.99', stocked: true, name: 'Baseball', sku:'3444'},  
-    {category: 'Sporting Goods', price: '$29.99', stocked: false, name: 'Basketball', sku:'1344'},  
-    {category: 'Electronics', price: '$99.99', stocked: true, name: 'iPod Touch', sku:'3422'},  
-    {category: 'Electronics', price: '$399.99', stocked: false, name: 'iPhone 5', sku:'2567'},  
-    {category: 'Electronics', price: '$199.99', stocked: true, name: 'Nexus 7', sku:'3214'},  
+    {category: 'Sporting Goods', price: '$49.99', stocked: true, name: 'Football', sku:'1234'},
+    {category: 'Sporting Goods', price: '$9.99', stocked: true, name: 'Baseball', sku:'3444'},
+    {category: 'Sporting Goods', price: '$29.99', stocked: false, name: 'Basketball', sku:'1344'},
+    {category: 'Electronics', price: '$99.99', stocked: true, name: 'iPod Touch', sku:'3422'},
+    {category: 'Electronics', price: '$399.99', stocked: false, name: 'iPhone 5', sku:'2567'},
+    {category: 'Electronics', price: '$199.99', stocked: true, name: 'Nexus 7', sku:'3214'},
     {category: 'Kitchenware', price: '$9.99', stocked: true, name: 'Pot', sku:'1414'},
 ];
 
 // entry route for /product post-request
 app.post('/product', (req, res) => {
-    console.log(req.body);
     if (req.is('json')) {
         let body = req.body;
         Products.push(body);

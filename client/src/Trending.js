@@ -17,8 +17,10 @@ export default class Trending extends Component {
     }
 
     componentDidMount () {
+        console.log("DID MOUNT");
+        
         //  axios.get(`https://api.themoviedb.org/3/movie/now_playing?api_key=${process.env.REACT_APP_MM_KEY}&language=en-US&page=1`)
-        axios.get(`https://api.themoviedb.org/3/movie/now_playing?api_key=72c7a3ed944673d07bbf1b9b44dc7894&language=en-US&page=1`)
+        axios.get(`https://api.themoviedb.org/3/movie/now_playing?api_key=72c7a3ed944673d07bbf1b9b44dc7894&language=th&page=1`)
         .then(res => {
             // console.log(res.data.results)
             this.setState({trend_list: res.data.results})
@@ -55,7 +57,7 @@ const MovieCard = (props) => {
     const { movie } = props
     return (            
         <div className="movie-card">
-            <NavLink to="/detail-movie/frozen2" className="img-wrapper">
+            <NavLink to={`/detail-movie/${movie.id}`} className="img-wrapper">
                 <img id="movie-image" src={`https://image.tmdb.org/t/p/original${movie.poster_path}`} 
                 alt={movie.poster_path}></img>
             </NavLink>
