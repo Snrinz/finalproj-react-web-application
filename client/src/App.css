@@ -12,6 +12,7 @@ body {
 .nav-section {
   position: -webkit-sticky;
   position: sticky;
+  margin-bottom: 30px;
   top: 0;
   display: flex;
   justify-content: center;
@@ -173,15 +174,18 @@ hr {
   border: 0.5px dashed rgb(231, 231, 231);
 }
 .comment-about{
+  display: grid;
+  grid-template-columns: 0.3fr 1fr;
   border: 1px solid rgb(231, 231, 231);
   border-radius: 4px;
-  display: flex;
 }
 .comment-user {
   margin-right: 10px;
   padding: 20px;
   background-color: rgb(243, 243, 243);
-  /* flex: 0.4; */
+}
+#text-comment {
+  font-size: small;
 }
 .information-user {
   display: grid;
@@ -189,9 +193,6 @@ hr {
 .comment-user .information-user {
   margin-top: 10px;
   text-align: center;
-}
-#text-comment {
-  font-size: small;
 }
 #img-user-comment {
   display: block;

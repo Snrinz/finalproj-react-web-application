@@ -1,38 +1,76 @@
 import React, { Component } from 'react'
-import imgMovie from './img/Frozen-2.jpg'
-// import Comment from './Comment'
-// import Post from './Post';
+import axios from 'axios';
 
 //library for Comment.js
 import defaultUser from './img/default_user.png'
 
 
 export default class DetailMovie extends Component {
+    state = {
+        movie_detail: {},
+        credits_list: {},
+        review_list: {}
+    }
+
+    componentDidMount () {
+        let { movie_id } = this.props.match.params
+        console.log("DID MOUNT");
+        console.log("ID " + movie_id);
+
+        //  axios.get(`https://api.themoviedb.org/3/movie/now_playing?api_key=${process.env.REACT_APP_MM_KEY}&language=en-US&page=1`)
+        axios.get(`https://api.themoviedb.org/3/movie/${movie_id}?language=th&api_key=72c7a3ed944673d07bbf1b9b44dc7894`)
+        .then(res => {
+            console.log(res.data)
+            this.setState({movie_detail: res.data})
+        })
+        .catch(err => console.log(err)) 
+
+        axios.get(`https://api.themoviedb.org/3/movie/${movie_id}/credits?api_key=72c7a3ed944673d07bbf1b9b44dc7894`)
+        .then(res => {
+            console.log(res.data)
+            this.setState({credits_list : res.data})
+        })
+        .catch(err => console.log(err)) 
+
+        axios.get(`https://api.themoviedb.org/3/movie/${movie_id}/reviews?api_key=72c7a3ed944673d07bbf1b9b44dc7894`)
+        .then(res => {
+            console.log("review: " + res.data)
+            this.setState({review_list : res.data.results})
+        })
+        .catch(err => console.log(err)) 
+    }
+
     render() {
-        let {match} = this.props;
 
         return (
         <div>
-            <h3>ID: {match.params.test}</h3>
 
             <div className="grid-section">
-            
             
 
             <div className="detail-movie-section">
                 {/* <div className="image-detail-wrapped"> */}
-                <img id="image-detail-movie" src={imgMovie} alt="sth" />
+                <img id="image-detail-movie" src={`https://image.tmdb.org/t/p/original${this.state.movie_detail.poster_path}`} 
+                alt={this.state.movie_detail.poster_path}></img>
                 {/* </div> */}
                 <div className="description-section">
 
                     <div className="descrip">
-                        <h2>โฟรเซ่น 2 ผจญภัยปริศนาราชินีหิมะ (Frozen 2)</h2>
+                        <h2>{this.state.movie_detail.title}</h2>
                     </div>
 
                     <hr style={{opacity: '0'}} />
                     <div className="descrip">
                         <p>แนวประเภท: </p>
-                        <p>อนิเมชั่น / ผจญภัย / ตลก</p>
+                        {
+                        (this.state.movie_detail.genres && Object.keys(this.state.movie_detail.genres).length > 0)
+                            ? this.state.movie_detail.genres.map(type => (
+                                <p style={{paddingLeft: "10px"}}>{type.name}</p>
+                            ))
+                            // if (type.next() == null)
+                            : ""
+                        }
+
                     </div>
                     <hr />
                     
@@ -50,21 +88,25 @@ export default class DetailMovie extends Component {
                     <hr />   
                     <p>เรื่องย่อ: </p>
                     <div className="descrip">
-                        <span>
-                        เรื่องราวการผจญภัยของเจ้าหญิง เอลซ่า ที่ต้องการหาคาตอบจากเสียงเรียกปริศนาที่เธอได้ยินเพียงลำพัง 
-                        และเธอต้องออกเดินทางสู่ผืนป่าอาถรรพ์อันกว้างใหญ่ที่ถูกปกคุมด้วยหมอกที่ไม่มีใครเข้าไปได้และไม่มีใครออกมาได้เป็นเวลาหลายปี 
-                        เจ้าหญิง เอลซ่า เดินทางไปยังป่าพร้อมกับน้องสาว อันนา ที่ควงแฟนหนุ่ม คริสทอฟ พร้อมกับสัตว์คู่ใจอย่าง สเวน ไปด้วย และยังมี โอลาฟ 
-                        รูปปั้นหิมะที่มีชีวิตร่วมออกเดินทางในครั้งนี้ เจ้าหญิง เอลซ่า ต้องการหาคาตอบของเสียงและหาคาตอบว่าทาไมเธอถึงได้เกิดมาพร้อมกับพลังวิเศษ 
-                        และได้รู้ความลับของความขัดแย้งระหว่าง เอเรนเดล กับ นอร์ธัลดรา ที่อาจจะเปลี่ยนแปลงชีวิตและนาไปสู่คาตอบที่แท้จริงของเธอ
-                        </span>
+                        <span> {this.state.movie_detail.overview} </span>
                     </div>
                 </div>    
                  
             </div>
-
-            <Comment />
-            <Comment />
-            <Comment />
+            
+                <h2 style={{fontWeight: "bold"}}>Comments</h2>
+            {
+                <React.Fragment>
+                    {
+                        (this.state.review_list && Object.keys(this.state.review_list).length > 0)
+                        ? this.state.review_list.map(review => (
+                        <Comment review={review} />
+                        ))
+                        : "Loading .  . ."
+                        
+                    }
+                </React.Fragment>
+            }
 
             <Post />
 
@@ -77,7 +119,8 @@ export default class DetailMovie extends Component {
     }
 }
 
-const Comment = () => {
+const Comment = (props) => {
+    const { review } = props
     return (
         <div>
 
@@ -86,12 +129,12 @@ const Comment = () => {
                     <div class="comment-user">       
                         <img id="img-user-comment" src={defaultUser} alt="sth" />
                         <div class="information-user">
-                            <span id="usrname">User</span>
+                            <span id="usrname">{review.author}</span>
                             <span id="date-post">19 Feb 2020</span>
                             <span id="time">1 hour ago</span>  
                         </div>                            
                     </div>
-                    <p id="text-comment">หนังสนุกมากเลย ภาพสวย เพลงเพราะ แต่ร้องบ่อยไปหน่อย</p>
+                    <p id="text-comment">{review.content}</p>
                 </div>
             </div>
             

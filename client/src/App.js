@@ -27,7 +27,7 @@ export default class App extends Component {
 				{/* https://stackoverflow.com/questions/54463073/react-router-match-with-params */}
 				<Switch>
                     <Route exact path="/" component={MainPage}  />
-					<Route path="/detail-movie/:test" component={DetailMovie} />
+					<Route path="/detail-movie/:movie_id" component={DetailMovie} />
                 </Switch>
 			</Router>
 			
