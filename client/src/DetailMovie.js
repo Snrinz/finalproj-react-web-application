@@ -65,7 +65,7 @@ export default class DetailMovie extends Component {
                         {
                         (this.state.movie_detail.genres && Object.keys(this.state.movie_detail.genres).length > 0)
                             ? this.state.movie_detail.genres.map(type => (
-                                <p style={{paddingLeft: "10px"}}>{type.name}</p>
+                                <p key={type.id} style={{paddingLeft: "10px"}}>{type.name}</p>
                             ))
                             // if (type.next() == null)
                             : ""
@@ -93,14 +93,14 @@ export default class DetailMovie extends Component {
                 </div>    
                  
             </div>
-            
+
                 <h2 style={{fontWeight: "bold"}}>Comments</h2>
             {
                 <React.Fragment>
                     {
                         (this.state.review_list && Object.keys(this.state.review_list).length > 0)
                         ? this.state.review_list.map(review => (
-                        <Comment review={review} />
+                        <Comment key={review.id} review={review} />
                         ))
                         : "Loading .  . ."
                         

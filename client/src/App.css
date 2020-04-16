@@ -32,6 +32,7 @@ body {
   grid-template-columns: 1fr 1fr 1fr;
   grid-gap: 10px;
 }
+
 #icon, #icon:hover, #icon:link, #icon:active, #icon:hover {
   color: rgb(100, 99, 99);
   font-size: 22px;
@@ -63,6 +64,7 @@ body {
   font-size: 45px;
 }
 .movie-card {
+  margin-bottom: 30px;
   display: grid;
   justify-items: center;
   max-width: 80%;
@@ -186,6 +188,7 @@ hr {
 }
 #text-comment {
   font-size: small;
+  padding: 30px;
 }
 .information-user {
   display: grid;

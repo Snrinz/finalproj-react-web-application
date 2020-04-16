@@ -34,7 +34,7 @@ export default class Trending extends Component {
                         <React.Fragment>
                             {
                                 this.state.trend_list.map(movie => (
-                                    <MovieCard movie={movie} />
+                                    <MovieCard key={movie.id} movie={movie} />
                                 ))
                             }
                         </React.Fragment>
