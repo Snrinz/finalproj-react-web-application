@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios';
+import ReactPlayer from 'react-player'
 
 //library for Comment.js
 import defaultUser from './img/default_user.png'
@@ -86,15 +87,26 @@ export default class DetailMovie extends Component {
                     </div>
 
                     <hr />   
-                    <p>เรื่องย่อ: </p>
-                    <div className="descrip">
-                        <span> {this.state.movie_detail.overview} </span>
-                    </div>
+                    {
+                        (this.state.movie_detail.overview)?
+                        <>
+                            <p>เรื่องย่อ: </p>
+                            <div className="descrip">
+                                <span> {this.state.movie_detail.overview} </span>
+                            </div>
+                        </>
+                        : 
+                        (this.state.movie_detail.video)? <ReactPlayer url="http://api.themoviedb.org/3/movie/${movie_id}/videos?api_key=72c7a3ed944673d07bbf1b9b44dc7894" controls={true}></ReactPlayer>
+                        :""
+
+                    }
+                    
                 </div>    
                  
             </div>
 
-                <h2 style={{fontWeight: "bold"}}>Comments</h2>
+            <h2 id="comments-title" >Comments</h2>
+            
             {
                 <React.Fragment>
                     {
@@ -102,7 +114,7 @@ export default class DetailMovie extends Component {
                         ? this.state.review_list.map(review => (
                         <Comment key={review.id} review={review} />
                         ))
-                        : "Loading .  . ."
+                        : <p id="no-comment">There are no comments</p>
                         
                     }
                 </React.Fragment>

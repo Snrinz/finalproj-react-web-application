@@ -5,6 +5,7 @@ import { faCog } from "@fortawesome/free-solid-svg-icons"
 import { faUser } from "@fortawesome/free-solid-svg-icons"
 import { faHome } from "@fortawesome/free-solid-svg-icons"
 import { faSearch } from "@fortawesome/free-solid-svg-icons"
+import { faFilter } from "@fortawesome/free-solid-svg-icons"
 import { Link } from 'react-router-dom'
 
 // icon awesome
@@ -13,6 +14,9 @@ import { Link } from 'react-router-dom'
 const Navigation = () => {
     return (
         <nav className="nav-section">
+            <div className="filter-section">
+                <FilterSection />
+            </div>
             <SearchField></SearchField>
             <div className="icon-section">
                 <Link to="/"><FontAwesomeIcon id="icon" icon={faHome} /></Link>
@@ -29,11 +33,27 @@ const Navigation = () => {
 
 const SearchField = () => {  
     return (
-        <div>
-            <FontAwesomeIcon icon={faSearch} />
+        <div className="search-section">
             <input type="text" id="searchfield" name="searchfield" placeholder="Search movie . . ."></input>
+            <FontAwesomeIcon id="search-icon" icon={faSearch} />
         </div>
     ) 
+}
+
+const FilterSection = () => {
+    return (
+        <div class="filter-setion">
+            <FontAwesomeIcon id="icon" icon={faFilter} />
+            <div>                
+                <div class="list-menu">
+                    <p>Trending On Air</p>
+                    <p>Trailer & Video</p>
+                    <p>Top 10 Rating</p>
+                </div>
+            </div>            
+        </div>
+
+    )
 }
 
 const Setting = () => {

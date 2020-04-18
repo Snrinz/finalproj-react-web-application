@@ -24,6 +24,14 @@ export default class Trending extends Component {
         .catch(err => console.log(err)) 
     }
 
+    displayMovieCard = () => {
+        for(let i=0 ; i<4 ; i++) {
+            let card = []
+            card.push(<MovieCard key={this.state.trend_list[i].id} movie={this.state.trend_list[i]} />)
+            return card;
+        }
+    }
+
     render() {
         return (
             <div style={{display: 'flex', alignItems: 'center'}}>
@@ -31,11 +39,12 @@ export default class Trending extends Component {
                 <FontAwesomeIcon id="left-right" icon={faAngleLeft} />
                 <div className="trend-movie-section">
                     {
+                        // this.displayMovieCard()
                         <React.Fragment>
                             {
-                                this.state.trend_list.map(movie => (
-                                    <MovieCard key={movie.id} movie={movie} />
-                                ))
+                                 this.state.trend_list.map(movie => (
+                                     <MovieCard key={movie.id} movie={movie} />
+                                 ))
                             }
                         </React.Fragment>
                     }
