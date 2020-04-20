@@ -116,6 +116,7 @@ body {
 }
 .movie-card:hover {
   box-shadow: 0 10px 10px 0 rgba(202, 202, 202, 0.486);
+  transform: scale(1.09)
 }
 /* hover แบบ zoom */
 /* .img-wrapper {  
@@ -135,7 +136,7 @@ body {
   /* transform: scale(1.1);  hover แบบ zoom */
 }
 .rating-section {
-  display: inline;
+  display: inline-block;
   margin: 10px auto;
 }
 #star {
@@ -174,6 +175,24 @@ body {
 }
 
 /* DetailMovie */
+#btnRate {
+  display: inline-block;
+  color: inherit;
+  margin-right: 20px;
+  cursor: pointer;
+  font-weight: bold;
+  border: 1px solid rgb(231, 231, 231);
+  border-radius: 4px;
+  background-color: rgba(245, 222, 179, 0);
+  font-family: inherit;
+}
+.listStar { display: none; }
+#starHover { margin-right: 2px; cursor: pointer; }
+.ratethis:hover .listStar {
+  display: block;
+  position: absolute;
+  z-index: 1;
+}
 .grid-section {
   display: grid;
 }

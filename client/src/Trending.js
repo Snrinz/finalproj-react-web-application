@@ -24,13 +24,13 @@ export default class Trending extends Component {
         .catch(err => console.log(err)) 
     }
 
-    displayMovieCard = () => {
-        for(let i=0 ; i<4 ; i++) {
-            let card = []
-            card.push(<MovieCard key={this.state.trend_list[i].id} movie={this.state.trend_list[i]} />)
-            return card;
-        }
-    }
+    // displayMovieCard = () => {
+    //     for(let i=0 ; i<4 ; i++) {
+    //         let card = []
+    //         card.push(<MovieCard key={this.state.trend_list[i].id} movie={this.state.trend_list[i]} />)
+    //         return card;
+    //     }
+    // }
 
     render() {
         return (

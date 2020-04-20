@@ -1,10 +1,13 @@
-import React, { Component } from 'react'
+import React, { Component, useState, useEffect } from 'react'
 import axios from 'axios';
 import ReactPlayer from 'react-player'
 
 //library for Comment.js
 import defaultUser from './img/default_user.png'
 
+//library for MovieCard
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faStar } from "@fortawesome/free-solid-svg-icons"
 
 export default class DetailMovie extends Component {
     state = {
@@ -55,8 +58,8 @@ export default class DetailMovie extends Component {
                 alt={this.state.movie_detail.poster_path}></img>
                 {/* </div> */}
                 <div className="description-section">
-
-                    <div className="descrip">
+                    <Rate vote_average={this.state.movie_detail.vote_average} />
+                    <div className="descrip">                        
                         <h2>{this.state.movie_detail.title}</h2>
                     </div>
 
@@ -68,7 +71,6 @@ export default class DetailMovie extends Component {
                             ? this.state.movie_detail.genres.map(type => (
                                 <p key={type.id} style={{paddingLeft: "10px"}}>{type.name}</p>
                             ))
-                            // if (type.next() == null)
                             : ""
                         }
 
@@ -96,7 +98,7 @@ export default class DetailMovie extends Component {
                             </div>
                         </>
                         : 
-                        (this.state.movie_detail.video)? <ReactPlayer url="http://api.themoviedb.org/3/movie/${movie_id}/videos?api_key=72c7a3ed944673d07bbf1b9b44dc7894" controls={true}></ReactPlayer>
+                        (this.state.movie_detail.video)? <ReactPlayer url="http://api.themoviedb.org/3/movie/${movie_id}/videos?append_to_response=videos&api_key=72c7a3ed944673d07bbf1b9b44dc7894" controls={true}></ReactPlayer>
                         :""
 
                     }
@@ -129,6 +131,29 @@ export default class DetailMovie extends Component {
 
         )
     }
+}
+
+const Rate = (props) => {
+    let { vote_average } = props
+    const listStar = []
+
+    const [count, setCount] = useState(0)    
+
+    for(var i=1 ; i<=10 ; i++){
+        listStar.push(<FontAwesomeIcon onhover={() => setCount(i) } id="starHover" icon={faStar} />)
+    }
+
+    return(
+        <>
+            <div className="ratethis">
+                <button id="btnRate">Rate this<FontAwesomeIcon style={{margin: "auto 5px"}} id="star" icon={faStar} /> {vote_average}</button>
+                <div className="listStar">{listStar}</div>
+            </div>
+            {/* {
+                ()
+            } */}
+        </>
+    )
 }
 
 const Comment = (props) => {
