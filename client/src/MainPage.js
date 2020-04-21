@@ -12,7 +12,7 @@ export default class Index extends Component {
                 <h1 className="heading-label">Trailer & Video</h1>
                 <Trailer />
 
-                <h1 className="heading-label">Top 10 Rating</h1>
+                {/* <h1 className="heading-label">Top 10 Rating</h1> */}
             </div>
         )
     }
