@@ -1,8 +1,51 @@
 // index.js -- server side
 import express from 'express'; 
 import bodyParser from 'body-parser';
+
+import mongoose  from 'mongoose';
+import morgan  from 'morgan';
+import path  from 'path';
+
+
+
+// const app = express();
+// const PORT = process.env.PORT || 8080; // Step 1
+// import routes  from './routes/api';
+
 const app = express(); 
-const port = 4000;
+const port = process.env.PORT || 8080;
+
+
+// Step 2
+mongoose.connect( 'mongodb+srv://france:france090@cluster0-p0dro.mongodb.net/test?retryWrites=true&w=majority', {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+});
+
+mongoose.connection.on('connected', () => {
+    console.log('Mongoose is connected!!!!');
+});
+
+// // Data parsing
+// app.use(express.json());
+// app.use(express.urlencoded({ extended: false }));
+
+// // Step 3
+
+// if (process.env.NODE_ENV === 'production') {
+//     app.use(express.static('client/build'));
+// }
+
+
+// // HTTP request logger
+// app.use(morgan('tiny'));
+// app.use('/api', routes);
+
+
+
+// app.listen(PORT, console.log(`Server is starting at ${PORT}`));
+
+
 
 app.use(bodyParser.json());
 
