@@ -1,4 +1,5 @@
 import mongoose  from 'mongoose';
+// import mongoose  from 'mongoose';
 
 
 // Schema
@@ -8,11 +9,13 @@ const BlogPostSchema = new Schema({
     body: String,
     date: {
         type: String,
-        default: Date.now()
+        default: new Date()
     }
 });
 
 // Model
-const BlogPost = mongoose.model('BlogPost', BlogPostSchema);
+const  BlogPost = mongoose.model('BlogPost', BlogPostSchema);
 
-module.exports =  BlogPost;
+// module.exports  =  BlogPost;
+
+export default BlogPost;
