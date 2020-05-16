@@ -4,6 +4,7 @@ import './App.css';
 import Navigation from './Navigation'
 import MainPage from './MainPage';
 import DetailMovie from './DetailMovie';
+import Register from './Register';
 
 
 export default class App extends Component {
@@ -28,7 +29,8 @@ export default class App extends Component {
 				<Switch>
                     <Route exact path="/" component={MainPage}  />
 					<Route path="/detail-movie/:movie_id" component={DetailMovie} />
-                </Switch>
+					<Route path="/sign-up" component={Register} />
+				</Switch>
 			</Router>
 			
         

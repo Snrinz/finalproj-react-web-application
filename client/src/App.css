@@ -64,14 +64,6 @@ body {
   cursor: pointer;
 }
 
-/* FilterSection */
-.filter-section {
-  /* background-color: greenyellow; */
-  margin: auto 0px;
-  position: relative;
-  display: inline-block;
-}
-
 .list-menu {
   display: none;
   position: absolute;

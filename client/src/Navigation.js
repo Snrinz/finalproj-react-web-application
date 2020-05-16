@@ -5,7 +5,7 @@ import { faCog } from "@fortawesome/free-solid-svg-icons"
 import { faUser } from "@fortawesome/free-solid-svg-icons"
 import { faHome } from "@fortawesome/free-solid-svg-icons"
 import { faSearch } from "@fortawesome/free-solid-svg-icons"
-import { faFilter } from "@fortawesome/free-solid-svg-icons"
+import { faUserPlus } from "@fortawesome/free-solid-svg-icons"
 import { Link } from 'react-router-dom'
 
 // icon awesome
@@ -14,14 +14,13 @@ import { Link } from 'react-router-dom'
 const Navigation = () => {
     return (
         <nav className="nav-section">
-            <div className="filter-section">
-                <FilterSection />
-            </div>
+            <div />
             <SearchField></SearchField>
             <div className="icon-section">
                 <Link to="/"><FontAwesomeIcon id="icon" icon={faHome} /></Link>
                 <FontAwesomeIcon id="icon" icon={faUser} />
-                <FontAwesomeIcon id="icon" icon={faCog} />                    
+                <FontAwesomeIcon id="icon" icon={faCog} />
+                <Link to="/sign-up"><FontAwesomeIcon id="icon" icon={faUserPlus} /></Link>                    
             </div>
                 {/* Modal */}
 {/* https://codepen.io/designcouch/pen/obvKxm?__cf_chl_jschl_tk__=3ee3763e5eead6767d03beddc95a2bc3e8635f18-1586194370-0-Aa8YSwpBeb_sWyAN5c0Pej-Lvt3_gkSddiAzMUoypGoEQboiEH9zzMyfVSI7T08HY65hd3n3NNssaaVMoWtg5UT--Xs_Bi57lhKxtghGWygxswUrv9z76Ys11bT6HLhcU9qITJ1t6yPznCI34Lnom08S92P3WsBlN2wCDEt1uwLYHUaELYp3bW1FOtbUaFBCE7h4ZtquLbOKkdVtfE2Wg8WlHThaTVDeozZs44IzyjoveZss-Y7k0N8ouHrW3egkLEoRBJBGjzjk3ohhyGcZZB9SJrLtScsdmMfhidZMhZ5i_cD8fRQrzRJo6K7DMXFjGQF72hnFbUP9A590ULl04HOHll8TsYNwE78V39LSCQQq */}
@@ -38,22 +37,6 @@ const SearchField = () => {
             <FontAwesomeIcon id="search-icon" icon={faSearch} />
         </div>
     ) 
-}
-
-const FilterSection = () => {
-    return (
-        <div class="filter-setion">
-            <FontAwesomeIcon id="icon" icon={faFilter} />
-            <div>                
-                <div class="list-menu">
-                    <p>Trending On Air</p>
-                    <p>Trailer & Video</p>
-                    <p>Top 10 Rating</p>
-                </div>
-            </div>            
-        </div>
-
-    )
 }
 
 const Setting = () => {
