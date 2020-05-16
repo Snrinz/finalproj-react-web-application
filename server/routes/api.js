@@ -3,8 +3,8 @@ import express  from 'express';
 // const router = express.Router();
 var router = express.Router()
 // const app = express(); 
-import BlogPost  from '../models/blogPost.js';
-import Movie  from '../models/movie.js';
+import BlogPost  from '../models/blogPostModel.js';
+import Movie  from '../models/movieModel.js';
 
 
 

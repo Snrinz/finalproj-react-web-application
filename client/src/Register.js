@@ -1,11 +1,9 @@
 import React from 'react';
+import {Link, withRouter} from 'react-router-dom';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
-import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
@@ -110,6 +108,22 @@ const Form = props => {
                     variant="outlined"
                     required
                     fullWidth
+                    id="phone"
+                    label="Phone"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    name="phone"
+                    autoComplete="phone"
+                    value={values.phone}
+                    helperText={touched.phone ? errors.phone : ""}
+                    error={touched.phone && Boolean(errors.phone)} 
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                    variant="outlined"
+                    required
+                    fullWidth
                     name="password"
                     label="Password"
                     type="password"
@@ -135,8 +149,8 @@ const Form = props => {
               </Button>
               <Grid container justify="flex-end">
                 <Grid item>
-                  <Link href="#" variant="body2">
-                    Already have an account? Sign in
+                  <Link to="/sign-in" variant="body2">
+                    { "Already have an account? Sign in" }
                   </Link>
                 </Grid>
               </Grid>
@@ -150,12 +164,13 @@ const Form = props => {
 };
 
 const Register = withFormik({
-  mapPropsToValues: () => ({ firstName, lastName, email, password }) => {
+  mapPropsToValues: () => ({ firstName, lastName, email, password , phone }) => {
     return {
       firstName: firstName || "",
       lastName: lastName || "",
       email: email || "",
-      password: password || ""
+      password: password || "",
+      phone: phone || ""
     };
   },
 
@@ -172,10 +187,14 @@ const Register = withFormik({
     password: Yup.string()
       .min(8, "Password must contain at least 8 characters")
       .required("Enter your password"),
+    phone: Yup.string()
+      .matches(/\d/, "Must be numeric")
+      .min(10, "Phone must be 10 numerics")
+      .required("Enter your password"),
   }),
 
   handleSubmit: (values, { setSubmitting, setErrors, props }) => {   
-    fetch('/api/user/register', {
+    fetch('/api/register', {
       method: 'POST',
       body: JSON.stringify(values),
       headers: new Headers({ 'Content-Type': 'application/json' }),
@@ -211,6 +230,7 @@ const Register = withFormik({
     });
     setSubmitting(false);
   },
+  
   displayName: "Form"
 })(Form);
 
