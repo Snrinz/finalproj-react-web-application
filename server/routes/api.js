@@ -51,21 +51,29 @@ router.post('/movie',async (req, res) => {
 
     movie.name = req.body.name;
     movie.type = req.body.type;
+    movie.actor = req.body.actor;
+
+
     movie.description = req.body.description;
     movie.trailer = req.body.trailer;
     movie.director = req.body.director;
     movie.company = req.body.company;
     movie.photo = req.body.photo;
     movie.onAirTime =  moment(req.body.onAirTime, 'DD/MM/YYYY') ;
-    console.log(req.body);
-    var actor = req.body.actor
-    // var actor = JSON.stringify(req.body);
-    // actor = JSON.parse(actor); 
-    // console.log(actor);
+    // console.log(req.body);
+    // var actor = req.body.actor
+    // var type = req.body.type;
+    // for (let t of type) {
+    //     movie.type.push( t)
+    // }
+
+    // // var actor = JSON.stringify(req.body);
+    // // actor = JSON.parse(actor); 
+    // // console.log(actor);
     
-    for (let actori of actor) {
-        movie.actor.push( actori)
-    }
+    // for (let actori of actor) {
+    //     movie.actor.push( actori)
+    // }
    
     await movie.save((error) => {
         if (error) {
@@ -168,7 +176,70 @@ router.get('/moviemostrating', async (req , res) =>{
     })
 
 })
+router.get('/moviecomingsoon', async (req , res) =>{
+    var today = moment().toDate();
 
+    Movie.find({
+        onAirTime:{ $gte: today },
+    })
+    .sort( { onAirTime: 1 } )
+    .then(async movies =>{
+        var moviesArr = []
+        console.log(movies);
+        
+        for (let m of  movies){
+            var rating =  await findRating(m._id);
+            var tmp = []
+            tmp.push(m)
+            tmp.push(rating)
+            moviesArr.push(tmp)
+        }
+        
+        
+
+         
+        return res.json({
+            msg:"",
+            movies: moviesArr
+        })
+
+    })
+    
+})
+
+router.get('/movieonair', async (req , res) =>{
+    var today = moment().toDate();
+    var lenday = moment(today).subtract(14, 'days').toDate();
+    Movie.find({
+        $and:[
+        {onAirTime:{ $gte: lenday }},
+        {onAirTime:{ $lte: today }},
+        ]
+    })
+    .sort( { onAirTime: 1 } )
+    .then(async movies =>{
+        var moviesArr = []
+        console.log(movies);
+        
+        for (let m of  movies){
+            var rating =  await findRating(m._id);
+            var tmp = []
+            tmp.push(m)
+            tmp.push(rating)
+            moviesArr.push(tmp)
+        }
+        
+        
+
+         
+        return res.json({
+            msg:"",
+            movies: moviesArr
+        })
+
+    })
+    
+})
 var findRating =async (movieId)=>{
     var ratings = await Ratings.aggregate([
         {
@@ -249,27 +320,7 @@ router.post('/reviews',async (req, res) => {
 
 
 router.post('/users',async (req, res) => {
-    // const {  movieId , userId , comment} = req.body;
-    
-    
-    // firstName: String,
-    // lastName: String,
-    // phoneNo: [String],
-    // email: { type: String, lowercase: true, trim: true },
-    // password: String,
-    // memberType: {type: String, enum: ['MEMBER', 'ADMIN'], default: 'MEMBER'},
-   
-    // await reviews.save((error) => {
-    //     if (error) {
-    //         res.status(500).json({ msg: 'Sorry, internal server errors' });
-    //         return;
-    //     }
-    //     // BlogPost
-    //     return res.json({
-    //         msg: 'Your data has been saved!!!!!!',
-    //         reviews: reviews
-    //     });
-    // });
+ 
 
     const _email = req.body.email.toLowerCase();
     User.findOne({email: _email},async function (err, user) {
