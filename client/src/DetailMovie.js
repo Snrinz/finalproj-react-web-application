@@ -1,7 +1,7 @@
 import React, { Component, useState } from 'react'
 import axios from 'axios';
 import ReactPlayer from 'react-player'
-
+import imgTrailer from './img/trailer2.jpg'
 //library for Comment.js
 import defaultUser from './img/default_user.png'
 
@@ -22,13 +22,24 @@ export default class DetailMovie extends Component {
         console.log("ID " + movie_id);
 
         //  axios.get(`https://api.themoviedb.org/3/movie/now_playing?api_key=${process.env.REACT_APP_MM_KEY}&language=en-US&page=1`)
-        axios.get(`https://api.themoviedb.org/3/movie/${movie_id}?language=th&api_key=72c7a3ed944673d07bbf1b9b44dc7894`)
+        // axios.get(`/api/movie/${movie_id}`)
+        // .then(res => {
+        //     console.log(res.movie)
+        //     this.setState({movie_detail: res.movie})
+        // })
+        // .catch(err => console.log(err)) 
+        fetch(`/api/movie/${movie_id}`)
         .then(res => {
-            console.log(res.data)
-            this.setState({movie_detail: res.data})
+            if (res.ok) return res.json()
+            else throw res
         })
-        .catch(err => console.log(err)) 
-
+        .then(res =>{ 
+            console.log(res.movie)
+            this.setState({movie_detail: res.movie})
+        })
+        .catch(err => {
+            console.log("error " + JSON.stringify(err)); 
+        }) 
         axios.get(`https://api.themoviedb.org/3/movie/${movie_id}/credits?api_key=72c7a3ed944673d07bbf1b9b44dc7894`)
         .then(res => {
             console.log(res.data)
@@ -54,59 +65,74 @@ export default class DetailMovie extends Component {
 
             <div className="detail-movie-section">
                 {/* <div className="image-detail-wrapped"> */}
-                <img id="image-detail-movie" src={`https://image.tmdb.org/t/p/original${this.state.movie_detail.poster_path}`} 
-                alt={this.state.movie_detail.poster_path}></img>
+                <img id="image-detail-movie" src={`./img/${this.state.movie_detail.photo}`} 
+                alt={this.state.movie_detail.photo}></img>
                 {/* </div> */}
                 <div className="description-section">
-                    <Rate vote_average={this.state.movie_detail.vote_average} />
+                    {/* <h1>{this.state.movie_detail.name}</h1> */}
+
+                    <Rate vote_average={this.state.movie_detail.rating} />
                     <div className="descrip">                        
-                        <h2>{this.state.movie_detail.title}</h2>
+                        <h2>{this.state.movie_detail.name}</h2>
                     </div>
 
                     <hr style={{opacity: '0'}} />
                     <div className="descrip">
                         <p>แนวประเภท: </p>
                         {
-                        (this.state.movie_detail.genres && Object.keys(this.state.movie_detail.genres).length > 0)
-                            ? this.state.movie_detail.genres.map(type => (
-                                <p key={type.id} style={{paddingLeft: "10px"}}>{type.name}</p>
+                        (this.state.movie_detail.type && Object.keys(this.state.movie_detail.type).length > 0)
+                            ? this.state.movie_detail.type.map(type => (
+                                <p key={type} style={{paddingLeft: "10px"}}>{type}</p>
                             ))
                             : ""
                         }
 
                     </div>
                     <hr />
-                    
+                    <div className="descrip">
+                        <p>นักแสดงนำ: </p>
+                        {
+                        (this.state.movie_detail.actor && Object.keys(this.state.movie_detail.actor).length > 0)
+                            ? this.state.movie_detail.actor.map(type => (
+                                <p key={type} style={{paddingLeft: "10px"}}>{type}</p>
+                            ))
+                            : ""
+                        }
+
+                    </div>
+                    <hr />
                     <div className="descrip">
                         <p>ผู้กำกับ: </p>
-                        <p style={{alignSelf: 'center'}}>Chris Buck, Jennifer Lee</p>
+                        <p style={{alignSelf: 'center'}}>{this.state.movie_detail.director}</p>
                     </div>
                     <hr />
                     
                     <div className="descrip">
-                        <p>บทภาพยนตร์: </p>
-                        <p style={{alignSelf: 'center'}}>Chris Buck, Jennifer Lee, Marc Smith, Robert Lopez, Kristen Anderson-Lopez</p>
+                        <p>บริษัทผู้สร้าง:{this.state.movie_detail.company} </p>
+                        {/* <p style={{alignSelf: 'center'}}>Chris Buck, Jennifer Lee, Marc Smith, Robert Lopez, Kristen Anderson-Lopez</p> */}
                     </div>
 
                     <hr />   
-                    {
-                        (this.state.movie_detail.overview)?
-                        <>
-                            <p>เรื่องย่อ: </p>
+                    <div>
+                         <p>เรื่องย่อ: </p>
                             <div className="descrip">
-                                <span> {this.state.movie_detail.overview} </span>
+                                <span> {this.state.movie_detail.description} </span>
                             </div>
-                        </>
-                        : 
-                        (this.state.movie_detail.video)? <ReactPlayer url="http://api.themoviedb.org/3/movie/${movie_id}/videos?append_to_response=videos&api_key=72c7a3ed944673d07bbf1b9b44dc7894" controls={true}></ReactPlayer>
-                        :""
-
-                    }
+                    </div>
+                    <hr />   
+                
+                     
+                </div>  
+                 
                     
-                </div>    
                  
             </div>
+            <div style={{display: 'flex', align: 'center'}}>
+                {
+                    (this.state.movie_detail.trailer)? <ReactPlayer url={this.state.movie_detail.trailer}  controls={true}></ReactPlayer> : ""
 
+                }
+            </div> 
             <h2 id="comments-title" >Comments</h2>
             
             {

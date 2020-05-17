@@ -11,7 +11,7 @@ let mongooseDbConnect = (url=config.database, options=config.connectOptions) => 
     return (req, res, next) => {
         mongoose.connect(config.database, config.connectOptions);
         mongoose.connection.on('connected', () => { 
-            console.log('Connected to database '+ config.database);
+            // console.log('Connected to database '+ config.database);
             next();    
         });
         mongoose.connection.on('error', (err) => {

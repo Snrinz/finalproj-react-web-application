@@ -6,6 +6,12 @@ import MainPage from './MainPage';
 import DetailMovie from './DetailMovie';
 import Register from './Register';
 import SignIn from './SignIn';
+import Mostrating from './Moviepage/Mostrating';
+import Comingsoon from './Moviepage/Comingsoon';
+import Onair from './Moviepage/Onair';
+
+
+
 import Dashboard from './Dashboard/Dashboard';
 
 export default class App extends Component {
@@ -33,6 +39,12 @@ export default class App extends Component {
 					<Route path="/sign-up" component={Register} />
 					<Route path="/sign-in" component={SignIn} />
 					<Route path="/dashboard" component={Dashboard} />
+					<Route path="/onairpage" component={Onair} />
+					<Route path="/comingpage" component={Comingsoon} />
+					<Route path="/toppage" component={Mostrating} />
+
+
+
 				</Switch>
 			</Router>
         

@@ -133,9 +133,10 @@ router.get('/movie', async (req , res) =>{
 })
 
 router.get('/moviemostrating', async (req , res) =>{
-   
+    var length =parseInt( req.query.length)
     Movie.find({})
-    
+    .skip(0)
+    .limit(length)
     .then(async movies =>{
         var moviesArr = []        
         for (let m of  movies){
@@ -176,10 +177,12 @@ router.get('/moviemostrating', async (req , res) =>{
 })
 router.get('/moviecomingsoon', async (req , res) =>{
     var today = moment().toDate();
-
+    var length =parseInt( req.query.length)
     Movie.find({
         onAirTime:{ $gte: today },
     })
+    .skip(0)
+    .limit(length)
     .sort( { onAirTime: 1 } )
     .then(async movies =>{
         var moviesArr = []
@@ -205,6 +208,9 @@ router.get('/moviecomingsoon', async (req , res) =>{
 })
 
 router.get('/movieonair', async (req , res) =>{
+    var length =parseInt( req.query.length)
+    console.log(length);
+    
     var today = moment().toDate();
     var lenday = moment(today).subtract(14, 'days').toDate();
     Movie.find({
@@ -213,6 +219,8 @@ router.get('/movieonair', async (req , res) =>{
         {onAirTime:{ $lte: today }},
         ]
     })
+    .skip(0)
+    .limit(length)
     .sort( { onAirTime: 1 } )
     .then(async movies =>{
         var moviesArr = []
