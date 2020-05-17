@@ -1,6 +1,5 @@
 import express  from 'express';
 import moment from'moment';
-import async from'async';
 import mongoose  from 'mongoose';
 
 // const router = express.Router();
@@ -11,9 +10,6 @@ import Movie  from '../models/movie.js';
 import Ratings  from '../models/rating.js';
 import Reviews  from '../models/reviews.js';
 import User  from '../models/user.js';
-
-
-
 
 // Routes
 router.get('/', (req, res) => {
@@ -138,9 +134,7 @@ router.get('/moviemostrating', async (req , res) =>{
     Movie.find({})
     
     .then(async movies =>{
-        var moviesArr = []
-        // console.log(movies);
-        
+        var moviesArr = []        
         for (let m of  movies){
             var rating =  await findRating(m._id);
             var tmp = []
@@ -169,11 +163,6 @@ router.get('/moviemostrating', async (req , res) =>{
                     }
                 }
             }
-        
-        
-        
-        
-
          
         return res.json({
             msg:"",

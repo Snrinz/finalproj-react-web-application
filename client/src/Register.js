@@ -53,7 +53,7 @@ const Form = props => {
             <Typography component="h1" variant="h5">
               Sign up
             </Typography>
-            <form className={classes.form} noValidate>
+            <form className={classes.form} onSubmit={handleSubmit}>
               <Grid container spacing={2}>
                 <Grid item xs={12} sm={6}>
                   <TextField autoComplete="fname"
@@ -108,15 +108,15 @@ const Form = props => {
                     variant="outlined"
                     required
                     fullWidth
-                    id="phone"
-                    label="Phone"
+                    id="phoneNo"
+                    label="phoneNo"
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    name="phone"
-                    autoComplete="phone"
-                    value={values.phone}
-                    helperText={touched.phone ? errors.phone : ""}
-                    error={touched.phone && Boolean(errors.phone)} 
+                    name="phoneNo"
+                    autoComplete="phoneNo"
+                    value={values.phoneNo}
+                    helperText={touched.phoneNo ? errors.phoneNo : ""}
+                    error={touched.phoneNo && Boolean(errors.phoneNo)} 
                   />
                 </Grid>
                 <Grid item xs={12}>
@@ -143,7 +143,6 @@ const Form = props => {
                 variant="contained"
                 color="primary"
                 className={classes.submit}
-                onSubmit={handleSubmit}
               >
                 Sign Up
               </Button>
@@ -163,14 +162,16 @@ const Form = props => {
   );
 };
 
-const Register = withFormik({
-  mapPropsToValues: () => ({ firstName, lastName, email, password , phone }) => {
+const phoneNoRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
+
+const Register = withRouter(withFormik({
+  mapPropsToValues: () => ({ firstName, lastName, email, password , phoneNo }) => {
     return {
       firstName: firstName || "",
       lastName: lastName || "",
       email: email || "",
       password: password || "",
-      phone: phone || ""
+      phoneNo: phoneNo || ""
     };
   },
 
@@ -187,19 +188,19 @@ const Register = withFormik({
     password: Yup.string()
       .min(8, "Password must contain at least 8 characters")
       .required("Enter your password"),
-    phone: Yup.string()
-      .matches(/\d/, "Must be numeric")
-      .min(10, "Phone must be 10 numerics")
+    phoneNo: Yup.string()
+      .matches(phoneNoRegExp, "phoneNo number is not valid")
+      .min(10, "phoneNo must be 10 numerics")
       .required("Enter your password"),
   }),
 
-  handleSubmit: (values, { setSubmitting, setErrors, props }) => {   
-    fetch('/api/register', {
+  handleSubmit: (values, { setSubmitting, setErrors, props }) => {
+    fetch('/user/register', {
       method: 'POST',
       body: JSON.stringify(values),
       headers: new Headers({ 'Content-Type': 'application/json' }),
     })
-    .then(response => {
+    .then(response => {      
       if (response.status !== 200) {
         console.log(response.statusText);
         throw `Status Code: ${response.status} ${response.statusText}`;
@@ -207,7 +208,8 @@ const Register = withFormik({
       return response.json()
     })
     .then(res => {
-      alert("Congratulation! " + res.message + " with " + res.user.email);
+      alert(res.message)
+      //alert("Congratulation! " + res.message + " with " + res.user.email);
       // redirect page back to previous location if any, otherwise go to /      
       let history = props.history; //useHistory();
       let location = props.location; //useLocation();    
@@ -232,7 +234,7 @@ const Register = withFormik({
   },
   
   displayName: "Form"
-})(Form);
+})(Form));
 
 export default Register;
 

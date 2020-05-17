@@ -8,7 +8,6 @@ import logger from 'morgan';
 import mongooseDbConnect from './config/database.js';
 import userRouter from './routes/userRouter.js';
 import api from './routes/api.js';
-import path from 'path';
 
 
 const app = express(); 
@@ -28,7 +27,7 @@ app.use('/api', api);
 
 // make server start listening on a specified port 
 app.get('/', (req, res) => res.status(404).json(logError("Not Found")) ) 
-app.use('/*', (req, res) => res.status(422).json(logError("Unsupported path entity")) );
+//app.use('/*', (req, res) => res.status(422).json(logError("Unsupported path entity")) );
 app.listen(port, () => 
     console.log(`Server started at port ${port}`)
 );

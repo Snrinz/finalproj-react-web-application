@@ -32,7 +32,7 @@ userSchema.methods.validPassword = function (password) {
 
 userSchema.methods.generateJWT = function () {
     const expiresIn = 7200;
-    return {token: jsonwebtoken.sign({email: this.email, _id: this._id, role: this.role},
+    return {token: jsonwebtoken.sign({email: this.email, _id: this._id, memberType: this.memberType},
             jwtSecret, { expiresIn}), // 2 hour
             expiresIn: expiresIn
     }
@@ -42,10 +42,11 @@ userSchema.methods.toAuthJSON = function () {
   let genJWT =this.generateJWT();
   return {
     _id: this._id,
-    FName: this.FName,
-    LName: this.LName,
+    firstName: this.firstName,
+    lastName: this.lastName,
     email: this.email,
-    role: this.role,
+    phoneNo: this.phoneNo,
+    memberType: this.memberType,
     token: "bearer " +genJWT.token,
     expiresIn: genJWT.expiresIn,
   };
@@ -54,20 +55,22 @@ userSchema.methods.toAuthJSON = function () {
 userSchema.methods.toNewRegisterJSON = function () {
     return {
         _id: this._id,
-        FName: this.FName,
-        LName: this.LName,
+        firstName: this.firstName,
+        lastName: this.lastName,
         email: this.email,
-        role: this.role,
+        phoneNo: this.phoneNo,
+        memberType: this.memberType,
     };
 };
   
 userSchema.methods.toProfileJSON = function () {
     return {
         _id: this._id,
-        FName: this.FName,
-        LName: this.LName,
+        firstName: this.firstName,
+        lastName: this.lastName,
         email: this.email,
-        role: this.role,
+        phoneNo: this.phoneNo,
+        memberType: this.memberType,
         hasAvatar: this.avatar !== null,
         signUpDate: this.signUpDate,
         like : this.like

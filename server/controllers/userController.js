@@ -17,25 +17,27 @@ const usrFieldProjection = {
 
 // Create and Save a new user
 export let create = (req, res) => {
-    let {firstName, lastName, email, phoneNo, password, role} = req.body;
+    let {firstName, lastName, phoneNo, email, password, memberType} = req.body;
     
     if (!firstName || !lastName || !email || !phoneNo || !password)
         return res.status(422).json(logError('Invalid user registration info.'));
     if (!validatorEmail(email)) 
         return res.status(422).json(logError('Invalid email address.'));
   
-    role = isBlank(role)? 'user': (role==="admin" || role==='user')? role:'user';
+    memberType = isBlank(memberType)? 'MEMBER': (memberType==="ADMIN" || memberType==='MEMBER')? memberType:'MEMBER';
   
     bcrypt.genSalt(10, (err, salt) => {
         bcrypt.hash(password, salt, (err, hash) => {
-        if (err) res.status(400).json(logError(err));
-    
+        if (err)
+            res.status(400).json(logError(err));
+        
         var newUser = new userModel({
             firstName,
             lastName,
             email,
+            phoneNo,
             password: hash,
-            role,
+            memberType,
         })
 
         // Save User in the database
@@ -53,9 +55,9 @@ export let create = (req, res) => {
 })};
   
 export let checkLogon = (req, res) => {
-    const {email, password} = req.body;
+    const {email, phoneNo, password} = req.body;
     
-    if (!email || !password) 
+    if (!email || !phoneNo || !password) 
         res.status(422).json(logError("Required fields"));
     else {
         userModel.findOne({email: email})

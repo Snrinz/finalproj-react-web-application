@@ -4,7 +4,6 @@ export const jwtSession = {
 };
 export const ROLES = {
   user: 1, 
-  owner: 2, 
-  admin: 3,
+  admin: 2,
   name: (value) => Object.keys(ROLES).find(e=>ROLES[e]===value)
 };

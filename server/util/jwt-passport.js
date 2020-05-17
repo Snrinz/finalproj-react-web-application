@@ -34,8 +34,8 @@ export const isInRole = (role) => (req, res, next) => {
     if (!req.user) 
         return res.status(404).json(logError("Need to signin"))
 
-    if (role === ROLES.owner && req.user.role === "user" && req.user._id.equals(req.params.userId))
-        req.user.role = "owner";
+    //if (role === ROLES.owner && req.user.role === "MEMBERTYPE" && req.user._id.equals(req.params.userId))
+        // req.user.role = "owner";
     const hasRole = role <= ROLES[req.user.role];
     if (hasRole) return next();
     return res.status(404).json(logError(`Required ${ROLES.name(role)} authorization`))
