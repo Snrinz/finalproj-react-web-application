@@ -2,11 +2,14 @@
 import express from 'express'; 
 import bodyParser from 'body-parser';
 // import mongoose  from 'mongoose';
-import morgan  from 'morgan';
+// import morgan  from 'morgan';
 import { logError } from './util/util.js';
 import logger from 'morgan';
 import mongooseDbConnect from './config/database.js';
 import userRouter from './routes/userRouter.js';
+import api from './routes/api.js';
+import path from 'path';
+
 
 const app = express(); 
 const port = 4001;
@@ -14,12 +17,14 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ // Middleware
     extended: true
 }));
-app.use(logger("short"))
+// app.use(logger("short"))
 
 // connect to mongoDB
 app.use(mongooseDbConnect())
+app.use(logger('tiny'));
+app.use('/user', userRouter);
+app.use('/api', api);
 
-app.use('/api/user', userRouter);
 
 // make server start listening on a specified port 
 app.get('/', (req, res) => res.status(404).json(logError("Not Found")) ) 
@@ -38,4 +43,4 @@ app.listen(port, () =>
 // });
 
 // // HTTP request logger
-// app.use(morgan('tiny'));
+

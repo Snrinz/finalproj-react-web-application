@@ -12,7 +12,8 @@ const movieSchema = new Schema({
     actor: [ String ],
     director: String,
     company: String,
-    onAirTime: Date
+    onAirTime: Date,
+    photo: String
 },
  {
     timestamps: true

@@ -3,6 +3,8 @@ let mongoose = mongooseDef.default;
 import {config} from './dbConfig.js';
  
 let mongooseDbConnect = (url=config.database, options=config.connectOptions) => {
+    console.log(url);
+    
 	if (typeof url !== 'string') 
 		throw new TypeError('url must be string!');
 

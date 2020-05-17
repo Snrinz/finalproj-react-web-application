@@ -1,7 +1,7 @@
 import mongoose  from 'mongoose';
 
-import User from './user'
-import Movie from './movieModel'
+import User from './user.js'
+import Movie from './movie.js'
 
 // Schema
 const Schema = mongoose.Schema;

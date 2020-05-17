@@ -3,7 +3,7 @@ import jsonwebtoken from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 
 import { jwtSecret } from "../config/jwtConfig.js";
-import userModel from '../models/userModel.js';
+import userModel from '../models/user.js';
 import { isBlank, logError, validatorEmail } from '../util/util.js';
 import {Buffer} from 'buffer';
 import fs from 'fs';
