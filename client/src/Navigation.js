@@ -7,6 +7,7 @@ import { faSearch } from "@fortawesome/free-solid-svg-icons"
 import { faSignInAlt } from "@fortawesome/free-solid-svg-icons"
 import { Link } from 'react-router-dom'
 import Context from './utils/authUtils/Context'
+import DashboardIcon from '@material-ui/icons/Dashboard';
 
 const Navigation = () => {
     const context = useContext(Context)
@@ -18,6 +19,7 @@ const Navigation = () => {
                 <Link to="/"><FontAwesomeIcon id="icon" icon={faHome} /></Link>
                 <FontAwesomeIcon id="icon" icon={faUser} />
                 <FontAwesomeIcon id="icon" icon={faCog} />
+                <Link to="/dashboard"><DashboardIcon id="icon" /></Link>
                 <Link to="/sign-in"><FontAwesomeIcon id="icon" icon={faSignInAlt} /></Link> 
                 {/* {context.authState?
                     <>

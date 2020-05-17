@@ -208,12 +208,11 @@ const Register = withRouter(withFormik({
       return response.json()
     })
     .then(res => {
-      alert(res.message)
-      //alert("Congratulation! " + res.message + " with " + res.user.email);
+      alert("Congratulation! " + res.message + " with " + res.user.email);
       // redirect page back to previous location if any, otherwise go to /      
       let history = props.history; //useHistory();
       let location = props.location; //useLocation();    
-      let { from } = location.state || { from: { pathname: "/signin" } };
+      let { from } = location.state || { from: { pathname: "/sign-in" } };
       history.replace(from);
     })
     .catch(err => { 

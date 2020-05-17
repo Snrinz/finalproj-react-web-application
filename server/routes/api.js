@@ -116,12 +116,8 @@ router.get('/movie', async (req , res) =>{
             tmp.push(rating)
             moviesArr.push(tmp)
         }
-        
-        
-
          
         return res.json({
-            msg:"",
             movies: moviesArr
         })
 

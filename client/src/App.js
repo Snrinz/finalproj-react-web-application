@@ -6,6 +6,7 @@ import MainPage from './MainPage';
 import DetailMovie from './DetailMovie';
 import Register from './Register';
 import SignIn from './SignIn';
+import Dashboard from './Dashboard/Dashboard';
 
 export default class App extends Component {
 	render() {
@@ -31,6 +32,7 @@ export default class App extends Component {
 					<Route path="/detail-movie/:movie_id" component={DetailMovie} />
 					<Route path="/sign-up" component={Register} />
 					<Route path="/sign-in" component={SignIn} />
+					<Route path="/dashboard" component={Dashboard} />
 				</Switch>
 			</Router>
         
