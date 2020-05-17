@@ -115,14 +115,13 @@ router.get('/movie', async (req , res) =>{
     
     .then(async movies =>{
         var moviesArr = []
-        console.log(movies);
+        // console.log(movies);
         
         for (let m of  movies){
             var rating =  await findRating(m._id);
-            var tmp = []
-            tmp.push(m)
-            tmp.push(rating)
-            moviesArr.push(tmp)
+            m = JSON.parse(JSON.stringify(m));
+            m.rating = rating;
+            moviesArr.push(m)
         }
          
         return res.json({
@@ -141,10 +140,9 @@ router.get('/moviemostrating', async (req , res) =>{
         var moviesArr = []        
         for (let m of  movies){
             var rating =  await findRating(m._id);
-            var tmp = []
-            tmp.push(m)
-            tmp.push(rating)
-            moviesArr.push(tmp)
+            m = JSON.parse(JSON.stringify(m));
+            m.rating = rating;
+            moviesArr.push(m)
         }
         
         let len=  moviesArr.length
@@ -154,12 +152,12 @@ router.get('/moviemostrating', async (req , res) =>{
         
             for (let i = 0; i < len; i++) {
                 for (let j = 0; j < len-1; j++) {
-                    console.log(moviesArr[j][1] +" "+moviesArr[j+1][1] );
-                    let tmp1 = moviesArr[j][1];
+                    console.log(moviesArr[j].rating +" "+moviesArr[j+1].rating );
+                    let tmp1 = moviesArr[j].rating;
                     let one = j+1;
                     console.log(one);
                     
-                    let tmp2 = moviesArr[one][1];
+                    let tmp2 = moviesArr[one].rating;
                     if (tmp1 < tmp2) {
                         let tmp = moviesArr[j];
                         moviesArr[j] = moviesArr[j + 1];
@@ -189,10 +187,9 @@ router.get('/moviecomingsoon', async (req , res) =>{
         
         for (let m of  movies){
             var rating =  await findRating(m._id);
-            var tmp = []
-            tmp.push(m)
-            tmp.push(rating)
-            moviesArr.push(tmp)
+            m = JSON.parse(JSON.stringify(m));
+            m.rating = rating;
+            moviesArr.push(m)
         }
         
         
@@ -223,10 +220,9 @@ router.get('/movieonair', async (req , res) =>{
         
         for (let m of  movies){
             var rating =  await findRating(m._id);
-            var tmp = []
-            tmp.push(m)
-            tmp.push(rating)
-            moviesArr.push(tmp)
+            m = JSON.parse(JSON.stringify(m));
+            m.rating = rating;
+            moviesArr.push(m)
         }
         
         
