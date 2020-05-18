@@ -1,13 +1,16 @@
 import React, { Component, useState } from 'react'
-import axios from 'axios';
+// import axios from 'axios';
 import ReactPlayer from 'react-player'
 import imgTrailer from './img/trailer2.jpg'
 //library for Comment.js
 import defaultUser from './img/default_user.png'
 
+import moment from'moment';
+// import './App.css';
 //library for MovieCard
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faStar } from "@fortawesome/free-solid-svg-icons"
+
 
 export default class DetailMovie extends Component {
     state = {
@@ -19,7 +22,7 @@ export default class DetailMovie extends Component {
     componentDidMount () {
         let { movie_id } = this.props.match.params
         console.log("DID MOUNT");
-        console.log("ID " + movie_id);
+        
 
         //  axios.get(`https://api.themoviedb.org/3/movie/now_playing?api_key=${process.env.REACT_APP_MM_KEY}&language=en-US&page=1`)
         // axios.get(`/api/movie/${movie_id}`)
@@ -40,19 +43,19 @@ export default class DetailMovie extends Component {
         .catch(err => {
             console.log("error " + JSON.stringify(err)); 
         }) 
-        axios.get(`https://api.themoviedb.org/3/movie/${movie_id}/credits?api_key=72c7a3ed944673d07bbf1b9b44dc7894`)
-        .then(res => {
-            console.log(res.data)
-            this.setState({credits_list : res.data})
-        })
-        .catch(err => console.log(err)) 
+        // axios.get(`https://api.themoviedb.org/3/movie/${movie_id}/credits?api_key=72c7a3ed944673d07bbf1b9b44dc7894`)
+        // .then(res => {
+        //     console.log(res.data)
+        //     this.setState({credits_list : res.data})
+        // })
+        // .catch(err => console.log(err)) 
 
-        axios.get(`https://api.themoviedb.org/3/movie/${movie_id}/reviews?api_key=72c7a3ed944673d07bbf1b9b44dc7894`)
-        .then(res => {
-            console.log("review: " + res.data)
-            this.setState({review_list : res.data.results})
-        })
-        .catch(err => console.log(err)) 
+        // axios.get(`https://api.themoviedb.org/3/movie/${movie_id}/reviews?api_key=72c7a3ed944673d07bbf1b9b44dc7894`)
+        // .then(res => {
+        //     console.log("review: " + res.data)
+        //     this.setState({review_list : res.data.results})
+        // })
+        // .catch(err => console.log(err)) 
     }
 
     render() {
@@ -64,16 +67,20 @@ export default class DetailMovie extends Component {
             
 
             <div className="detail-movie-section">
-                {/* <div className="image-detail-wrapped"> */}
-                <img id="image-detail-movie" src={`./img/${this.state.movie_detail.photo}`} 
-                alt={this.state.movie_detail.photo}></img>
+                {/* <div className="image-detail-wrapped">
+                     <img id="movie-image" src={`./img/${this.state.movie_detail.photo}`} 
+                    alt={this.state.movie_detail.photo}></img>  */}
                 {/* </div> */}
+                   <Img photo={this.state.movie_detail.photo}/> 
                 <div className="description-section">
                     {/* <h1>{this.state.movie_detail.name}</h1> */}
 
                     <Rate vote_average={this.state.movie_detail.rating} />
                     <div className="descrip">                        
                         <h2>{this.state.movie_detail.name}</h2>
+                        <h2>{this.state.movie_detail.photo}</h2>
+
+
                     </div>
 
                     <hr style={{opacity: '0'}} />
@@ -120,14 +127,25 @@ export default class DetailMovie extends Component {
                             </div>
                     </div>
                     <hr />   
-                
+                    <div>
+                         <p>วันที่เข้าฉาย: </p>
+                            
+                                <span> {moment(this.state.movie_detail.onAirTime).locale('th').format('LL') } </span>
+                            
+                    </div>
+                    <hr />  
                      
                 </div>  
                  
                     
                  
             </div>
+            <div className="trailer-section">
+                <img id="trailer-image" src={imgTrailer}  alt="sth"></img>
+                <ReactPlayer url="https://www.youtube.com/watch?v=3cxixDgHUYw" controls={true}></ReactPlayer>
+            </div>
             <div style={{display: 'flex', align: 'center'}}>
+            <img id="trailer-image" src={imgTrailer}  alt="sth"></img>
                 {
                     (this.state.movie_detail.trailer)? <ReactPlayer url={this.state.movie_detail.trailer}  controls={true}></ReactPlayer> : ""
 
@@ -152,7 +170,7 @@ export default class DetailMovie extends Component {
 
 
             </div>
-         
+            
         </div>
 
         )
@@ -214,4 +232,18 @@ const Post = () => {
 
         </div>
     )
+}
+
+const Img = (props) => {
+    let { photo } = props
+    return (
+        <React.Fragment>
+            <div className="image-detail-wrapped">
+                <img id="movie-image" src={`./img/${photo}`} 
+                alt={photo}></img> 
+            
+            </div>
+        </React.Fragment>
+    )
+
 }

@@ -109,6 +109,32 @@ router.get('/movie/:movieId', async (req , res) =>{
     })
 
 })
+
+// router.get('/movie/:movieId', async (req , res) =>{
+//     const {movieId } = req.params;
+//     Movie.findById(movieId)
+    
+//     .then(async movie =>{
+    
+//         var comments =await  Reviews.find( { _movie : mongoose.Types.ObjectId(movieId)})
+//         console.log(comments);
+//         var rating =  await findRating(movieId);
+        
+
+         
+//         return res.json({
+//             msg:"",
+//             movie: movie,
+//             comment: comments,
+//             rating: rating
+//         })
+
+//     })
+
+// })
+// app.use('/image', function(req, res){
+//     res.sendFile(path.resolve(__dirname, './images/img1.jpg'));
+// })
 router.get('/movie', async (req , res) =>{
     const {movieId } = req.params;
     Movie.find({})
