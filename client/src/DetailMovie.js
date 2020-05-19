@@ -9,6 +9,10 @@ import moment from'moment';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faStar } from "@fortawesome/free-solid-svg-icons"
 import Loading from "./Loading"
+// import { withFormik } from 'formik'
+// import { withRouter } from 'react-router-dom';
+// import * as Yup from 'yup';
+import PostForm from './CommentPost'
 
 export default class DetailMovie extends Component {
     state = {
@@ -21,7 +25,21 @@ export default class DetailMovie extends Component {
     componentDidMount () {
         let { movie_id } = this.props.match.params
         console.log("DID MOUNT");
+        // Get Movie Detail
+        fetch(`/api/movie/${movie_id}`)
+        .then(res => {
+            if (res.ok) return res.json()
+            else throw res
+        })
+        .then(res =>{ 
+            console.log(res.movie)
+            this.setState({movie_detail: res.movie, isLoad:false})
+        })
+        .catch(err => {
+            console.log("error " + JSON.stringify(err)); 
+        }) 
 
+        // Get Review
         fetch(`/api/movie/${movie_id}`)
         .then(res => {
             if (res.ok) return res.json()
@@ -141,8 +159,7 @@ export default class DetailMovie extends Component {
                 </React.Fragment>
             }
 
-            <Post />
-
+            <PostForm userId="Pailin" movieId={this.state.movie_detail._id} />
 
             </div>
             
@@ -168,9 +185,7 @@ const Rate = (props) => {
                 <button id="btnRate">Rate this<FontAwesomeIcon style={{margin: "auto 5px"}} id="star" icon={faStar} /> {vote_average}</button>
                 <div className="listStar">{listStar}</div>
             </div>
-            {/* {
-                ()
-            } */}
+
         </>
     )
 }
@@ -196,29 +211,4 @@ const Comment = (props) => {
             
         </div>
     )
-}
-
-const Post = () => {
-    return (
-        <div className="post-section">
-            <textarea name="text-post" placeholder="Type text in here . ." /> 
-            
-            <input type="submit" value="SUBMIT" />
-
-        </div>
-    )
-}
-
-const Img = (props) => {
-    let { photo } = props
-    return (
-        <React.Fragment>
-            <div className="image-detail-wrapped">
-                <img id="movie-image" src={`./img/${photo}`} 
-                alt={photo}></img> 
-            
-            </div>
-        </React.Fragment>
-    )
-
 }
