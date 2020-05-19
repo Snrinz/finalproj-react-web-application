@@ -96,8 +96,6 @@ router.get('/movie/:movieId', async (req , res) =>{
         var comments =await  Reviews.find( { _movie : mongoose.Types.ObjectId(movieId)})
         console.log(comments);
         var rating =  await findRating(movieId);
-        
-
          
         return res.json({
             msg:"",

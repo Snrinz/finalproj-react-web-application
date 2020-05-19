@@ -142,7 +142,10 @@ body {
   text-decoration: none;
   transition: 0.3s;
 }
-#title-summary:visited, #title-summary:link, #name-movie:hover, #name-movie:active {
+#title-summary:visited, #title-summary:link {
+  color: rgb(92, 91, 91);
+}
+#name-movie:hover, #name-movie:active {
   color: rgb(151, 150, 150);
 }
 .watch-button, input[type=submit]{

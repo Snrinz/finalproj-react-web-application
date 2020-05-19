@@ -30,12 +30,11 @@ const PostForm = (props) => {
                     />
                 {errors.comment && touched.comment && errors.comment}    
                 
-                <input type="submit" />
+                <input type="submit" value="submit" />
             </form>   
         </div>
     )
 }
-
 
 const CommentFormik = withRouter(withFormik({
     mapPropsToValues: () => ({ comment, userId, movieId }) => {

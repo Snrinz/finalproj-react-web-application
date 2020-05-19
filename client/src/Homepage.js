@@ -65,29 +65,83 @@ export default function Homepage() {
 
         return (
             <div>
-                <NavLink to={`/onairpage`} >
-                    <h1 id="title-summary" className="heading-label">On Air</h1>
-                </NavLink>
-                <div style={{display: 'flex', alignItems: 'center'}}>
 
-                    <FontAwesomeIcon id="left-right" icon={faAngleLeft} />
-                    <div className="trend-movie-section">
-                        {
-                            (onair_list.isLoad)?
-                            <Loading />
-                            :<React.Fragment>
-                                {
+                {
+                    (onair_list.isLoad)?
+                        <Loading />
+                    :
+                        <div style={{margin: '50px'}}>
+                            <NavLink id="title-summary" to={`/onairpage`} >
+                                <h1 className="heading-label">Movie On Air</h1>
+                            </NavLink>
+                            <div style={{display: 'flex', alignItems: 'center'}}>
+                                <FontAwesomeIcon id="left-right" icon={faAngleLeft} />
+                                <div className="trend-movie-section">
+                                    <React.Fragment>
+                                        {
+                                            onair_list.onair_list.map(movie => (
+                                                <MovieCard key={movie.id} movie={movie} />
+                                            ))
+                                        }
+                                    </React.Fragment>
+                                    
+                                </div> 
+                                <FontAwesomeIcon id="left-right" icon={faAngleRight} />
+                            </div>
+                        </div>
+                }
 
-                                    onair_list.onair_list.map(movie => (
-                                        <MovieCard key={movie.id} movie={movie} />
-                                    ))
-                                }
-                            </React.Fragment>
-                        }
-                    </div> 
-                    <FontAwesomeIcon id="left-right" icon={faAngleRight} />
-                        
-                </div>
+                {
+                    (most_list.isLoad)?
+                        <Loading />
+                    :
+                        <div style={{margin: '50px'}}>
+                            <NavLink id="title-summary" to={`/toppage`} >
+                                <h1 className="heading-label">Top Rating</h1>
+                            </NavLink>
+                            <div style={{display: 'flex', alignItems: 'center'}}>
+                                <FontAwesomeIcon id="left-right" icon={faAngleLeft} />
+                                <div className="trend-movie-section">
+                                    <React.Fragment>
+                                        {
+                                            most_list.most_list.map(movie => (
+                                                <MovieCard key={movie.id} movie={movie} />
+                                            ))
+                                        }
+                                    </React.Fragment>
+                                    
+                                </div> 
+                                <FontAwesomeIcon id="left-right" icon={faAngleRight} />
+                            </div>
+                        </div>
+                }
+
+                {
+                    (coming_list.isLoad)?
+                        <Loading />
+                    :
+                        <div style={{margin: '50px'}}>
+                            <NavLink id="title-summary" to={`/comingpage`} >
+                                <h1  className="heading-label">Coming Zoon</h1>
+                            </NavLink>
+                            <div style={{display: 'flex', alignItems: 'center'}}>
+                                <FontAwesomeIcon id="left-right" icon={faAngleLeft} />
+                                <div className="trend-movie-section">
+                                    <React.Fragment>
+                                        {
+                                            coming_list.coming_list.map(movie => (
+                                                <MovieCard key={movie.id} movie={movie} />
+                                            ))
+                                        }
+                                    </React.Fragment>
+                                    
+                                </div> 
+                                <FontAwesomeIcon id="left-right" icon={faAngleRight} />
+                            </div>
+                        </div>
+                }
+ 
+                
             </div>
         )
 

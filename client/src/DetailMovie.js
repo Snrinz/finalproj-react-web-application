@@ -62,7 +62,7 @@ export default class DetailMovie extends Component {
             <div className="grid-section">
         {
         (this.state.isLoad)?
-            <Loading />
+                <Loading />
         :
                 <div className="detail-movie-section">
                     <img id="image-detail-movie" src={require(`./img/${this.state.movie_detail.photo}`)} alt={this.state.movie_detail.photo}></img>
