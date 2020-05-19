@@ -81,7 +81,7 @@ const Form = props => {
                     name="lastName"
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    autoComplete="lname"
+                    autoComplete="lastName"
                     value={values.lastName}
                     helperText={touched.lastName ? errors.lastName : ""}
                     error={touched.lastName && Boolean(errors.lastName)} 

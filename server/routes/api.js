@@ -237,9 +237,40 @@ router.get('/movieonair', async (req , res) =>{
         })
 
     })
+})
+router.get('/reviews/movie/:movieId', async (req , res) =>{
+    const {movieId } = req.params;
+    console.log(movieId);
     
+    
+    Reviews.find({
+        _movie: new mongoose.Types.ObjectId(movieId)
+    })
+    
+    .sort( { createdAt: -1 } )
+    .then(async reviews =>{
+       console.log(reviews);
+       
+         
+        return res.json({
+            msg:"",
+            reviews: reviews
+        })
+
+    })
 })
 
+router.get('/rating/movie/:movieId', async (req , res) =>{
+    const {movieId } = req.params;
+    console.log(movieId);
+    
+    var ratings =await findRating(movieId)
+
+    return res.json({
+        msg: '',
+        rating: ratings
+    });
+})
 var findRating =async (movieId)=>{
     var ratings = await Ratings.aggregate([
         {
