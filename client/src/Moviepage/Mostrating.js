@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import axios from 'axios';
 import { faAngleRight } from "@fortawesome/free-solid-svg-icons"
 import { faAngleLeft } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
@@ -16,15 +15,6 @@ export default class Mostrating extends Component {
     }
 
     componentDidMount () {
-        // console.log("DID MOUNT");
-        
-        // //  axios.get(`https://api.themoviedb.org/3/movie/now_playing?api_key=${process.env.REACT_APP_MM_KEY}&language=en-US&page=1`)
-        // axios.get(`/api/movie`)
-        // .then(res => {
-        //     this.setState({trend_list: res.movies})
-        // })
-        // .catch(err => console.log(err)) 
-
         fetch(`/api/moviemostrating?length=100`)
         .then(res => {
             if (res.ok) return res.json()
@@ -40,14 +30,6 @@ export default class Mostrating extends Component {
         
     }
 
-    // displayMovieCard = () => {
-    //     for(let i=0 ; i<4 ; i++) {
-    //         let card = []
-    //         card.push(<MovieCard key={this.state.trend_list[i].id} movie={this.state.trend_list[i]} />)
-    //         return card;
-    //     }
-    // }
-
     render() {
         return (
             <div style={{display: 'flex', alignItems: 'center'}}>
@@ -55,7 +37,6 @@ export default class Mostrating extends Component {
                 <FontAwesomeIcon id="left-right" icon={faAngleLeft} />
                 <div className="trend-movie-section">
                     {
-                        // this.displayMovieCard()
                         <React.Fragment>
                             {
                                  this.state.onair_list.map(movie => (

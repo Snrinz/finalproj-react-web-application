@@ -258,9 +258,6 @@ router.get('/movieonair', async (req , res) =>{
             m.rating = rating;
             moviesArr.push(m)
         }
-        
-        
-
          
         return res.json({
             msg:"",
@@ -270,6 +267,7 @@ router.get('/movieonair', async (req , res) =>{
     })
     
 })
+
 var findRating =async (movieId)=>{
     var ratings = await Ratings.aggregate([
         {

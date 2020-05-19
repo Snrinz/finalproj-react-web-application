@@ -1,136 +1,84 @@
-import React, { Component } from 'react'
-import axios from 'axios';
+import React, { useState, useEffect } from 'react'
 import { faAngleRight } from "@fortawesome/free-solid-svg-icons"
 import { faAngleLeft } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import Loading from "./Loading"
 
 //library for MovieCard
 import { NavLink } from 'react-router-dom'
 import { faStar } from "@fortawesome/free-solid-svg-icons"
 
-export default class Homepage extends Component {
-    state = {
-        onair_list: [],
-        most_list: [],
-        coming_list: []
-    }
+export default function Homepage() {
+    const [onair_list, setOnair_list] = useState({
+        onair_list:[],
+        isLoad:true
+    })
+    const [most_list, setMost_list] = useState({
+        most_list:[],
+        isLoad:true
+    })
+    const [coming_list, setComing_list] = useState({
+        coming_list:[],
+        isLoad:true
+    })
 
-    componentDidMount () {
-        // console.log("DID MOUNT");
-        
-        // //  axios.get(`https://api.themoviedb.org/3/movie/now_playing?api_key=${process.env.REACT_APP_MM_KEY}&language=en-US&page=1`)
-        // axios.get(`/api/movie`)
-        // .then(res => {
-        //     this.setState({trend_list: res.movies})
-        // })
-        // .catch(err => console.log(err)) 
-
+    useEffect(() => {
         fetch(`/api/movieonair?length=4`)
         .then(res => {
             if (res.ok) return res.json()
             else throw res
         })
         .then(res =>{ 
-            console.log("data is " + res.movies[0].name);            
-            this.setState({onair_list: res.movies})
+            console.log("data is " + res.movies[0].name);  
+            setOnair_list({onair_list:res.movies, isLoad:false})
         })
         .catch(err => {
             console.log("error " + JSON.stringify(err)); 
         }) 
+
         fetch(`/api/moviecomingsoon?length=4`)
         .then(res => {
             if (res.ok) return res.json()
             else throw res
         })
         .then(res =>{ 
-            console.log("data is " + res.movies[0].name);            
-            this.setState({coming_list: res.movies})
+            console.log("data is " + res.movies[0].name);      
+            setComing_list({coming_list:res.movies, isLoad:false})
         })
         .catch(err => {
             console.log("error " + JSON.stringify(err)); 
         }) 
+
         fetch(`/api/moviemostrating?length=4`)
         .then(res => {
             if (res.ok) return res.json()
             else throw res
         })
         .then(res =>{ 
-            console.log("data is " + res.movies[0].name);            
-            this.setState({most_list: res.movies})
+            console.log("data is " + res.movies[0].name);      
+            setMost_list({most_list:res.movies, isLoad:false})
         })
         .catch(err => {
             console.log("error " + JSON.stringify(err)); 
-        }) 
-    }
+        })       
+    }, []);
 
-    // displayMovieCard = () => {
-    //     for(let i=0 ; i<4 ; i++) {
-    //         let card = []
-    //         card.push(<MovieCard key={this.state.trend_list[i].id} movie={this.state.trend_list[i]} />)
-    //         return card;
-    //     }
-    // }
-
-    render() {
         return (
             <div>
                 <NavLink to={`/onairpage`} >
-                    <h1 className="heading-label">On Air</h1>
-                </NavLink>
-                {/* <h1 className="heading-label">On Air</h1>  */}
-                <div style={{display: 'flex', alignItems: 'center'}}>
-
-                    <FontAwesomeIcon id="left-right" icon={faAngleLeft} />
-                    <div className="trend-movie-section">
-                        {
-                            // this.displayMovieCard()
-                            <React.Fragment>
-                                {
-                                    this.state.onair_list.map(movie => (
-                                        <MovieCard key={movie.id} movie={movie} />
-                                    ))
-                                }
-                            </React.Fragment>
-                        }
-                    </div> 
-                    <FontAwesomeIcon id="left-right" icon={faAngleRight} />
-                        
-                </div>
-                <NavLink to={`/comingpage`} >
-
-                    <h1 className="heading-label">Coming soon</h1> 
+                    <h1 id="title-summary" className="heading-label">On Air</h1>
                 </NavLink>
                 <div style={{display: 'flex', alignItems: 'center'}}>
 
                     <FontAwesomeIcon id="left-right" icon={faAngleLeft} />
                     <div className="trend-movie-section">
                         {
-                            // this.displayMovieCard()
-                            <React.Fragment>
+                            (onair_list.isLoad)?
+                            <Loading />
+                            :<React.Fragment>
                                 {
-                                    this.state.coming_list.map(movie => (
-                                        <MovieCard key={movie.id} movie={movie} />
-                                    ))
-                                }
-                            </React.Fragment>
-                        }
-                    </div> 
-                    <FontAwesomeIcon id="left-right" icon={faAngleRight} />
-                        
-                </div>
-                <NavLink to={`/toppage`} >
 
-                    <h1 className="heading-label">Top rating</h1> 
-                </NavLink>
-                <div style={{display: 'flex', alignItems: 'center'}}>
-
-                    <FontAwesomeIcon id="left-right" icon={faAngleLeft} />
-                    <div className="trend-movie-section">
-                        {
-                            // this.displayMovieCard()
-                            <React.Fragment>
-                                {
-                                    this.state.most_list.map(movie => (
+                                    onair_list.onair_list.map(movie => (
                                         <MovieCard key={movie.id} movie={movie} />
                                     ))
                                 }
@@ -142,7 +90,6 @@ export default class Homepage extends Component {
                 </div>
             </div>
         )
-    }
 
 }
 
@@ -151,8 +98,7 @@ const MovieCard = (props) => {
     return (            
         <div className="movie-card">
             <NavLink to={`/detail-movie/${movie._id}`} className="img-wrapper">
-                <img id="movie-image" src={`./img/${movie.photo}`} 
-                alt={movie.photo}></img>
+                <img id="movie-image" src={`./img/${movie.photo}`} alt={movie.photo}></img>
             </NavLink>
             
             <div class="rating-section">
@@ -160,7 +106,7 @@ const MovieCard = (props) => {
             </div>
 
             <NavLink to={`/detail-movie/${movie._id}`} id="name-movie">
-                <strong>{movie.title}</strong>
+                <strong>{movie.name}</strong>
             </NavLink>
 
             <WatchListButton />        
