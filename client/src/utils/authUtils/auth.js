@@ -1,7 +1,7 @@
 import history from './history';
 
 class Auth {
-    url = "/api/user/";
+    url = "/user/";
     profile = {};
     signin = (data, error) => { // data consists of email and password
       let option = {  

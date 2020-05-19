@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import './App.css';
-import Navigation from './Navigation'
+// import Navigation from './Navigation'
 import MainPage from './MainPage';
 import DetailMovie from './DetailMovie';
 import Register from './Register';
@@ -9,7 +9,7 @@ import SignIn from './SignIn';
 import Mostrating from './Moviepage/Mostrating';
 import Comingsoon from './Moviepage/Comingsoon';
 import Onair from './Moviepage/Onair';
-
+import ContextState2 from './contextStateRoutes';
 
 
 import Dashboard from './Dashboard/Dashboard';
@@ -19,7 +19,7 @@ export default class App extends Component {
 		return (
 			<Router>
 				<body>
-					<Navigation />
+					<ContextState2 />
 				</body>	
 
 				{/* Because with render you are not passing the default 
@@ -36,8 +36,8 @@ export default class App extends Component {
 				<Switch>
                     <Route exact path="/" component={MainPage}  />
 					<Route path="/detail-movie/:movie_id" component={DetailMovie} />
-					<Route path="/sign-up" component={Register} />
-					<Route path="/sign-in" component={SignIn} />
+					{/* <Route path="/sign-up" component={Register} />
+					<Route path="/sign-in" component={SignIn} /> */}
 					<Route path="/dashboard" component={Dashboard} />
 					<Route path="/onairpage" component={Onair} />
 					<Route path="/comingpage" component={Comingsoon} />

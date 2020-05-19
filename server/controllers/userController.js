@@ -55,9 +55,9 @@ export let create = (req, res) => {
 })};
   
 export let checkLogon = (req, res) => {
-    const {email, phoneNo, password} = req.body;
+    const {email,  password} = req.body;
     
-    if (!email || !phoneNo || !password) 
+    if (!email  || !password) 
         res.status(422).json(logError("Required fields"));
     else {
         userModel.findOne({email: email})

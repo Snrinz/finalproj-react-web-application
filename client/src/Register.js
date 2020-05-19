@@ -56,7 +56,7 @@ const Form = props => {
             <form className={classes.form} onSubmit={handleSubmit}>
               <Grid container spacing={2}>
                 <Grid item xs={12} sm={6}>
-                  <TextField autoComplete="fname"
+                  <TextField autoComplete="firstName"
                     name="firstName"
                     variant="outlined"
                     required

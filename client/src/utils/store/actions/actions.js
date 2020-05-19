@@ -25,3 +25,12 @@ export const remove_profile = () => {
     type: ACTION_TYPES.REMOVE_PROFILE
   }
 }
+
+// reset profile to newState ***
+export const reset_profile = (newState) => {  
+  return {
+    type: ACTION_TYPES.RESET_PROFILE,
+    state: newState
+  }
+}
+
