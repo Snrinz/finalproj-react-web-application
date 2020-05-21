@@ -3,7 +3,12 @@ import {Link} from 'react-router-dom';
 import {Nav, NavDropdown, Navbar} from 'react-bootstrap';
 
 import Context from '../../utils/authUtils/Context';
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faCog } from "@fortawesome/free-solid-svg-icons"
+import { faUser } from "@fortawesome/free-solid-svg-icons"
+import { faHome } from "@fortawesome/free-solid-svg-icons"
+import { faSearch } from "@fortawesome/free-solid-svg-icons"
+import { faSignInAlt } from "@fortawesome/free-solid-svg-icons"
 const UnauthenMenu = () => {
     return (
         <Navbar.Collapse>
@@ -11,7 +16,7 @@ const UnauthenMenu = () => {
             <Nav.Link as={Link} to="/signup">
                 <i className="fa fa-user-plus"/> Signup</Nav.Link>
             <Nav.Link as={Link} to="/signin">
-                <i className="far fa-user-circle" title="Sign in" /> Signin</Nav.Link>
+                <i className="far fa-user-circle" title="Sign in" /> <FontAwesomeIcon id="icon" icon={faSignInAlt} /></Nav.Link>
           </Nav>
         </Navbar.Collapse>
     )
@@ -19,11 +24,11 @@ const UnauthenMenu = () => {
 const AuthenMenu = (props) => {
     const context = useContext(Context);
     const profile = context.profileState
-    let isAdmin = profile.role === 'admin';
+    let isAdmin = profile.memberType === 'ADMIN';
 
     return (<>
         <NavDropdown title={profile.firstName} drop="left" id="basic-nav-dropdown">
-            <NavDropdown.Item as={Link} to="/profile">
+            {/* <NavDropdown.Item as={Link} to="/profile">
                 Profile {" "}
                 <i className="far fa-id-badge"></i>
             </NavDropdown.Item>
@@ -35,10 +40,10 @@ const AuthenMenu = (props) => {
                 <NavDropdown.Item as={Link} to="/addImg">
                 <i className="far fa-images"></i>{" "}
                 Add Image</NavDropdown.Item>
-            }
+            } */}
             <NavDropdown.Item onClick={() => context.handleUserLogout()}> 
                 Sign out {" "}
-                <i className="fas fa-sign-out-alt" />{" "}
+                
             </NavDropdown.Item>
         </NavDropdown>
     </>)

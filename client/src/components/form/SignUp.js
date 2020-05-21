@@ -126,6 +126,23 @@ function SignUpForm(props) {
               <TextField
                 variant="outlined"
                 required
+                
+                fullWidth
+                id="phoneNo"
+                label="phoneNo"
+                name="phoneNo"
+                autoComplete="phoneNo"
+                value={values.phoneNo}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                helperText={touched.phoneNo ? errors.phoneNo : ""}
+                error={touched.phoneNo && Boolean(errors.phoneNo)}    
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                variant="outlined"
+                required
                 fullWidth
                 name="password"
                 label="Password"
@@ -183,7 +200,7 @@ function SignUpForm(props) {
     </Container>
   );
 }
-
+var phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
 const SignUp = withRouter(withFormik({
   mapPropsToValues: ({
     firstName,
@@ -200,7 +217,9 @@ const SignUp = withRouter(withFormik({
       confirmedPassword: confirmedPassword || "",
     };
   },
+  
 
+  
   validationSchema: Yup.object().shape({
     firstName: Yup.string()
       .matches(/\w/, "Must be alphanumric")
@@ -211,6 +230,7 @@ const SignUp = withRouter(withFormik({
     email: Yup.string()
       .email("Enter a valid email")
       .required("Email is required"),
+    phoneNo: Yup.string().matches(phoneRegExp, 'Phone number is not valid'),
     password: Yup.string()
       .min(8, "Password must contain at least 8 characters")
       .required("Enter your password"),
@@ -220,7 +240,7 @@ const SignUp = withRouter(withFormik({
   }),
 
   handleSubmit: (values, { setSubmitting, setErrors, props }) => {   
-    fetch('/api/user/register', {
+    fetch('/user/register', {
       method: 'POST',
       body: JSON.stringify(values),
       headers: new Headers({ 'Content-Type': 'application/json' }),
@@ -233,7 +253,7 @@ const SignUp = withRouter(withFormik({
       return response.json()
     })
     .then(res => {
-      alert("Congratulation! " + res.message + " with " + res.user.email);
+      alert("ลงทะเบียนเสร็จแล้ว!!!   ด้วย Email " + res.user.email);
       // redirect page back to previous location if any, otherwise go to /      
       let history = props.history; //useHistory();
       let location = props.location; //useLocation();    

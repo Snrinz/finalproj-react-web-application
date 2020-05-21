@@ -6,15 +6,18 @@ import AuthCheck from './authUtils/authcheck';
 
 import HomePage from '../components/layout/HomePage';
 import Navigation from "../components/layout/Navigation";
-import Copyright from "../components/layout/Copyright";
-import SignIn from '../components/form/SignIn2';
+// import Copyright from "../components/layout/Copyright";
+import SignIn from '../components/form/SignIn';
 import SignUp from '../components/form/SignUp';
 import AddImgForm from '../components/form/AddImgForm';
 import GridListImages from '../components/subComponents/GridListImages2'
 import NotFoundPage from '../components/subComponents/NotFoundPage';
 import Profile from '../components/subComponents/Profile'
 import PrivateRoute from './PrivateRoute'
-
+import DetailMovie from '../DetailMovie';
+import Mostrating from '../Moviepage/Mostrating';
+import Comingsoon from '../Moviepage/Comingsoon';
+import Onair from '../Moviepage/Onair';
 const Routes = () => {
 //    const context = useContext(Context)
 /*    const [refresh, setRefresh] = React.useState(false)
@@ -71,7 +74,16 @@ console.log("Routes context 2", context.profileState);
 
               <Route path='/signin' component={SignIn} />
               <Route exact path="/signup" component={SignUp} />
-              <PrivateRoute path="/profile" 
+
+              {/* <Route exact path="/" component={MainPage}  /> */}
+              <Route path="/detail-movie/:movie_id" component={DetailMovie} />
+              {/* <Route path="/sign-up" component={Register} />
+              <Route path="/sign-in" component={SignIn} /> */}
+              {/* <Route path="/dashboard" component={Dashboard} /> */}
+              <Route path="/onairpage" component={Onair} />
+              <Route path="/comingpage" component={Comingsoon} />
+              <Route path="/toppage" component={Mostrating} />
+              {/* <PrivateRoute path="/profile" 
                             component={Profile} 
                             redirectTo="/signin"
                             fromPage="/profile" />
@@ -83,7 +95,7 @@ console.log("Routes context 2", context.profileState);
               <PrivateRoute path="/addImg" component={AddImgForm} 
                                            redirectTo="/"
                                            requiredAdmin={true}
-                                           fromPage="/addImg" />
+                                           fromPage="/addImg" /> */}
 {/*              <Route path="/addImg" component={AddImgForm} />
               <Route path="/profile" component={Profile} />
   */}
@@ -91,7 +103,7 @@ console.log("Routes context 2", context.profileState);
             </Switch>
           </div>
         <hr />
-        <Copyright/>
+        {/* <Copyright/> */}
         </Router>
       </div>
   )}
