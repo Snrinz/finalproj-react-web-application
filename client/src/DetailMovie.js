@@ -32,7 +32,7 @@ export default class DetailMovie extends Component {
             else throw res
         })
         .then(res =>{ 
-            console.log(res.movie)
+            console.log("Movie is " + res.movie)
             this.setState({movie_detail: res.movie, isLoad:false})
         })
         .catch(err => {
@@ -64,7 +64,7 @@ export default class DetailMovie extends Component {
         {
         (this.state.isLoad)?
                 <Loading />
-        :
+         :
         <>
                 <div className="detail-movie-section">
                     <img id="image-detail-movie" src={require(`./img/${this.state.movie_detail.photo}`)} alt={this.state.movie_detail.photo}></img>
@@ -185,6 +185,9 @@ const Rate = (props) => {
 
 const Comment = (props) => {
     const { review } = props
+    var getFullName = () => {
+        return review._user.firstName + " " + review._user.lastName
+    }
     return (
         <div>
 
@@ -193,7 +196,7 @@ const Comment = (props) => {
                     <div className="comment-user">       
                         <img id="img-user-comment" src={defaultUser} alt="sth" />
                         <div className="information-user">
-                            <span id="usrname">{review._id}</span>
+                        <span id="usrname">{getFullName()}</span>
                             <span id="date-post">{review.createdAt}</span>
                             {/* <span id="time">1 hour ago</span>   */}
                         </div>                            
