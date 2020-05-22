@@ -92,8 +92,8 @@ export default class DetailMovie extends Component {
                         <p>นักแสดงนำ: </p>
                         {
                         (this.state.movie_detail.actor && Object.keys(this.state.movie_detail.actor).length > 0)
-                            ? this.state.movie_detail.actor.map(type => (
-                                <p key={type} style={{paddingLeft: "10px"}}>{type}</p>
+                            ? this.state.movie_detail.actor.map(actor => (
+                                <p key={actor} style={{paddingLeft: "10px"}}>{actor}</p>
                             ))
                             : ""
                         }
