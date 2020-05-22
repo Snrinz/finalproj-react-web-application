@@ -63,14 +63,14 @@ export let checkLogon = (req, res) => {
         userModel.findOne({email: email})
         .then(user => {
             if (!user) {
-                res.status(404).json(logError(err||"Not found email"));
+                res.status(404).json(logError(err||"Email ผิด"));
             }
             else {
                 if(user.validPassword(password)) {
                     res.json({user:user.toAuthJSON()})
                 }
                 else {
-                res.status(401).json(logError("-Invalid credential"))};
+                res.status(401).json(logError("รหัสผ่านผิด"))};
             }
         })
         .catch(err => res.status(401).json(logError(err)))

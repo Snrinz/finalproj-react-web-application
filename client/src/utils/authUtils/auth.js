@@ -25,6 +25,7 @@ class Auth {
       }})
       .catch(async err => {
         let msg = await err.json(); 
+        alert("ผิดพลาดครับ ")
         error({globalError: msg.errors.global}) 
       })
     };
@@ -57,7 +58,7 @@ class Auth {
       localStorage.removeItem('token')
       localStorage.removeItem('id_token')
       localStorage.removeItem('expiresAt')
-      setTimeout(() => { history.push('/authcheck') }, 600);
+      // setTimeout(() => { history.push('/authcheck') }, 600);
     };
     isAuthenticated = () => {
       let expiresAt = JSON.parse(this.getToken('expiresAt'))

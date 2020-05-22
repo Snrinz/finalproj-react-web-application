@@ -15,13 +15,12 @@ const Navigation = () => {
       
       {/* <Navbar.Toggle aria-controls="basic-navbar-nav" /> */}
       <Navbar.Collapse id="basic-navbar-nav">
-        <Nav className="mr-auto">
+        {/* <Nav className="mr-auto">
           <Nav.Link as={Link} to="/">
             <FontAwesomeIcon id="icon" icon={faHome} />
-                {/* <FontAwesomeIcon id="icon" icon={faUser} />
-                <FontAwesomeIcon id="icon" icon={faCog} /> */}
+                
           </Nav.Link>
-        </Nav>
+        </Nav> */}
         <Nav className="ml-auto">
           <UserNavBar/>
         </Nav>
