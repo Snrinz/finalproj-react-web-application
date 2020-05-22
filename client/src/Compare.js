@@ -1,8 +1,7 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { withFormik } from 'formik'
 import { withRouter } from 'react-router-dom';
 import * as Yup from 'yup';
-
 
 const PostForm = (props) => {
     const {
@@ -15,10 +14,9 @@ const PostForm = (props) => {
       } = props;
       console.log("user id: " + props.userId);
       console.log("movie id " + props.movieId);
-      values.userId = props.userId
-      values.movieId = props.movieId
-      
+
     return (
+
         <div className="post-section">
             <form onSubmit={handleSubmit}>
                 <textarea name="text-post" 
@@ -31,12 +29,13 @@ const PostForm = (props) => {
                     required
                     />
                 {errors.comment && touched.comment && errors.comment}    
-                
+
                 <input type="submit" />
             </form>   
         </div>
     )
 }
+
 
 const CommentFormik = withRouter(withFormik({
     mapPropsToValues: () => ({ comment, userId, movieId }) => {
@@ -48,6 +47,7 @@ const CommentFormik = withRouter(withFormik({
     },
     validationSchema: Yup.object().shape({
         comment: Yup.string()
+        .matches(/\w/,  "เทส")
         .required()
     }),
     handleSubmit: (values, { setSubmitting}) => {
@@ -71,4 +71,4 @@ const CommentFormik = withRouter(withFormik({
     displayName: "PostForm"
   })(PostForm));
 
-  export default CommentFormik;
+  export default CommentFormik; 

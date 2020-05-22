@@ -341,7 +341,7 @@ router.post('/reviews',async (req, res) => {
     console.log(req.body);
     
     const userId = req.body.userId;
-    console.log(movieId + " " + userId + " " + comment);
+    console.log("Request ขอคอมเม้นหน่อยจ้า " + movieId + " " + userId + " " + comment);
     
     var  reviews = new Reviews({
         _user: new mongoose.Types.ObjectId(userId),
