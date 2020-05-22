@@ -1,9 +1,12 @@
-import React from 'react'
+import React , {useContext} from 'react'
 import { withFormik } from 'formik'
 import { withRouter } from 'react-router-dom';
 import * as Yup from 'yup';
+import Context from './utils/authUtils/Context';
 
 const PostForm = (props) => {
+  // const context = useContext(Context);
+  // const profile = context.profileState
     const {
         values,
         touched,

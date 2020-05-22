@@ -1,4 +1,4 @@
-import React, { Component, useState } from 'react'
+import React, { Component, useState ,useContext} from 'react'
 // import ReactPlayer from 'react-player'
 // import imgTrailer from './img/trailer2.jpg'
 //library for Comment.js
@@ -19,10 +19,13 @@ export default class DetailMovie extends Component {
         movie_detail: {},
         credits_list: {},
         review_list: [],
-        isLoad: true
+        isLoad: true,
+        profile:{}
     }
 
     componentDidMount () {
+        // const context = useContext(Context);
+        // this.setState({profile: context.profileState}) 
         let { movie_id } = this.props.match.params
         console.log("DID MOUNT");
         // Get Movie Detail
@@ -152,9 +155,9 @@ export default class DetailMovie extends Component {
                 </React.Fragment>
             }
 
-            <PostForm userId="Pailin" movieId={this.state.movie_detail._id} />
+            
 
-            </div>
+           <PostComment movieId={this.state.movie_detail._id}/> </div>
             
         </div>
 
@@ -185,6 +188,8 @@ const Rate = (props) => {
 
 const Comment = (props) => {
     const { review } = props
+    
+    
     return (
         <div>
 
@@ -193,8 +198,8 @@ const Comment = (props) => {
                     <div className="comment-user">       
                         <img id="img-user-comment" src={defaultUser} alt="sth" />
                         <div className="information-user">
-                            <span id="usrname">{review._id}</span>
-                            <span id="date-post">{review.createdAt}</span>
+                            <span id="usrname">{review._user.firstName  }  {review._user.lastName  }  </span>
+                            <span id="date-post">{ moment(review.createdAt).locale('th').format('LL') }</span>
                             {/* <span id="time">1 hour ago</span>   */}
                         </div>                            
                     </div>
@@ -203,5 +208,17 @@ const Comment = (props) => {
             </div>
             
         </div>
+    )
+}
+
+const PostComment = (props) => {
+    const { movieId } = props
+    const context = useContext(Context);
+    const profile = context.profileState
+    console.log("user",profile);
+    return(
+        <>
+        { context.authState ? <PostForm userId={profile._id} movieId={movieId} />: <div></div>}
+        </>
     )
 }
