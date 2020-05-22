@@ -3,7 +3,7 @@ import React, { Component, useState } from 'react'
 // import imgTrailer from './img/trailer2.jpg'
 //library for Comment.js
 import defaultUser from './img/default_user.png'
-
+import Context from './utils/authUtils/Context';
 import moment from'moment';
 //library for MovieCard
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
@@ -89,7 +89,7 @@ export default class DetailMovie extends Component {
                     </div>
                     <hr />
                     <div className="descrip">
-                        <p>นักแสดงนำ: </p>
+                    <p>นักแสดงนำ: </p>
                         {
                         (this.state.movie_detail.actor && Object.keys(this.state.movie_detail.actor).length > 0)
                             ? this.state.movie_detail.actor.map(actor => (

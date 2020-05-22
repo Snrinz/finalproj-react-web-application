@@ -246,15 +246,25 @@ router.get('/reviews/movie/:movieId', async (req , res) =>{
     Reviews.find({
         _movie: new mongoose.Types.ObjectId(movieId)
     })
-    
+    // .populate("_user")
     .sort( { createdAt: -1 } )
+    
     .then(async reviews =>{
        console.log(reviews);
-       
+    var arr = [];
+    for(let i of reviews){
+        console.log(i._user);
+        
+        var user =await  User.findById(i._user)
+        i = JSON.parse(JSON.stringify(i));
+        i._user = user
+        arr.push(i)
+    }
+    //   
          
         return res.json({
             msg:"",
-            reviews: reviews
+            reviews: arr
         })
 
     })
@@ -326,7 +336,11 @@ router.post('/rating',async (req, res) => {
 });
 
 router.post('/reviews',async (req, res) => {
-    const {  movieId , userId , comment} = req.body;
+    const   movieId  = req.body.movieId;
+    const comment = req.body.comment;
+    console.log(req.body);
+    
+    const userId = req.body.userId;
     console.log(movieId + " " + userId + " " + comment);
     
     var  reviews = new Reviews({
