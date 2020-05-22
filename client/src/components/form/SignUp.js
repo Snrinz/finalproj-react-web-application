@@ -192,11 +192,11 @@ function SignUpForm(props) {
           </Grid>
         </form>
       </div>
-      <Container style={{display: debug? "block": "none"}} className={classes.paper} maxWidth="xs">
+      {/* <Container style={{display: debug? "block": "none"}} className={classes.paper} maxWidth="xs">
         <pre>{JSON.stringify(values, null, 2)}</pre>
         <hr/>
         <pre>{JSON.stringify(errors, null, 2)}</pre>
-      </Container>
+      </Container> */}
     </Container>
   );
 }

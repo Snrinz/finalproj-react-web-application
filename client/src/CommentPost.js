@@ -49,6 +49,7 @@ const CommentFormik = withRouter(withFormik({
         .required()
     }),
     handleSubmit: (values, { setSubmitting}) => {
+  
       fetch('/api/reviews', {
         method: 'POST',
         body: JSON.stringify(values),
