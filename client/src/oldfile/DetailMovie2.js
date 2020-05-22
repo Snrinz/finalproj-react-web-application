@@ -1,4 +1,4 @@
-import React, { Component, useState } from 'react'
+import React, { Component, useState, useEffect } from 'react'
 // import ReactPlayer from 'react-player'
 // import imgTrailer from './img/trailer2.jpg'
 //library for Comment.js
@@ -8,79 +8,80 @@ import moment from'moment';
 //library for MovieCard
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faStar } from "@fortawesome/free-solid-svg-icons"
-import Loading from "./Loading"
+import Loading from "../Loading"
 // import { withFormik } from 'formik'
 // import { withRouter } from 'react-router-dom';
 // import * as Yup from 'yup';
-import PostForm from './CommentPost'
+import PostForm from '../CommentPost'
 
-export default class DetailMovie extends Component {
-    state = {
-        movie_detail: {},
-        credits_list: {},
-        review_list: [],
-        isLoad: true
-    }
+export default function DetailMovie () {
+    const [movie_detail, setMovie_detail] = useState({})
+    const [credits_list, setCredits_list] = useState({})
+    const [review_list, setReview_list] = useState({})
+    const [isLoad, setisLoad] = useState(true)
 
-    componentDidMount () {
+    useEffect(() => {
         let { movie_id } = this.props.match.params
-        console.log("DID MOUNT");
-        // Get Movie Detail
+        //Get Movie Detail
         fetch(`/api/movie/${movie_id}`)
         .then(res => {
             if (res.ok) return res.json()
             else throw res
         })
         .then(res =>{ 
-            console.log(res.movie)
-            this.setState({movie_detail: res.movie, isLoad:false})
+            console.log("Movie" + res.movie)
+            setMovie_detail({movie_detail:res.movie})
+            setisLoad({isLoad:false})
         })
         .catch(err => {
-            console.log("error " + JSON.stringify(err)); 
+            console.log("error1" + JSON.stringify(err)); 
         }) 
 
-        // Get Review
+       // Get Review
         fetch(`/api/reviews/movie/${movie_id}`)
         .then(res => {
             if (res.ok) return res.json()
             else throw res
         })
         .then(res =>{ 
-            console.log("Review List: " + res.reviews)     
-            console.log("Before " + this.state.review_list);
-            this.setState({review_list: res.reviews})
+            console.log("Review List: " + res.reviews[0].comment)
+            setReview_list({review_list:res.review, isLoad:false})
         })
         .catch(err => {
             console.log("error2 " + JSON.stringify(err)); 
         }) 
-    }
-
-    render() {
-
+    }, []);
+        
         return (
         <div>
+
+            {
+            (this.state.isLoad)? "Yes, กำลังโหลด": "No, ไม่โหลดแล้ว"
+            }
 
             <div className="grid-section">
         {
         (this.state.isLoad)?
-                <Loading />
+            <p>ทำไมมาหลายอัน</p>
+                //<Loading />
         :
-        <>
+            <>
                 <div className="detail-movie-section">
-                    <img id="image-detail-movie" src={require(`./img/${this.state.movie_detail.photo}`)} alt={this.state.movie_detail.photo}></img>
+                    <img id="image-detail-movie" src={require(`./img/${movie_detail.photo}`)} alt={movie_detail.photo}></img>
+                    {/* <img id="image-detail-movie" src={`./img/${movie_detail.photo}`} alt={movie_detail.photo}></img> */}
 
                 <div className="description-section">
-                    <Rate vote_average={this.state.movie_detail.rating} />
+                    <Rate key="" vote_average={movie_detail.rating} />
                     <div className="descrip">                        
-                        <h2>{this.state.movie_detail.name}</h2>
+                        <h2>{movie_detail.name}</h2>
                     </div>
 
                     <hr style={{opacity: '0'}} />
                     <div className="descrip">
                         <p>แนวประเภท: </p>
                         {
-                        (this.state.movie_detail.type && Object.keys(this.state.movie_detail.type).length > 0)
-                            ? this.state.movie_detail.type.map(type => (
+                        (movie_detail.type && Object.keys(movie_detail.type).length > 0)
+                            ? movie_detail.type.map(type => (
                                 <p key={type} style={{paddingLeft: "10px"}}>{type}</p>
                             ))
                             : ""
@@ -91,9 +92,9 @@ export default class DetailMovie extends Component {
                     <div className="descrip">
                         <p>นักแสดงนำ: </p>
                         {
-                        (this.state.movie_detail.actor && Object.keys(this.state.movie_detail.actor).length > 0)
-                            ? this.state.movie_detail.actor.map(type => (
-                                <p key={type} style={{paddingLeft: "10px"}}>{type}</p>
+                        (movie_detail.actor && Object.keys(movie_detail.actor).length > 0)
+                            ? movie_detail.actor.map(actor => (
+                                <p key={actor} style={{paddingLeft: "10px"}}>{actor}</p>
                             ))
                             : ""
                         }
@@ -102,12 +103,12 @@ export default class DetailMovie extends Component {
                     <hr />
                     <div className="descrip">
                         <p>ผู้กำกับ: </p>
-                        <p style={{alignSelf: 'center'}}>{this.state.movie_detail.director}</p>
+                        <p style={{alignSelf: 'center'}}>{movie_detail.director}</p>
                     </div>
                     <hr />
                     
                     <div className="descrip">
-                        <p>บริษัทผู้สร้าง:{this.state.movie_detail.company} </p>
+                        <p>บริษัทผู้สร้าง:{movie_detail.company} </p>
                         {/* <p style={{alignSelf: 'center'}}>Chris Buck, Jennifer Lee, Marc Smith, Robert Lopez, Kristen Anderson-Lopez</p> */}
                     </div>
 
@@ -115,51 +116,54 @@ export default class DetailMovie extends Component {
                     <div>
                          <p>เรื่องย่อ: </p>
                             <div className="descrip">
-                                <span> {this.state.movie_detail.description} </span>
+                                <span> {movie_detail.description} </span>
                             </div>
                     </div>
                     <hr />   
                     <div>
                          <p>วันที่เข้าฉาย: </p>
-                            
-                                <span> {moment(this.state.movie_detail.onAirTime).locale('th').format('LL') } </span>
+                                <span> {moment(movie_detail.onAirTime).locale('th').format('LL') } </span>
                             
                     </div>
                     <hr />  
                      
                 </div>  
-                 
-                    
-                 
-            </div>
-        </>
+                </div>
+
+                <h2 id="comments-title" >Comments</h2>
+                {
+                    <React.Fragment>
+                        {
+                            (review_list.review_list && Object.keys(review_list.review_list).length > 0)
+                            ? review_list.review_list.map(review => (
+                                <Comment key={review.id} review={review} />
+                            ))
+                            : <p id="no-comment">There are no comments</p>
+                            
+                        }
+                    </React.Fragment>
+                }
+
+                <PostForm key="" userId="Pailin" movieId={movie_detail._id} />
+            </>
         }
-        
-
-
-            <h2 id="comments-title" >Comments</h2>
-            {
-                <React.Fragment>
-                    {
-                    (this.state.review_list && Object.keys(this.state.review_list).length > 0)? 
-                        // <p>Trueeeeeeeeeeeeeeeeeeeeeeeee</p>
-                        this.state.review_list.map(review => (
-                            <Comment key={review._id} review={review} />
-                        ))
-                        : <p id="no-comment">There are no comments</p>
-                        
-                    }
-                </React.Fragment>
-            }
-
-            <PostForm userId="Pailin" movieId={this.state.movie_detail._id} />
-
+        {/* <h2 id="comments-title" >Comments</h2>
+        {
+            <React.Fragment>
+                {
+                    (review_list && Object.keys(review_list).length > 0)
+                    ? review_list.map(review => (                
+                        <Comment key={review.id} review={review} />
+                    ))
+                    : <p id="no-comment">There are no comments</p>
+                }
+            </React.Fragment>
+        }
+        <PostForm userId="Pailin" movieId={movie_detail._id} /> */}
             </div>
             
         </div>
-
         )
-    }
 }
 
 const Rate = (props) => {
