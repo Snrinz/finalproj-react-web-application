@@ -313,7 +313,7 @@ var findRating =async (movieId)=>{
 
 router.post('/rating',async (req, res) => {
     const {  movieId , userId , rating} = req.body;
-    
+
     var ratings = new Ratings({
         _user: new mongoose.Types.ObjectId(userId),
         _movie: new mongoose.Types.ObjectId(movieId),
@@ -321,6 +321,7 @@ router.post('/rating',async (req, res) => {
     }
     );
 
+   console.log("ขอเพิ่มดาวหน่อยจ้า " + rating + " ดาว มาจาก " + _user + " เป็นคนโหวต ของหนังเรื่อง " + _movie);
    
     await ratings.save((error) => {
         if (error) {

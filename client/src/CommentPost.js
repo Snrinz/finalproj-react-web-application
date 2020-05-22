@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { withFormik } from 'formik'
 import { withRouter } from 'react-router-dom';
 import * as Yup from 'yup';
@@ -13,8 +13,6 @@ const PostForm = (props) => {
         handleBlur,
         handleSubmit,
       } = props;
-      console.log("user id: " + props.userId);
-      console.log("movie id " + props.movieId);
       values.userId = props.userId
       values.movieId = props.movieId
       

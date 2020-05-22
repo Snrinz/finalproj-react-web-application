@@ -6,6 +6,7 @@ body {
   color: rgb(100, 99, 99);
   background-color: #FFFCFC;
   font-family: Century Gothic, Opun ,sans-serif;
+  padding-bottom: 20px;
 }
 
 /* Navigation */
@@ -132,6 +133,7 @@ body {
   margin: 10px auto;
 }
 #star {
+  margin-left: 10px;
   color: rgb(250, 205, 120);
 }
 #title-summary:visited, #title-summary:link, #name-movie:visited, #name-movie:link {
@@ -170,24 +172,6 @@ body {
 }
 
 /* DetailMovie */
-#btnRate {
-  display: inline-block;
-  color: inherit;
-  margin-right: 20px;
-  cursor: pointer;
-  font-weight: bold;
-  border: 1px solid rgb(231, 231, 231);
-  border-radius: 4px;
-  background-color: rgba(245, 222, 179, 0);
-  font-family: inherit;
-}
-.listStar { display: none; }
-#starHover { margin-right: 2px; cursor: pointer; }
-.ratethis:hover .listStar {
-  display: block;
-  position: absolute;
-  z-index: 1;
-}
 .grid-section {
   display: grid;
 }

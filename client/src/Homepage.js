@@ -80,7 +80,7 @@ export default function Homepage() {
                                     <React.Fragment>
                                         {
                                             onair_list.onair_list.map(movie => (
-                                                <MovieCard key={movie.id} movie={movie} />
+                                                <MovieCard key={movie._id} movie={movie} />
                                             ))
                                         }
                                     </React.Fragment>
@@ -105,7 +105,7 @@ export default function Homepage() {
                                     <React.Fragment>
                                         {
                                             most_list.most_list.map(movie => (
-                                                <MovieCard key={movie.id} movie={movie} />
+                                                <MovieCard key={movie._id} movie={movie} />
                                             ))
                                         }
                                     </React.Fragment>
@@ -130,7 +130,7 @@ export default function Homepage() {
                                     <React.Fragment>
                                         {
                                             coming_list.coming_list.map(movie => (
-                                                <MovieCard key={movie.id} movie={movie} />
+                                                <MovieCard key={movie._id} movie={movie} />
                                             ))
                                         }
                                     </React.Fragment>
@@ -155,7 +155,7 @@ const MovieCard = (props) => {
                 <img id="movie-image" src={`./img/${movie.photo}`} alt={movie.photo}></img>
             </NavLink>
             
-            <div class="rating-section">
+            <div className="rating-section">
                 <FontAwesomeIcon  id="star" icon={faStar} /> {movie.rating}
             </div>
 
