@@ -4,16 +4,13 @@ import history from './authUtils/history';
 import Context from './authUtils/Context';
 import AuthCheck from './authUtils/authcheck';
 
-import HomePage from '../components/layout/HomePage';
+import HomePage from '../Homepage';
 import Navigation from "../components/layout/Navigation";
 // import Copyright from "../components/layout/Copyright";
 import SignIn from '../components/form/SignIn';
 import SignUp from '../components/form/SignUp';
-import AddImgForm from '../components/form/AddImgForm';
-import GridListImages from '../components/subComponents/GridListImages2'
 import NotFoundPage from '../components/subComponents/NotFoundPage';
-import Profile from '../components/subComponents/Profile'
-import PrivateRoute from './PrivateRoute'
+// import PrivateRoute from './PrivateRoute'
 import DetailMovie from '../DetailMovie';
 import Mostrating from '../Moviepage/Mostrating';
 import Comingsoon from '../Moviepage/Comingsoon';
@@ -69,7 +66,7 @@ console.log("Routes context 2", context.profileState);
             <Switch>
               
               <Route exact path="/" component={()=><HomePage />} />
-              //console.log("Routes context ", context.profileState);
+              {/* console.log("Routes context ", context.profileState); */}
 
               <Route path='/authcheck' component={AuthCheck} />
 
@@ -104,11 +101,9 @@ console.log("Routes context 2", context.profileState);
             </Switch>
           </div>
         <hr />
-        {/* <Copyright/> */}
         </Router>
       </div>
   )}
-
 
 
 export default Routes;

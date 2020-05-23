@@ -60,6 +60,7 @@ const CommentFormik = withRouter(withFormik({
           console.log(response.statusText);
           throw `Status Code: ${response.status} ${response.statusText}`;
         }
+
         return response.json()
       })
       .catch(err => { 

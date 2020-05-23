@@ -87,7 +87,7 @@ class ShowTheLocation extends React.Component {
 
 // Create a new component that is "connected" (to borrow redux
 // terminology) to the router.
-const ShowTheLocationWithRouter = withRouter(ShowTheLocation);
+// const ShowTheLocationWithRouter = withRouter(ShowTheLocation);
 
 
 export default ContextState2
