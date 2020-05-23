@@ -87,6 +87,7 @@ router.post('/movie',async (req, res) => {
         });
     });
 });
+
 router.get('/movie/:movieId', async (req , res) =>{
     const {movieId } = req.params;
     Movie.findById(movieId)
@@ -108,26 +109,49 @@ router.get('/movie/:movieId', async (req , res) =>{
 })
 
 router.get('/movie', async (req , res) =>{
-    const {movieId } = req.params;
-    Movie.find({})
-    
-    .then(async movies =>{
-        var moviesArr = []
-        // console.log(movies);
-        
-        for (let m of  movies){
-            var rating =  await findRating(m._id);
-            m = JSON.parse(JSON.stringify(m));
-            m.rating = rating;
-            moviesArr.push(m)
-        }
-         
-        return res.json({
-            movies: moviesArr
+    const { movieId } = req.params;
+
+    if(req.query.filter && req.query.value) {
+        console.log("Filter: " + req.query.filter + " Value: " + req.query.value);
+
+        Movie.find({
+            name : new RegExp('^' + req.query.value, 'i')
         })
+        .then(async movies =>{
+            var moviesArr = []
 
-    })
+            // Filter Movie with Name, Type, Actor        
+            for (let m of  movies){
+                var rating =  await findRating(m._id);
+                m = JSON.parse(JSON.stringify(m));
+                m.rating = rating;
+                moviesArr.push(m)
+            }
+            return res.json({
+                movies: moviesArr
+            })
+        })
+    }else {
+        Movie.find({})
+        .then(async movies =>{
+            var moviesArr = []
 
+            // Filter Movie with Name, Type, Actor        
+            for (let m of  movies){
+                var rating =  await findRating(m._id);
+                m = JSON.parse(JSON.stringify(m));
+                m.rating = rating;
+                moviesArr.push(m)
+            }
+            return res.json({
+                movies: moviesArr
+            })
+
+        })        
+    }
+
+
+    
 })
 
 router.get('/moviemostrating', async (req , res) =>{
@@ -173,6 +197,7 @@ router.get('/moviemostrating', async (req , res) =>{
     })
 
 })
+
 router.get('/moviecomingsoon', async (req , res) =>{
     var today = moment().toDate();
     var length =parseInt( req.query.length)
@@ -192,9 +217,6 @@ router.get('/moviecomingsoon', async (req , res) =>{
             m.rating = rating;
             moviesArr.push(m)
         }
-        
-        
-
          
         return res.json({
             msg:"",
