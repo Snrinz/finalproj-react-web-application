@@ -1,14 +1,14 @@
-import React, {useContext} from 'react';
-import {Link} from 'react-router-dom';
+import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
 import {Nav, NavDropdown, Navbar} from 'react-bootstrap';
 // import Navbar from 'react-bootstrap/Navbar'
 import Context from '../../utils/authUtils/Context';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faCog } from "@fortawesome/free-solid-svg-icons"
-import { faUser } from "@fortawesome/free-solid-svg-icons"
-import { faHome } from "@fortawesome/free-solid-svg-icons"
-import { faSearch } from "@fortawesome/free-solid-svg-icons"
-import { faSignInAlt } from "@fortawesome/free-solid-svg-icons"
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+// import { faCog } from "@fortawesome/free-solid-svg-icons"
+// import { faUser } from "@fortawesome/free-solid-svg-icons"
+// import { faHome } from "@fortawesome/free-solid-svg-icons"
+// import { faSearch } from "@fortawesome/free-solid-svg-icons"
+// import { faSignInAlt } from "@fortawesome/free-solid-svg-icons"
 const UnauthenMenu = () => {
     return (
         <Navbar.Collapse>
@@ -35,17 +35,14 @@ const UnauthenMenutest = () => {
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                 <li class="nav-item active">
-                    <a class="nav-link" href="/">Home </a>
+                    <Link to="/">Home</Link>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/signup">Signup</a>
+                    <Link to="/signup">Signup</Link>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/signin">SignIn</a>
+                    <Link to="/signin">SignIn</Link>
                 </li>
-                {/* <li class="nav-item">
-                    <a class="nav-link disabled" href="#">Disabled</a>
-                </li> */}
                 </ul>
             </div>
             </nav>
@@ -64,18 +61,14 @@ const AuthenMenutest = (props) => {
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                 <li class="nav-item active">
-                    <a class="nav-link" href="/">Home </a>
+                    <Link to="/">Home</Link>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">{profile.firstName}</a>
+                    <Link to="/">{profile.firstName}</Link>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#" onClick={() => context.handleUserLogout()}> 
-                    SignOut</a>
+                    <Link to="/" onClick={() => context.handleUserLogout()}>SignOut</Link>
                 </li>
-                {/* <li class="nav-item">
-                    <a class="nav-link disabled" href="#">Disabled</a>
-                </li> */}
                 </ul>
             </div>
             </nav>

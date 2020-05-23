@@ -1,4 +1,4 @@
-import React, { Component, useState , useContext, useEffect } from 'react'
+import React, { Component , useContext, useEffect } from 'react'
 import ReactPlayer from 'react-player'
 //library for Comment.js
 import defaultUser from './img/default_user.png'
@@ -14,7 +14,6 @@ import PostForm from './CommentPost'
 import { makeStyles } from '@material-ui/core/styles';
 import Rating from '@material-ui/lab/Rating';
 import Box from '@material-ui/core/Box';
-import StarIcon from '@material-ui/icons/Star';
 
 export default class DetailMovie extends Component {
     state = {
@@ -214,7 +213,7 @@ const PostComment = (props) => {
 
 
 const Rate = (props) => {
-    const { movieId, vote_average } = props
+    const { movieId } = props
     const context = useContext(Context);
 
     const profile = context.profileState
@@ -254,7 +253,7 @@ const Rate = (props) => {
       };
 
     useEffect(() => {
-        if(value == 0) return
+        if(value === 0) return
 
         console.log("Rate value is " + value);
         let data = {

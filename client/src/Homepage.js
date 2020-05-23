@@ -65,7 +65,6 @@ export default function Homepage() {
 
         return (
             <div>
-
                 {
                     (onair_list.isLoad)?
                         <Loading />

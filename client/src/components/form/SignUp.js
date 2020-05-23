@@ -5,8 +5,6 @@ import AlertTitle from '@material-ui/lab/AlertTitle';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
 import { Link, withRouter } from 'react-router-dom';
 import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
@@ -46,15 +44,13 @@ function SignUpForm(props) {
     values,
     touched,
     errors,
-    isSubmitting,
     handleChange,
     handleBlur,
-    handleSubmit,
-    handleReset
+    handleSubmit
   } = props;
     
   const classes = useStyles();
-  const debug = true;
+  // const debug = true;
   return (
     <Container className={classes.main} maxwidth="md">
       <CssBaseline />
@@ -217,8 +213,6 @@ const SignUp = withRouter(withFormik({
       confirmedPassword: confirmedPassword || "",
     };
   },
-  
-
   
   validationSchema: Yup.object().shape({
     firstName: Yup.string()

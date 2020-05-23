@@ -1,13 +1,12 @@
-import React, { useState } from 'react';
-import {Link} from 'react-router-dom';
-import {Navbar, Nav, NavDropdown} from 'react-bootstrap'
+import React from 'react';
+import { Navbar, Nav } from 'react-bootstrap'
 import UserNavBar from './UserNavBar';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faCog } from "@fortawesome/free-solid-svg-icons"
-import { faUser } from "@fortawesome/free-solid-svg-icons"
-import { faHome } from "@fortawesome/free-solid-svg-icons"
-import { faSearch } from "@fortawesome/free-solid-svg-icons"
-import { faSignInAlt } from "@fortawesome/free-solid-svg-icons"
+// import { faCog } from "@fortawesome/free-solid-svg-icons"
+// import { faUser } from "@fortawesome/free-solid-svg-icons"
+// import { faHome } from "@fortawesome/free-solid-svg-icons"
+// import { faSearch } from "@fortawesome/free-solid-svg-icons"
+// import { faSignInAlt } from "@fortawesome/free-solid-svg-icons"
 
 const Navigation = () => {
   return (

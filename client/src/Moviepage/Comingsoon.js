@@ -12,19 +12,12 @@ import { faStar } from "@fortawesome/free-solid-svg-icons"
 
 // library for Search
 import { makeStyles, withStyles } from '@material-ui/core/styles';
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
 import NativeSelect from '@material-ui/core/NativeSelect';
 import InputBase from '@material-ui/core/InputBase';
-
 import Paper from '@material-ui/core/Paper';
-import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
-import DirectionsIcon from '@material-ui/icons/Directions';
 
 const BootstrapInput = withStyles((theme) => ({
     root: {
@@ -116,7 +109,7 @@ export default function Homepage() {
     }, []);
 
     useEffect(() => {
-        if(value == "") return
+        if(value === "") return
         console.log("Filter is " + filter);
         console.log("Value is " + value);
         
