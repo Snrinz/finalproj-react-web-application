@@ -95,7 +95,6 @@ export default class DetailMovie extends Component {
                             ))
                             : ""
                         }
-
                     </div>
                     <hr />
                     <div className="descrip">
@@ -107,7 +106,6 @@ export default class DetailMovie extends Component {
                             ))
                             : ""
                         }
-
                     </div>
                     <hr />
                     <div className="descrip">
@@ -117,8 +115,8 @@ export default class DetailMovie extends Component {
                     <hr />
                     
                     <div className="descrip">
-                        <p>บริษัทผู้สร้าง:{this.state.movie_detail.company} </p>
-                        {/* <p style={{alignSelf: 'center'}}>Chris Buck, Jennifer Lee, Marc Smith, Robert Lopez, Kristen Anderson-Lopez</p> */}
+                        <p>บริษัทผู้สร้าง: </p>
+                        <p style={{alignSelf: 'center'}}>{this.state.movie_detail.company}</p>
                     </div>
 
                     <hr />   
@@ -129,11 +127,9 @@ export default class DetailMovie extends Component {
                             </div>
                     </div>
                     <hr />   
-                    <div>
-                         <p>วันที่เข้าฉาย: </p>
-                            
-                                <span> {moment(this.state.movie_detail.onAirTime).locale('th').format('LL') } </span>
-                            
+                    <div className="descrip">
+                         <p>วันที่เข้าฉาย:  </p>
+                         <p style={{alignSelf: 'center'}}> { moment(this.state.movie_detail.onAirTime).locale('th').format('LL') } </p>
                     </div>
                     <hr />  
                      
@@ -306,7 +302,7 @@ const Rate = (props) => {
                     <Box fontSize={{ xs: 'medium' }}
                     p={{ xs: 2 }}>{labels[hover !== -1 ? hover : value]}</Box>}
                 </div>
-                : <div> ต้องเข้าสู่ระบบก่อน</div>
+                : <div style={{alignSelf: 'center'}}> ต้องเข้าสู่ระบบก่อน</div>
             }
         </>
     )
