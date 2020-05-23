@@ -71,7 +71,7 @@ export default class DetailMovie extends Component {
                 <Loading />
          :
         <>
-                <div className="detail-movie-section">
+                <div style={{marginTop: '20px'}} className="detail-movie-section">
                     <img id="image-detail-movie" src={require(`./img/${this.state.movie_detail.photo}`)} alt={this.state.movie_detail.photo}></img>
 
                 <div className="description-section">
@@ -210,7 +210,7 @@ const PostComment = (props) => {
         <>
             { context.authState ? 
                 <PostForm userId={profile._id} movieId={movieId} />
-                : <div style={{margin: 'auto auto', fontWeight: 'bold'}}>ต้องเข้าสู่ระบบก่อน จึงจะแสดงความคิดเห็นได้</div>
+                : <div style={{margin: '20px auto', fontWeight: 'bold'}}>ต้องเข้าสู่ระบบก่อน จึงจะแสดงความคิดเห็นได้</div>
             }
         </>
     )
@@ -258,11 +258,12 @@ const Rate = (props) => {
       };
 
     useEffect(() => {
+        if(value == 0) return
+
         console.log("Rate value is " + value);
         let data = {
-            //_user: profile._id,
-            _user: "5ec12861d9a1751c340bb1a6",
-            _movie: movieId,
+            userId: profile._id,
+            movieId: movieId,
             rating: value
         }
         // POST request using fetch inside useEffect React hook
@@ -286,9 +287,6 @@ const Rate = (props) => {
 
     return(
         <>
-            {/* <div className="rating-section">
-                <h2><FontAwesomeIcon  id="star" icon={faStar} /> {vote_average}</h2>
-            </div> */}
             { context.authState ? 
                 <div className={classes.root}>
                     <Rating
@@ -308,7 +306,7 @@ const Rate = (props) => {
                     <Box fontSize={{ xs: 'medium' }}
                     p={{ xs: 2 }}>{labels[hover !== -1 ? hover : value]}</Box>}
                 </div>
-                : <div> เข้าสู่ระบบก่อน</div>
+                : <div> ต้องเข้าสู่ระบบก่อน</div>
             }
         </>
     )
