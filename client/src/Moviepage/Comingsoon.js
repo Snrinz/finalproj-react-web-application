@@ -113,6 +113,7 @@ export default function Homepage() {
         console.log("Filter is " + filter);
         console.log("Value is " + value);
         
+<<<<<<< Updated upstream
         fetch(`/api/movie?filter=${filter}&&value=${value}`)
         .then(res => {
             if (res.ok) return res.json()
@@ -128,6 +129,9 @@ export default function Homepage() {
         })         
 
     }, [value, filter])
+=======
+    } 
+>>>>>>> Stashed changes
 
         return (
             <div>
