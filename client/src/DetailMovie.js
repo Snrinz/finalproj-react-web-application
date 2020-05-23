@@ -289,7 +289,7 @@ const Rate = (props) => {
             {/* <div className="rating-section">
                 <h2><FontAwesomeIcon  id="star" icon={faStar} /> {vote_average}</h2>
             </div> */}
-            {/* { context.authState ?  */}
+            { context.authState ? 
                 <div className={classes.root}>
                     <Rating
                     name="hover-feedback"
@@ -308,8 +308,8 @@ const Rate = (props) => {
                     <Box fontSize={{ xs: 'medium' }}
                     p={{ xs: 2 }}>{labels[hover !== -1 ? hover : value]}</Box>}
                 </div>
-                {/* :""
-            } */}
+                : <div> เข้าสู่ระบบก่อน</div>
+            }
         </>
     )
 }

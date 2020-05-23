@@ -1,5 +1,6 @@
 let dbURI = 'mongodb+srv://france:france090@cluster0-p0dro.mongodb.net/test?retryWrites=true&w=majority';
-if (process.env.NODE_ENV === 'production') {
+dbURI= 'mongodb://127.0.0.1:27017'
+if (process.env.NODE_ENV === 'beata') {
    dbURI = dbURI; // production DB server
 }
 export const config = {

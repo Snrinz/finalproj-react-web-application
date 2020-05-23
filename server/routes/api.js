@@ -94,10 +94,10 @@ router.get('/movie/:movieId', async (req , res) =>{
     .then(async movie =>{
     
         var comments =await  Reviews.find( { _movie : mongoose.Types.ObjectId(movieId)})
-        console.log(comments);
+        // console.log(comments);
         var rating =  await findRating(movieId);
          
-        return res.json({
+        return res.status(200).json({
             msg:"",
             movie: movie,
             comment: comments,
@@ -145,9 +145,9 @@ router.get('/moviemostrating', async (req , res) =>{
         }
         
         let len=  moviesArr.length
-        console.log(len);
+        // console.log(len);
         
-        console.log(moviesArr[1]);
+        // console.log(moviesArr[1]);
         
             for (let i = 0; i < len; i++) {
                 for (let j = 0; j < len-1; j++) {
@@ -184,7 +184,7 @@ router.get('/moviecomingsoon', async (req , res) =>{
     .sort( { onAirTime: 1 } )
     .then(async movies =>{
         var moviesArr = []
-        console.log(movies);
+        // console.log(movies);
         
         for (let m of  movies){
             var rating =  await findRating(m._id);
@@ -222,7 +222,7 @@ router.get('/movieonair', async (req , res) =>{
     .sort( { onAirTime: 1 } )
     .then(async movies =>{
         var moviesArr = []
-        console.log(movies);
+        // console.log(movies);
         
         for (let m of  movies){
             var rating =  await findRating(m._id);
@@ -321,7 +321,7 @@ router.post('/rating',async (req, res) => {
     }
     );
 
-   console.log("ขอเพิ่มดาวหน่อยจ้า " + rating + " ดาว มาจาก " + _user + " เป็นคนโหวต ของหนังเรื่อง " + _movie);
+   console.log("ขอเพิ่มดาวหน่อยจ้า " + rating + " ดาว มาจาก " + ratings._user + " เป็นคนโหวต ของหนังเรื่อง " + ratings._movie);
    
     await ratings.save((error) => {
         if (error) {
@@ -329,7 +329,7 @@ router.post('/rating',async (req, res) => {
             return;
         }
         // BlogPost
-        return res.json({
+        return res.status(200).json({
             msg: 'Your data has been saved!!!!!!',
             rating: ratings
         });
