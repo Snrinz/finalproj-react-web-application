@@ -35,12 +35,7 @@ const UnauthenMenutest = () => {
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                 <li class="nav-item active">
-<<<<<<< HEAD
-                <Nav.Link as={Link} to="/">Home </Nav.Link>
-                    {/* <a class="nav-link" href="/">Home </a> */}
-=======
                     <Link to="/">Home</Link>
->>>>>>> master
                 </li>
                 <li class="nav-item">
                     <Link to="/signup">Signup</Link>
@@ -66,12 +61,7 @@ const AuthenMenutest = (props) => {
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                 <li class="nav-item active">
-<<<<<<< HEAD
-                    {/* <a class="nav-link" href="/">Home </a> */}
-                    <Nav.Link as={Link} to="/">Home </Nav.Link>
-=======
                     <Link to="/">Home</Link>
->>>>>>> master
                 </li>
                 <li class="nav-item">
                     <Link to="/">{profile.firstName}</Link>
