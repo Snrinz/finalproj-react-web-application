@@ -261,8 +261,8 @@ const Rate = (props) => {
         console.log("Rate value is " + value);
         let data = {
             //_user: profile._id,
-            _user: "5ec12861d9a1751c340bb1a6",
-            _movie: movieId,
+            userId: profile._id,
+            movieId: movieId,
             rating: value
         }
         // POST request using fetch inside useEffect React hook
