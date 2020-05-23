@@ -81,7 +81,7 @@ router.post('/movie',async (req, res) => {
             return;
         }
         // BlogPost
-        return res.json({
+        return res.status(200).json({
             msg: 'Your data has been saved!!!!!!',
             movie: movie
         });
@@ -97,7 +97,7 @@ router.get('/movie/:movieId', async (req , res) =>{
         // console.log(comments);
         var rating =  await findRating(movieId);
          
-        return res.status(200).json({
+        return res.json({
             msg:"",
             movie: movie,
             comment: comments,
@@ -329,7 +329,7 @@ router.post('/rating',async (req, res) => {
             return;
         }
         // BlogPost
-        return res.status(200).json({
+        return res.json({
             msg: 'Your data has been saved!!!!!!',
             rating: ratings
         });

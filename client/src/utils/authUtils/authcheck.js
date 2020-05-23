@@ -21,7 +21,7 @@ console.log("-----------------location ", location);
     else {
       context.handleUserLogout()
       context.handleUserRemoveProfile()
-      history.replace('/')
+      // history.replace('/')
     }
   }, [])
 

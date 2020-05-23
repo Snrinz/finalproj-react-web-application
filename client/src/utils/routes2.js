@@ -67,6 +67,7 @@ console.log("Routes context 2", context.profileState);
           <Navigation/>
           <div className="container">
             <Switch>
+              
               <Route exact path="/" component={()=><HomePage />} />
               //console.log("Routes context ", context.profileState);
 
