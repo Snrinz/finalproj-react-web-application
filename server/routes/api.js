@@ -110,13 +110,25 @@ router.get('/movie/:movieId', async (req , res) =>{
 
 router.get('/movie', async (req , res) =>{
     const { movieId } = req.params;
-
+    let filter = req.query.filter
     if(req.query.filter && req.query.value) {
-        console.log("Filter: " + req.query.filter + " Value: " + req.query.value);
+        let filterInstuction = {}
 
-        Movie.find({
-            name : new RegExp('^' + req.query.value, 'i')
-        })
+        if(filter == 'movie')
+            filterInstuction = {
+                $or: [{name: new RegExp('^' + req.query.value, 'i')}, 
+                {description:new RegExp('^' + req.query.value, 'i')}]
+            }
+        else if(filter == 'type')
+            filterInstuction = {
+                type: req.query.value
+            }
+        else if(filter == 'actor')
+            filterInstuction = {
+                actor: new RegExp('^' + req.query.value, 'i')
+            }
+        
+        Movie.find(filterInstuction)
         .then(async movies =>{
             var moviesArr = []
 
