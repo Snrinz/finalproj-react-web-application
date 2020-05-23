@@ -60,21 +60,7 @@ router.post('/movie',async (req, res) => {
     movie.company = req.body.company;
     movie.photo = req.body.photo;
     movie.onAirTime =  moment(req.body.onAirTime, 'DD/MM/YYYY') ;
-    // console.log(req.body);
-    // var actor = req.body.actor
-    // var type = req.body.type;
-    // for (let t of type) {
-    //     movie.type.push( t)
-    // }
-
-    // // var actor = JSON.stringify(req.body);
-    // // actor = JSON.parse(actor); 
-    // // console.log(actor);
     
-    // for (let actori of actor) {
-    //     movie.actor.push( actori)
-    // }
-   
     await movie.save((error) => {
         if (error) {
             res.status(500).json({ msg: 'Sorry, internal server errors' });
@@ -108,68 +94,48 @@ router.get('/movie/:movieId', async (req , res) =>{
     })
 })
 
-router.get('/movie', async (req , res) =>{
-    const { movieId } = req.params;
+router.get('/movie', async (req , res) =>{    
+    let filterInstruction = {}
     let filter = req.query.filter
-    if(req.query.filter && req.query.value) {
-        let filterInstuction = {}
 
-        if(filter == 'movie')
-            filterInstuction = {
-                $or: [{name: new RegExp('^' + req.query.value, 'i')}, 
-                {description:new RegExp('^' + req.query.value, 'i')}]
-            }
-        else if(filter == 'type')
-            filterInstuction = {
-                type: req.query.value
-            }
-        else if(filter == 'actor')
-            filterInstuction = {
-                actor: new RegExp('^' + req.query.value, 'i')
-            }
-        
-        Movie.find(filterInstuction)
-        .then(async movies =>{
-            var moviesArr = []
+    if(filter == 'movie')
+        filterInstruction = {
+            $or: [{name: new RegExp('^' + req.query.value, 'i')}, 
+            {description:new RegExp('^' + req.query.value, 'i')}]
+        }
+    else if(filter == 'type')
+        filterInstruction = {
+            type: req.query.value
+        }
+    else if(filter == 'actor')
+        filterInstruction = {
+            actor: new RegExp('^' + req.query.value, 'i')
+        }
+    
+    Movie.find(filterInstruction)
+    .then(async movies =>{
+        var moviesArr = []
 
-            // Filter Movie with Name, Type, Actor        
-            for (let m of  movies){
-                var rating =  await findRating(m._id);
-                m = JSON.parse(JSON.stringify(m));
-                m.rating = rating;
-                moviesArr.push(m)
-            }
-            return res.json({
-                movies: moviesArr
-            })
+        for (let m of  movies){
+            var rating =  await findRating(m._id);
+            m = JSON.parse(JSON.stringify(m));
+            m.rating = rating;
+            moviesArr.push(m)
+        }
+        return res.json({
+            movies: moviesArr
         })
-    }else {
-        Movie.find({})
-        .then(async movies =>{
-            var moviesArr = []
-
-            // Filter Movie with Name, Type, Actor        
-            for (let m of  movies){
-                var rating =  await findRating(m._id);
-                m = JSON.parse(JSON.stringify(m));
-                m.rating = rating;
-                moviesArr.push(m)
-            }
-            return res.json({
-                movies: moviesArr
-            })
-
-        })        
-    }
-
-
+    })
     
 })
 
 router.get('/moviemostrating', async (req , res) =>{
-    var length =parseInt( req.query.length)
+    var length =parseInt( req.query.limit)
+    var page = req.query.page
+    var startIndex = (page-1) * length
+
     Movie.find({})
-    .skip(0)
+    .skip(startIndex)
     .limit(length)
     .then(async movies =>{
         var moviesArr = []        
@@ -212,12 +178,18 @@ router.get('/moviemostrating', async (req , res) =>{
 
 router.get('/moviecomingsoon', async (req , res) =>{
     var today = moment().toDate();
-    var length =parseInt( req.query.length)
+    var page = req.query.page
+    var limit = parseInt(req.query.limit)
+
+    var startIndex = (page-1) * limit
+    // var endIndex = page * limit
+    console.log("page: " + page + "limit: " + limit);
+    
     Movie.find({
         onAirTime:{ $gte: today },
     })
-    .skip(0)
-    .limit(length)
+    .skip(startIndex)
+    .limit(limit)
     .sort( { onAirTime: 1 } )
     .then(async movies =>{
         var moviesArr = []
@@ -240,8 +212,9 @@ router.get('/moviecomingsoon', async (req , res) =>{
 })
 
 router.get('/movieonair', async (req , res) =>{
-    var length =parseInt( req.query.length)
-    console.log(length);
+    var length =parseInt(req.query.limit)
+    var page = req.query.page
+    var startIndex = (page-1) * length
     
     var today = moment().toDate();
     var lenday = moment(today).subtract(14, 'days').toDate();
@@ -251,7 +224,7 @@ router.get('/movieonair', async (req , res) =>{
         {onAirTime:{ $lte: today }},
         ]
     })
-    .skip(0)
+    .skip(startIndex)
     .limit(length)
     .sort( { onAirTime: 1 } )
     .then(async movies =>{
@@ -440,13 +413,3 @@ router.post('/users',async (req, res) => {
     })
 });
 export default router;
-
-// router.get('/name', (req, res) => {
-//     const data =  {
-//         username: 'peterson',
-//         age: 5
-//     };
-//     res.json(data);
-// });
-
-

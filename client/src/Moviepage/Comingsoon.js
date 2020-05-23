@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import { faAngleRight } from "@fortawesome/free-solid-svg-icons"
-import { faAngleLeft } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 // import for Spinner
@@ -113,7 +111,6 @@ export default function Homepage() {
         console.log("Filter is " + filter);
         console.log("Value is " + value);
         
-<<<<<<< Updated upstream
         fetch(`/api/movie?filter=${filter}&&value=${value}`)
         .then(res => {
             if (res.ok) return res.json()
@@ -129,9 +126,6 @@ export default function Homepage() {
         })         
 
     }, [value, filter])
-=======
-    } 
->>>>>>> Stashed changes
 
         return (
             <div>
@@ -143,7 +137,6 @@ export default function Homepage() {
                                 value={filter}
                                 onChange={handleChange}
                                 input={<BootstrapInput />}
-                                // defaultValue="movie"
                                 >
                                 <option value="movie">Movie</option>
                                 <option value="type">Type</option>
@@ -176,7 +169,6 @@ export default function Homepage() {
                             :
                             (Object.keys(search_list.search_list).length > 0)?
                                 <div style={{display: 'flex', alignItems: 'center'}}>
-                                    <FontAwesomeIcon id="left-right" icon={faAngleLeft} />
                                     <div className="trend-movie-section">
                                         <React.Fragment>
                                             {
@@ -187,7 +179,6 @@ export default function Homepage() {
                                         </React.Fragment>
                                             
                                     </div> 
-                                    <FontAwesomeIcon id="left-right" icon={faAngleRight} />
                                 </div>
                             :
                              <h3 style={{textAlign: 'center'}}>ไม่พบข้อมูลที่ค้นหา</h3>
@@ -200,7 +191,6 @@ export default function Homepage() {
                             <Loading />
                         :
                             <div style={{display: 'flex', alignItems: 'center'}}>
-                                <FontAwesomeIcon id="left-right" icon={faAngleLeft} />
                                 <div className="trend-movie-section">
                                     <React.Fragment>
                                         {
@@ -211,7 +201,6 @@ export default function Homepage() {
                                     </React.Fragment>
                                         
                                 </div> 
-                                <FontAwesomeIcon id="left-right" icon={faAngleRight} />
                             </div>
                     }
                     </div>

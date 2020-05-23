@@ -21,49 +21,69 @@ export default function Homepage() {
         coming_list:[],
         isLoad:true
     })
+    const [pageOnair, setPageOnair] = useState(1)
+    const [pageTopRate, setPageTopRate] = useState(1)
+    const [pageComing, setPageComing] = useState(1)
+    const limit = 4
 
     useEffect(() => {
-        fetch(`/api/movieonair?length=4`)
+        fetch(`/api/movieonair?page=${pageOnair}&&limit=${limit}`)
         .then(res => {
             if (res.ok) return res.json()
             else throw res
         })
         .then(res =>{ 
-            console.log("data is " + res.movies[0].name);  
             setOnair_list({onair_list:res.movies, isLoad:false})
+            console.log("size " + Object.keys(onair_list.onair_list).length);
+            
         })
         .catch(err => {
-            console.log("error " + JSON.stringify(err)); 
+            console.log("error " + JSON.stringify(err));
+            if(err.status === 404) return            
+            setPageOnair(pageOnair-1)
         }) 
+        console.log("pageOnair" + pageOnair);
+    }, [pageOnair]);
 
-        fetch(`/api/moviecomingsoon?length=4`)
+    useEffect(() => {
+        fetch(`/api/moviemostrating?page=${pageTopRate}&&limit=${limit}`)
         .then(res => {
             if (res.ok) return res.json()
-            else throw res
+            else throw res.status
         })
         .then(res =>{ 
-            console.log("data is " + res.movies[0].name);      
-            setComing_list({coming_list:res.movies, isLoad:false})
-        })
-        .catch(err => {
-            console.log("error " + JSON.stringify(err)); 
-        }) 
-
-        fetch(`/api/moviemostrating?length=4`)
-        .then(res => {
-            if (res.ok) return res.json()
-            else throw res
-        })
-        .then(res =>{ 
-            console.log("data is " + res.movies[0].name);      
             setMost_list({most_list:res.movies, isLoad:false})
+            console.log("size " + Object.keys(most_list.most_list).length);
         })
         .catch(err => {
+            if(err === 404) return 
+            setPageTopRate(pageTopRate-1)
             console.log("error " + JSON.stringify(err)); 
-        })       
-    }, []);
+        })      
+        console.log("pageTopRate: " + pageTopRate);
+        
+    }, [pageTopRate])
 
-        return (
+    useEffect(() => {
+        fetch(`/api/moviecomingsoon?page=${pageComing}&&limit=${limit}`)
+        .then(res => {
+            if (res.ok) return res.json()
+            else throw res.status
+        })
+        .then(res =>{ 
+            setComing_list({coming_list:res.movies, isLoad:false})
+            console.log("size " + Object.keys(coming_list.coming_list).length);
+        })
+        .catch(err => {
+            if(err === 404) return  
+            console.log("error " + JSON.stringify(err)); 
+            setPageComing(pageComing-1)
+        }) 
+        console.log("pageComing: " + pageComing);
+        
+    }, [pageComing])
+
+    return (
             <div>
                 {
                     (onair_list.isLoad)?
@@ -74,7 +94,10 @@ export default function Homepage() {
                                 <h1 className="heading-label">Movie On Air</h1>
                             </NavLink>
                             <div style={{display: 'flex', alignItems: 'center'}}>
-                                <FontAwesomeIcon id="left-right" icon={faAngleLeft} />
+                                <FontAwesomeIcon id="left-right" onClick={() => {
+                                    if(pageOnair === 1 ) return
+                                    setPageOnair(pageOnair-1)
+                                }} icon={faAngleLeft} />
                                 <div className="trend-movie-section">
                                     <React.Fragment>
                                         {
@@ -85,7 +108,10 @@ export default function Homepage() {
                                     </React.Fragment>
                                     
                                 </div> 
-                                <FontAwesomeIcon id="left-right" icon={faAngleRight} />
+                                <FontAwesomeIcon id="left-right" onClick={() => {
+                                    if((Object.keys(onair_list.onair_list).length%4) === 0)
+                                    setPageOnair(pageOnair+1)
+                                }}  icon={faAngleRight} />
                             </div>
                         </div>
                 }
@@ -99,7 +125,10 @@ export default function Homepage() {
                                 <h1 className="heading-label">Top Rating</h1>
                             </NavLink>
                             <div style={{display: 'flex', alignItems: 'center'}}>
-                                <FontAwesomeIcon id="left-right" icon={faAngleLeft} />
+                                <FontAwesomeIcon id="left-right" onClick={() => {
+                                    if(pageTopRate === 1) return
+                                    setPageTopRate(pageTopRate-1)
+                                }} icon={faAngleLeft} />
                                 <div className="trend-movie-section">
                                     <React.Fragment>
                                         {
@@ -110,7 +139,10 @@ export default function Homepage() {
                                     </React.Fragment>
                                     
                                 </div> 
-                                <FontAwesomeIcon id="left-right" icon={faAngleRight} />
+                                <FontAwesomeIcon id="left-right" onClick={() => {
+                                    if((Object.keys(most_list.most_list).length%4) === 0)
+                                    setPageTopRate(pageTopRate+1)
+                                }} icon={faAngleRight} />
                             </div>
                         </div>
                 }
@@ -124,7 +156,10 @@ export default function Homepage() {
                                 <h1  className="heading-label">Coming Zoon</h1>
                             </NavLink>
                             <div style={{display: 'flex', alignItems: 'center'}}>
-                                <FontAwesomeIcon id="left-right" icon={faAngleLeft} />
+                                <FontAwesomeIcon id="left-right" onClick={() => {
+                                    if(pageComing === 1) return
+                                    setPageComing(pageComing-1)
+                                }} icon={faAngleLeft} />
                                 <div className="trend-movie-section">
                                     <React.Fragment>
                                         {
@@ -135,7 +170,10 @@ export default function Homepage() {
                                     </React.Fragment>
                                     
                                 </div> 
-                                <FontAwesomeIcon id="left-right" icon={faAngleRight} />
+                                <FontAwesomeIcon id="left-right" onClick={() => {
+                                    if((Object.keys(coming_list.coming_list).length%4) === 0)
+                                    setPageComing(pageComing+1)
+                                }} icon={faAngleRight} />
                             </div>
                         </div>
                 }

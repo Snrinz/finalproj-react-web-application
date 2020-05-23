@@ -95,7 +95,14 @@ body {
   grid-template-columns: 1fr 1fr 1fr 1fr;
 }
 #left-right {
+  cursor: pointer;
   font-size: 45px;
+  transition: .3s;
+}
+#left-right:hover {
+  border-radius: 4px;
+  box-shadow: 0 10px 10px 0 rgba(202, 202, 202, 0.486);
+  transform: scale(1.09)
 }
 .movie-card {
   margin-bottom: 30px;
@@ -107,7 +114,7 @@ body {
   background-color: rgb(255, 255, 255);
   transition: .3s;
 }
-.movie-card:hover {
+.movie-card:hover{
   box-shadow: 0 10px 10px 0 rgba(202, 202, 202, 0.486);
   transform: scale(1.09)
 }
