@@ -3,6 +3,7 @@ import { faAngleRight } from "@fortawesome/free-solid-svg-icons"
 import { faAngleLeft } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import Loading from "./Loading"
+import moment from'moment';
 
 //library for MovieCard
 import { NavLink } from 'react-router-dom'
@@ -99,7 +100,7 @@ export default function Homepage() {
                     :
                         <div data-aos="fade-up" style={{margin: '50px'}}>
                             <NavLink id="title-summary" to={`/onairpage`} >
-                                <h1 className="heading-label">Movie On Air</h1>
+                                <h1 className="heading-label">Movies On Air</h1>
                             </NavLink>
                             <div style={{display: 'flex', alignItems: 'center'}}>
                                 {
@@ -171,7 +172,7 @@ export default function Homepage() {
                     :
                         <div data-aos="fade-up" style={{margin: '50px'}}>
                             <NavLink id="title-summary" to={`/comingpage`} >
-                                <h1  className="heading-label">Coming Zoon</h1>
+                                <h1  className="heading-label">Coming Soon</h1>
                             </NavLink>
                             <div style={{display: 'flex', alignItems: 'center'}}>
                                 {
@@ -222,15 +223,17 @@ const MovieCard = (props) => {
                 <strong>{movie.name}</strong>
             </NavLink>
 
-            <WatchListButton />        
+            <WatchListButton movie={movie} />        
         </div>
     )
 }
 
-const WatchListButton = () => {
+const WatchListButton = (props) => {
+    const { movie } = props
     return (
         <div>
-            <button className="watch-button">+ Watch</button>
+            <h2>{moment(movie.onAirTime).locale('th').format('LL')}</h2>
+            {/* <button className="watch-button">+ Watch</button> */}
         </div>
     )
 }

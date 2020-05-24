@@ -134,7 +134,7 @@ const SignIn = () => {
           >
             Sign In
           </Button>
-          <label> ───────────────────  or  ──────────────────</label>
+          <label>─────────────────── or ─────────────────</label>
           <Button
                 href="/signup"
                 type="submit"
