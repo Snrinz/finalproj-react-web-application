@@ -3,7 +3,7 @@ import Avatar from '@material-ui/core/Avatar';
 import Alert from '@material-ui/lab/Alert';
 import AlertTitle from '@material-ui/lab/AlertTitle';
 import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
+// import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import { Link, withRouter } from 'react-router-dom';
 import Grid from '@material-ui/core/Grid';
@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.secondary.main,
   },
   form: {
-    width: '40%', // Fix IE 11 issue.
+    width: '100%', // Fix IE 11 issue.
     marginTop: theme.spacing(3),
   },
   submit: {
@@ -52,8 +52,9 @@ function SignUpForm(props) {
   const classes = useStyles();
   // const debug = true;
   return (
+    <div className= {"center2"}>
     <Container className={classes.main} maxwidth="md">
-      <CssBaseline />
+      {/* <CssBaseline /> */}
       <div maxwidth="xs" className={classes.paper}>
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />
@@ -174,7 +175,7 @@ function SignUpForm(props) {
             type="submit"
             fullWidth
             variant="contained"
-            color="primary"
+            color="secondary"
             className={classes.submit}
           >
             Sign Up
@@ -194,6 +195,7 @@ function SignUpForm(props) {
         <pre>{JSON.stringify(errors, null, 2)}</pre>
       </Container> */}
     </Container>
+    </div>
   );
 }
 var phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/

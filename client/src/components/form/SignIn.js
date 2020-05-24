@@ -3,7 +3,7 @@ import Avatar from '@material-ui/core/Avatar';
 import Alert from '@material-ui/lab/Alert';
 import AlertTitle from '@material-ui/lab/AlertTitle';
 import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
+// import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
@@ -37,9 +37,7 @@ const useStyles = makeStyles((theme) => ({
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
-  body: {
-    backgroundColor : 'blue'
-  }
+  
 
 
 }));
@@ -75,9 +73,9 @@ const SignIn = () => {
       handleSubmit,
       handleReset
     }) => (
-      
+      <div className= {"center"}>
     <Container component="main" maxWidth="xs">
-      <CssBaseline />
+      {/* <CssBaseline /> */}
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />
@@ -97,6 +95,8 @@ const SignIn = () => {
             margin="normal"
             required
             fullWidth
+            color="secondary"
+            // backgroundColor = "white"
             id="email"
             label="Email Address"
             name="email"
@@ -113,6 +113,7 @@ const SignIn = () => {
             margin="normal"
             required
             fullWidth
+            color="secondary"
             name="password"
             label="Password"
             type="password"
@@ -134,27 +135,32 @@ const SignIn = () => {
             type="submit"
             fullWidth
             variant="contained"
-            color="primary"
+            color="secondary"
             className={classes.submit}
           >
             Sign In
           </Button>
-        
-          <label> ──────────────────  or  ──────────────────  </label>
-          <br></br>
-          <br></br>
+          <br/>
+          <label> ──────────────  or  ──────────────  </label>
+          <br/>
+          <div className={classes.test}>
+          <br/>
           <Button 
                 href="/signup"
                 type="submit"
                 fullWidth
                 variant="contained"
-                color="primary"
+                color="secondary"
               >
                 Create a New Account
-          </Button>     
+          </Button> 
+           </div>   
         </form>
       </div>
     </Container>
+          <br/>
+          <br/>
+    </div>
     )}
   </Formik>
   );

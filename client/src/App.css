@@ -323,3 +323,25 @@ li a {
 li a:hover {
   background-color: #111;
 }
+
+.center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50% , -50%);
+  width: 400px;
+  background: white;
+  border-radius: 10px;
+  color: #111;
+}
+
+.center2 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50% , -50%);
+  width: 600px;
+  background: white;
+  border-radius: 10px;
+  color: #111;
+}
