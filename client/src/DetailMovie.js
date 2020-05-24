@@ -15,6 +15,10 @@ import { makeStyles } from '@material-ui/core/styles';
 import Rating from '@material-ui/lab/Rating';
 import Box from '@material-ui/core/Box';
 
+// API for Animation
+import Aos from "aos"
+import 'aos/dist/aos.css'
+
 export default class DetailMovie extends Component {
     state = {
         movie_detail: {},
@@ -23,6 +27,7 @@ export default class DetailMovie extends Component {
         isLoad: true,
         profile:{}
     }
+    
 
     componentDidMount () {
         // const context = useContext(Context);
@@ -57,6 +62,8 @@ export default class DetailMovie extends Component {
         .catch(err => {
             console.log("error2 " + JSON.stringify(err)); 
         }) 
+
+        Aos.init({ duration: 2000})
     }
 
     render() {
@@ -70,7 +77,7 @@ export default class DetailMovie extends Component {
                 <Loading />
          :
         <>
-                <div style={{marginTop: '20px'}} className="detail-movie-section">
+                <div style={{marginTop: '20px'}} data-aos="fade-up" className="detail-movie-section">
                     <img id="image-detail-movie" src={require(`./img/${this.state.movie_detail.photo}`)} alt={this.state.movie_detail.photo}></img>
 
                 <div className="description-section">
@@ -138,31 +145,35 @@ export default class DetailMovie extends Component {
                  
             </div>
 
-            <h2 id="comments-title" >Trailer</h2>
-            <div style={{display:'flex', justifyContent: 'center', marginBottom: '50px'}}>
-            <ReactPlayer width={1000} height={500} url={this.state.movie_detail.trailer} controls={true}></ReactPlayer>
-
+            <div data-aos="fade-up">
+                <h2 id="comments-title" >Trailer</h2>
+                <div style={{display:'flex', justifyContent: 'center', marginBottom: '50px'}}>
+                    <ReactPlayer width={1000} height={500} url={this.state.movie_detail.trailer} controls={true}></ReactPlayer>
+                </div>
             </div>
         </>
         }       
 
 
 
-            <h2 id="comments-title" >Comments</h2>
-            {
-                <React.Fragment>
-                    {
-                    (this.state.review_list && Object.keys(this.state.review_list).length > 0)? 
-                        this.state.review_list.map(review => (
-                            <Comment key={review._id} review={review} />
-                        ))
-                        : <p id="no-comment">There are no comments</p>
-                        
-                    }
-                </React.Fragment>
-            }
-            
-           <PostComment movieId={this.state.movie_detail._id} /> 
+            <div data-aos="fade-up">
+                <h2 id="comments-title" >Comments</h2>
+                {
+                    <React.Fragment>
+                        {
+                        (this.state.review_list && Object.keys(this.state.review_list).length > 0)? 
+                            this.state.review_list.map(review => (
+                                <Comment key={review._id} review={review} />
+                            ))
+                            : <p id="no-comment">There are no comments</p>
+                            
+                        }
+                    </React.Fragment>
+                }
+                
+                <PostComment movieId={this.state.movie_detail._id} />                 
+            </div>
+
 
            </div>
         </div>
@@ -205,7 +216,7 @@ const PostComment = (props) => {
         <>
             { context.authState ? 
                 <PostForm userId={profile._id} movieId={movieId} />
-                : <div style={{margin: '20px auto', fontWeight: 'bold'}}>ต้องเข้าสู่ระบบก่อน จึงจะแสดงความคิดเห็นได้</div>
+                : <div style={{marginTop: '50px', textAlign: 'center', fontWeight: 'bold'}}>ต้องเข้าสู่ระบบก่อน จึงจะแสดงความคิดเห็นได้</div>
             }
         </>
     )

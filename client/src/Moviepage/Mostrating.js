@@ -161,7 +161,7 @@ export default function Homepage() {
                 <div style={{margin: '25px'}}>
                     <h1  id="title-summary" className="heading-label">Top Rating</h1>
                 {
-                    (value != "")?
+                    (value !== "")?
                     <div>
                         {
                             (search_list.isLoad)?

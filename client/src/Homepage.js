@@ -8,6 +8,10 @@ import Loading from "./Loading"
 import { NavLink } from 'react-router-dom'
 import { faStar } from "@fortawesome/free-solid-svg-icons"
 
+// API for Animation
+import Aos from "aos"
+import 'aos/dist/aos.css'
+
 export default function Homepage() {
     const [onair_list, setOnair_list] = useState({
         onair_list:[],
@@ -25,6 +29,10 @@ export default function Homepage() {
     const [pageTopRate, setPageTopRate] = useState(1)
     const [pageComing, setPageComing] = useState(1)
     const limit = 4
+
+    useEffect(() => {
+        Aos.init({ duration: 2000})
+    }, [])
 
     useEffect(() => {
         fetch(`/api/movieonair?page=${pageOnair}&&limit=${limit}`)
@@ -89,15 +97,21 @@ export default function Homepage() {
                     (onair_list.isLoad)?
                         <Loading />
                     :
-                        <div style={{margin: '50px'}}>
+                        <div data-aos="fade-up" style={{margin: '50px'}}>
                             <NavLink id="title-summary" to={`/onairpage`} >
                                 <h1 className="heading-label">Movie On Air</h1>
                             </NavLink>
                             <div style={{display: 'flex', alignItems: 'center'}}>
+                                {
+                                (pageOnair === 1)?
+                                "":
                                 <FontAwesomeIcon id="left-right" onClick={() => {
                                     if(pageOnair === 1 ) return
                                     setPageOnair(pageOnair-1)
                                 }} icon={faAngleLeft} />
+                                }
+
+
                                 <div className="trend-movie-section">
                                     <React.Fragment>
                                         {
@@ -105,9 +119,9 @@ export default function Homepage() {
                                                 <MovieCard key={movie._id} movie={movie} />
                                             ))
                                         }
-                                    </React.Fragment>
-                                    
+                                    </React.Fragment>       
                                 </div> 
+
                                 <FontAwesomeIcon id="left-right" onClick={() => {
                                     if((Object.keys(onair_list.onair_list).length%4) === 0)
                                     setPageOnair(pageOnair+1)
@@ -120,15 +134,19 @@ export default function Homepage() {
                     (most_list.isLoad)?
                         <Loading />
                     :
-                        <div style={{margin: '50px'}}>
+                        <div data-aos="fade-up" style={{margin: '50px'}}>
                             <NavLink id="title-summary" to={`/toppage`} >
                                 <h1 className="heading-label">Top Rating</h1>
                             </NavLink>
                             <div style={{display: 'flex', alignItems: 'center'}}>
-                                <FontAwesomeIcon id="left-right" onClick={() => {
-                                    if(pageTopRate === 1) return
-                                    setPageTopRate(pageTopRate-1)
-                                }} icon={faAngleLeft} />
+                                {
+                                    (pageTopRate === 1)?
+                                    "":
+                                    <FontAwesomeIcon id="left-right" onClick={() => {
+                                        if(pageTopRate === 1) return
+                                        setPageTopRate(pageTopRate-1)
+                                    }} icon={faAngleLeft} />
+                                }
                                 <div className="trend-movie-section">
                                     <React.Fragment>
                                         {
@@ -151,15 +169,20 @@ export default function Homepage() {
                     (coming_list.isLoad)?
                         <Loading />
                     :
-                        <div style={{margin: '50px'}}>
+                        <div data-aos="fade-up" style={{margin: '50px'}}>
                             <NavLink id="title-summary" to={`/comingpage`} >
                                 <h1  className="heading-label">Coming Zoon</h1>
                             </NavLink>
                             <div style={{display: 'flex', alignItems: 'center'}}>
-                                <FontAwesomeIcon id="left-right" onClick={() => {
-                                    if(pageComing === 1) return
-                                    setPageComing(pageComing-1)
-                                }} icon={faAngleLeft} />
+                                {
+                                    (pageComing === 1)?
+                                    "":
+                                    <FontAwesomeIcon id="left-right" onClick={() => {
+                                        if(pageComing === 1) return
+                                        setPageComing(pageComing-1)
+                                    }} icon={faAngleLeft} />                                    
+                                }
+
                                 <div className="trend-movie-section">
                                     <React.Fragment>
                                         {
@@ -171,7 +194,6 @@ export default function Homepage() {
                                     
                                 </div> 
                                 <FontAwesomeIcon id="left-right" onClick={() => {
-                                    if((Object.keys(coming_list.coming_list).length%4) === 0)
                                     setPageComing(pageComing+1)
                                 }} icon={faAngleRight} />
                             </div>
