@@ -1,4 +1,5 @@
 import history from './history';
+import '../../App.css';
 
 class Auth {
     url = "/user/";

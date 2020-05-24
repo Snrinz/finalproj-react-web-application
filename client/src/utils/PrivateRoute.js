@@ -23,9 +23,9 @@ export default PrivateRoute
 
 import React, { useContext } from 'react'
 import { Route, Redirect } from 'react-router';
-import history from './authUtils/history'
+// import history from './authUtils/history'
 import Context from './authUtils/Context'
-
+import '../App.css';
 
 const PrivateRoute = ({component: ComposedComponent, redirectTo, requiredAdmin=false, fromPage, ...rest }) => {
   const context = useContext(Context);

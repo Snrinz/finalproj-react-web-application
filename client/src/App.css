@@ -9,6 +9,11 @@ body {
   padding-bottom: 20px;
 }
 
+div {
+  color: rgb(100, 99, 99);
+  font-family: Century Gothic, Opun ,sans-serif;
+}
+
 /* Navigation */
 .nav-section {
   position: -webkit-sticky;

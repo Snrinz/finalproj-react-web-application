@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import {Nav, NavDropdown, Navbar} from 'react-bootstrap';
+import '../../App.css';
 // import Navbar from 'react-bootstrap/Navbar'
 import Context from '../../utils/authUtils/Context';
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"

@@ -1,6 +1,8 @@
 import React, { useEffect, useContext } from 'react';
 import history from './history';
 import Context from './Context';
+import '../../App.css';
+
 
 const AuthCheck = (props) => {
   const context = useContext(Context)

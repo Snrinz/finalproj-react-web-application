@@ -15,6 +15,9 @@ import DetailMovie from '../DetailMovie';
 import Mostrating from '../Moviepage/Mostrating';
 import Comingsoon from '../Moviepage/Comingsoon';
 import Onair from '../Moviepage/Onair';
+import '../App.css';
+
+
 const Routes = () => {
 //    const context = useContext(Context)
 /*    const [refresh, setRefresh] = React.useState(false)

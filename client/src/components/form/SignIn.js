@@ -14,6 +14,8 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Context from '../../utils/authUtils/Context';
+import '../../App.css';
+
 
 import { Formik } from "formik";
 import * as Yup from 'yup';
@@ -38,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const SignIn = (props) => {
+const SignIn = () => {
   const context = useContext(Context)
 
   const classes = useStyles();

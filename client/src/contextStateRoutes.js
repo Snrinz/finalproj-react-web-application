@@ -1,13 +1,12 @@
 import PropTypes from "prop-types";
 
 import "./App.css";
-// import 'bootstrap/dist/css/bootstrap.min.css';
 
 import Context from './utils/authUtils/Context';
 import React, { useReducer } from 'react';
 import * as ACTIONS from './utils/store/actions/actions';
 
-import { withRouter } from "react-router";
+// import { withRouter } from "react-router";
 import * as AuthReducer from './utils/store/reducers/auth_reducer';
 
 import Auth from './utils/authUtils/auth';
