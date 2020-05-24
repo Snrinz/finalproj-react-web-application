@@ -171,9 +171,9 @@ router.get('/moviemostratingall', async (req , res) => {
 })
 
 router.get('/moviemostrating', async (req , res) =>{
-    // var length =parseInt( req.query.limit)
-    // var page = req.query.page
-    // var startIndex = (page-1) * length    
+    var length =parseInt( req.query.limit)
+    var page = req.query.page
+    var startIndex = (page-1) * length    
 
     // let filterInstruction = {}
     // let filter = req.query.filter
