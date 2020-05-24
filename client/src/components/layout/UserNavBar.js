@@ -88,9 +88,14 @@ const AuthenMenutest = () => {
                 <li class="nav-item" style={{float: "right"}}>
                     <Link to="/">{profile.firstName}</Link>
                 </li>
-                <li class="nav-item" style={{float: "right"}}>
-                    <Link to="/dashboard">Dashboard</Link>
-                </li>
+                {
+                    (isAdmin)?
+                    <li class="nav-item" style={{float: "right"}}>
+                    <   Link to="/dashboard">Dashboard</Link>
+                    </li>
+                    :""
+                }
+
                 </ul>
             </div>
             </nav>

@@ -2,8 +2,8 @@ import React from 'react'
 import { withFormik } from 'formik'
 import { withRouter } from 'react-router-dom';
 import * as Yup from 'yup';
-import { Redirect, Switch } from 'react-router-dom'
-
+// import { Redirect, Switch } from 'react-router-dom'
+import history from './utils/authUtils/history' //use if you want to redirect after submit
 
 const PostForm = (props) => {
     const {
@@ -63,12 +63,15 @@ const CommentFormik = withRouter(withFormik({
         }
         return response.json()
       })
-      .then(res => {
-        // let history = props.history; //useHistory();
-        // let location = props.location; //useLocation();    
-        // let { from } = location.state || { from: { pathname: `/detail-movie/${props.movieId}` } };        
-        // history.replace(from);
-        return <Switch><Redirect to="{`/detail-movie/${props.movieId}`}" /></Switch>
+      // .then(res => {
+      //   // let history = props.history; //useHistory();
+      //   // let location = props.location; //useLocation();    
+      //   // let { from } = location.state || { from: { pathname: `/detail-movie/${props.movieId}` } };        
+      //   // history.replace(from);
+      //   return <Switch><Redirect to="{`/detail-movie/${props.movieId}`}" /></Switch>
+      // })
+      .then(response => {
+        history.push(`/detail-movie/${props.movieId}`);
       })
       .catch(err => { 
         console.log(err);

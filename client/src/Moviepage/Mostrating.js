@@ -225,7 +225,7 @@ const MovieCard = (props) => {
             </NavLink>
             
             <div className="rating-section">
-                <FontAwesomeIcon  id="star" icon={faStar} /> {movie.rating}
+                <FontAwesomeIcon  id="star" icon={faStar} /> {movie.rating.toFixed(1)}
             </div>
 
             <NavLink to={`/detail-movie/${movie._id}`} id="name-movie">

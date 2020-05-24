@@ -154,7 +154,6 @@ const Dashboard = () => {
           
             <Switch>
               <Route exact path="/dashboard/movies" component={MovieDash} />
-              <Route path="/dashboard/users" component={UserDash} />
             </Switch>
 
           <Box pt={4}>

@@ -18,22 +18,5 @@ export const mainListItems = (
         <ListItemText primary="Movies" />
       </ListItem>
     </Link>
-    {/* Users */}
-    <Link to="/dashboard/users">
-      <ListItem button>
-        <ListItemIcon>
-          <PeopleIcon />
-        </ListItemIcon>
-        <ListItemText primary="Users" />
-      </ListItem>
-    </Link>
-    {/* Reviews */}
-    <ListItem button>
-      <ListItemIcon>
-        <BarChartIcon />
-      </ListItemIcon>
-      <ListItemText primary="Reviews" />
-    </ListItem>
-
   </div>
 );

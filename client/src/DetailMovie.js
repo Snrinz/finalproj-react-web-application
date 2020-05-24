@@ -18,6 +18,7 @@ import Box from '@material-ui/core/Box';
 // API for Animation
 import Aos from "aos"
 import 'aos/dist/aos.css'
+// import history from './utils/authUtils/history' //use if you want to redirect after submit
 
 export default class DetailMovie extends Component {
     state = {
@@ -82,7 +83,7 @@ export default class DetailMovie extends Component {
                     <div className="descrip">                        
                         <h2>{this.state.movie_detail.name}</h2>
                         <div className="rating-section">
-                            <h2><FontAwesomeIcon id="star" icon={faStar} /> {this.state.rating} </h2>
+                            <h2><FontAwesomeIcon id="star" icon={faStar} /> {this.state.rating.toFixed(1)} </h2>
                         </div>
                     </div>
                     <hr style={{opacity: '0'}} />
@@ -327,11 +328,12 @@ const PostComment = (props) => {
 
 //         fetch('/api/reviews', {
 //             method: 'POST',
-//             withCredentials: true,
-//             credentials: 'include',
+//             // withCredentials: true,
+//             // credentials: 'include',
 //             body: JSON.stringify(data),
 //             // headers: new Headers({ 'Authorization': localStorage.getItem('token') }),
-//             headers: new Headers({ 'Content-Type': 'application/json' }),
+//             // headers: new Headers({ 'Content-Type': 'application/json',
+//             // 'Authorization': localStorage.getItem('token') }),
 //           })
 //           .then(response => {
 //             if (response.status !== 200) {
@@ -339,6 +341,9 @@ const PostComment = (props) => {
 //               throw `Status Code: ${response.status} ${response.statusText}`;
 //             }
 //             return response.json()
+//           })
+//           .then(response => {
+//               history.push('/');
 //           })
 //           .catch(err => { 
 //             console.log(err);
