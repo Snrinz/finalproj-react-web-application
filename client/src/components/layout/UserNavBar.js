@@ -1,7 +1,6 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import {Nav, NavDropdown, Navbar} from 'react-bootstrap';
-import '../../App.css';
 // import Navbar from 'react-bootstrap/Navbar'
 import Context from '../../utils/authUtils/Context';
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
@@ -10,6 +9,7 @@ import Context from '../../utils/authUtils/Context';
 // import { faHome } from "@fortawesome/free-solid-svg-icons"
 // import { faSearch } from "@fortawesome/free-solid-svg-icons"
 // import { faSignInAlt } from "@fortawesome/free-solid-svg-icons"
+
 const UnauthenMenu = () => {
     return (
         <Navbar.Collapse>
@@ -28,13 +28,21 @@ const UnauthenMenu = () => {
     )
 }
 
+const styleNavBar = {
+    listStyleType: 'none', 
+    margin: '0', 
+    padding: '0', 
+    overflow: 'hidden', 
+    backgroundColor: '#333'
+}
+
 const UnauthenMenutest = () => {
     return (
         <>
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <nav className="navbar navbar-expand-lg navbar-light bg-light">
             
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
+                <ul style={styleNavBar} class="navbar-nav">
                 <li class="nav-item active">
                     <Link to="/"><img
                         src="/icon.png"
@@ -56,16 +64,16 @@ const UnauthenMenutest = () => {
         </>
     )
 }
-const AuthenMenutest = (props) => {
+const AuthenMenutest = () => {
     const context = useContext(Context);
     const profile = context.profileState
     let isAdmin = profile.memberType === 'ADMIN';
 
     return (<>
-       <nav class="navbar navbar-expand-lg navbar-light bg-light">
+       <nav className="navbar navbar-expand-lg navbar-light bg-light">
             
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
+                <ul style={styleNavBar} class="navbar-nav">
                 <li class="nav-item active">
                 <Link to="/"><img
                         src="/icon.png"
@@ -79,6 +87,9 @@ const AuthenMenutest = (props) => {
                 </li>
                 <li class="nav-item" style={{float: "right"}}>
                     <Link to="/">{profile.firstName}</Link>
+                </li>
+                <li class="nav-item" style={{float: "right"}}>
+                    <Link to="/dashboard">Dashboard</Link>
                 </li>
                 </ul>
             </div>

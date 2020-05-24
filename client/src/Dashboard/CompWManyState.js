@@ -60,3 +60,145 @@ export function CompWManyState1() {
    </select>
 </div>);
 }
+
+
+
+
+
+
+
+// import React, { useState, useEffect } from 'react'
+// import { withFormik } from 'formik'
+// import { withRouter } from 'react-router-dom';
+// import * as Yup from 'yup';
+// import TextField from '@material-ui/core/TextField';
+// import Grid from '@material-ui/core/Grid';
+// import { makeStyles } from '@material-ui/core/styles';
+// import Button from '@material-ui/core/Button';
+// import { Link } from 'react-router-dom';
+// const useStyles = makeStyles((theme) => ({
+//   root: {
+//     '& .MuiTextField-root': {
+//       margin: theme.spacing(1),
+//       width: '25ch',
+//     },
+//   },
+// }));
+
+
+// const MovieForm = (props) => {      
+//     const classes = useStyles();
+//     const [movie, setMovie] = useState(props.movie)
+
+//     const handleSubmit = (event) => {
+        
+//     }
+
+//     return (
+//         <form className={classes.root} onSubmit={handleSubmit}>
+//             {/* <img id="image-detail-movie" src={require(`../img/${movie.photo}`)} 
+//             alt={movie.photo}></img> */}
+
+//             <Grid container spacing={2}>
+//                 <Grid item xs={12} sm={6}>
+//                     <TextField
+//                         autoComplete="name"
+//                         name="name"
+//                         variant="outlined"
+//                         required
+//                         fullWidth
+//                         id="name"
+//                         label="ชื่อภาพยนตร์"
+//                         onChange={event => setMovie({...movie, name: event.target.value})}
+//                         defaultValue={movie.name}
+//                         autoFocus
+//                     />
+//                 </Grid>
+//                 <Grid item xs={12} sm={6}>
+//                     <TextField
+//                         autoComplete="type"
+//                         name="type"
+//                         variant="outlined"
+//                         required
+//                         fullWidth
+//                         id="type"
+//                         label="ประเภท"
+//                         onChange={event => setMovie({...movie, type: event.target.value})}
+//                         defaultValue={movie.type}
+//                         autoFocus
+//                     />
+//                 </Grid>
+//                 <Grid item xs={12} sm={6}>
+//                     <TextField
+//                         autoComplete="actor"
+//                         name="actor"
+//                         variant="outlined"
+//                         required
+//                         fullWidth
+//                         id="actor"
+//                         label="นักแสดง"
+//                         onChange={event => setMovie({...movie, actor: event.target.value})}
+//                         defaultValue={movie.actor}
+//                         autoFocus
+//                     />
+//                 </Grid>
+//                 <Grid item xs={12} sm={6}>
+//                     <TextField
+//                         autoComplete="actor"
+//                         name="actor"
+//                         variant="outlined"
+//                         required
+//                         fullWidth
+//                         id="actor"
+//                         label="นักแสดง"
+//                         onChange={event => setMovie({...movie, actor: event.target.value})}
+//                         defaultValue={movie.actor}
+//                         autoFocus
+//                     />
+//                 </Grid>
+//           </Grid>
+//         </form>
+//     )
+// }
+
+// const MovieFormFormik = withRouter(withFormik({
+//     mapPropsToValues: () => ({ name, type, description, trailer, director, company, photo }) => {
+//       return {
+//         name: name || "",
+//         type: type || "",
+//         description: description || "",
+//         trailer: trailer || "",
+//         director: director || "",
+//         company: company || "",
+//         photo: photo || "",
+
+//       };
+//     },
+//     validationSchema: Yup.object().shape({
+//         comment: Yup.string()
+//         .required()
+//     }),
+//     handleSubmit: (values, { setSubmitting}) => {
+  
+//       fetch('/api/reviews', {
+//         method: 'POST',
+//         body: JSON.stringify(values),
+//         headers: new Headers({ 'Content-Type': 'application/json' }),
+//       })
+//       .then(response => {
+//         if (response.status !== 200) {
+//           console.log(response.statusText);
+//           throw `Status Code: ${response.status} ${response.statusText}`;
+//         }
+
+//         return response.json()
+//       })
+//       .catch(err => { 
+//         console.log(err);
+//       });
+//       setSubmitting(false);
+//     },
+//     displayName: "MovieForm"
+//   })(MovieForm));
+
+  export default MovieForm;

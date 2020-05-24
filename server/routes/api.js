@@ -94,7 +94,28 @@ router.get('/movie/:movieId', async (req , res) =>{
     })
 })
 
-router.get('/movie', async (req , res) =>{    
+router.get('/users', async (req , res) =>{
+    let filterInstruction = {}
+
+    User.find(filterInstruction)
+    .then(async users =>{
+        var usersArr = []
+
+        // for (let user of  users){
+        //     var rating =  await findRating(user._id);
+        //     user = JSON.parse(JSON.stringify(user));
+        //     user.rating = rating;
+        //     moviesArr.push(m)
+        // }
+
+        return res.json({
+            users: usersArr
+        })
+    })
+    
+})
+
+router.get('/movie', async (req , res) =>{
     let filterInstruction = {}
     let filter = req.query.filter
 

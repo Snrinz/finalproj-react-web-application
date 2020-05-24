@@ -15,11 +15,11 @@ import DetailMovie from '../DetailMovie';
 import Mostrating from '../Moviepage/Mostrating';
 import Comingsoon from '../Moviepage/Comingsoon';
 import Onair from '../Moviepage/Onair';
-import '../App.css';
+import Dashboard from '../Dashboard/Dashboard'
 
 
 const Routes = () => {
-//    const context = useContext(Context)
+   const context = useContext(Context)
 /*    const [refresh, setRefresh] = React.useState(false)
     if (window.performance) {
       if (performance.navigation.type == 1) {
@@ -29,20 +29,19 @@ const Routes = () => {
       }
     } 
 */
-/*
-if (context.authObj.isAuthenticated() && !context.profileState) {
-  console.log("Routes context 2", context.profileState);
-                context.authObj.getProfile()
-                .then(() => {
-                    context.handleUserAddProfile(context.profileState)
-                    context.handleUserLogin()
-                }).catch(err => {
-                    console.log(err)
-                    history.replace('/signin')
-                })
-        }
-*/
-const context = useContext(Context)
+
+// if (context.authObj.isAuthenticated() && !context.profileState) {
+//   console.log("Routes context 2", context.profileState);
+//                 context.authObj.getProfile()
+//                 .then(() => {
+//                     context.handleUserAddProfile(context.profileState)
+//                     context.handleUserLogin()
+//                 }).catch(err => {
+//                     console.log(err)
+//                     history.replace('/signin')
+//                 })
+//         }
+
 
 /* React.useEffect(async () => {
       console.log("Routes context 1 ", context.profileState);
@@ -66,8 +65,7 @@ console.log("Routes context 2", context.profileState);
           <Router history={history} >
           <Navigation/>
           <div className="container">
-            <Switch>
-              
+            <Switch>              
               <Route exact path="/" component={()=><HomePage />} />
               {/* console.log("Routes context ", context.profileState); */}
 
@@ -80,7 +78,7 @@ console.log("Routes context 2", context.profileState);
               <Route path="/detail-movie/:movie_id" component={DetailMovie} />
               {/* <Route path="/sign-up" component={Register} />
               <Route path="/sign-in" component={SignIn} /> */}
-              {/* <Route path="/dashboard" component={Dashboard} /> */}
+              <Route path="/dashboard" component={Dashboard} />
               <Route path="/onairpage" component={Onair} />
               <Route path="/comingpage" component={Comingsoon} />
               <Route path="/toppage" component={Mostrating} />
