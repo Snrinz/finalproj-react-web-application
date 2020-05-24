@@ -15,7 +15,7 @@ const NeedSignin = () =>  {
         redirect? <Redirect to='/signin' />
         : <div className="container">
             <Alert variant="warning" className="display-4 mt-4 text-center">
-                You need to <Link to='/signin'>Signin</Link> first before using this content</Alert>
+                You need to <Link to='/signin'>Sign In</Link> first before using this content</Alert>
             </div>
     }</>)
 }

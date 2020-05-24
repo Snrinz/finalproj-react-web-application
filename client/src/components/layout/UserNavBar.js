@@ -15,12 +15,12 @@ const UnauthenMenu = () => {
         <Navbar.Collapse>
           <Nav >
               
-            <Nav.Link id="title-summary" as={Link} to="/signup">
-                <h1 className="heading-label"/> Signup
-            </Nav.Link>
+            {/* <Nav.Link id="title-summary" as={Link} to="/signup">
+                <h1 className="heading-label"/> Sign Up
+            </Nav.Link> */}
             <Nav.Link id="title-summary" as={Link} to="/signin">
                 {/* <h1 className="far fa-user-circle" title="Sign in" />  */}
-                <h1 className="heading-label"/> SignIn
+                <h1 className="heading-label"/> Sign In
                 {/* <FontAwesomeIcon id="icon" icon={faSignInAlt} /> */}
             </Nav.Link>
           </Nav>
@@ -36,13 +36,18 @@ const UnauthenMenutest = () => {
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                 <li class="nav-item active">
-                    <Link to="/">Home</Link>
+                    <Link to="/"><img
+                        src="icon.jpg"
+                        width="18"
+                        height="18"
+                        // className="d-inline-block align-top"
+                    /></Link>
                 </li>
-                <li class="nav-item">
-                    <Link to="/signup">Signup</Link>
-                </li>
-                <li class="nav-item">
-                    <Link to="/signin">SignIn</Link>
+                {/* <li class="nav-item" style={{float: "right"}}>
+                    <Link to="/signup">Sign Up</Link>
+                </li> */}
+                <li class="nav-item" style={{float: "right"}}>
+                    <Link to="/signin">Sign In</Link>
                 </li>
                 </ul>
             </div>
@@ -62,13 +67,18 @@ const AuthenMenutest = (props) => {
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                 <li class="nav-item active">
-                    <Link to="/">Home</Link>
+                <Link to="/"><img
+                        src="icon.jpg"
+                        width="18"
+                        height="18"
+                        // className="d-inline-block align-top"
+                    /></Link>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" style={{float: "right"}}>
+                    <Link to="/" onClick={() => context.handleUserLogout()}>Sign Out</Link>
+                </li>
+                <li class="nav-item" style={{float: "right"}}>
                     <Link to="/">{profile.firstName}</Link>
-                </li>
-                <li class="nav-item">
-                    <Link to="/" onClick={() => context.handleUserLogout()}>SignOut</Link>
                 </li>
                 </ul>
             </div>
