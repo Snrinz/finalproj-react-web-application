@@ -78,7 +78,7 @@ const SignIn = () => {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Sign in
+          Sign In
         </Typography>
         { errors.globalError && 
           <Alert severity="error">
@@ -134,13 +134,16 @@ const SignIn = () => {
           >
             Sign In
           </Button>
-          <Grid container>
-            <Grid item>
-              <Link to="/signup" variant="body2">
-                {"Don't have an account? Sign Up"}
-              </Link>
-            </Grid>
-          </Grid>
+          <label> ───────────────────  or  ──────────────────</label>
+          <Button
+                href="/signup"
+                type="submit"
+                fullWidth
+                variant="contained"
+                color="primary"
+              >
+                Create a New Account
+          </Button>     
         </form>
       </div>
     </Container>

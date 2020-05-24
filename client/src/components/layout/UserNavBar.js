@@ -14,12 +14,12 @@ const UnauthenMenu = () => {
         <Navbar.Collapse>
           <Nav >
               
-            <Nav.Link id="title-summary" as={Link} to="/signup">
-                <h1 className="heading-label"/> Signup
-            </Nav.Link>
+            {/* <Nav.Link id="title-summary" as={Link} to="/signup">
+                <h1 className="heading-label"/> Sign Up
+            </Nav.Link> */}
             <Nav.Link id="title-summary" as={Link} to="/signin">
                 {/* <h1 className="far fa-user-circle" title="Sign in" />  */}
-                <h1 className="heading-label"/> SignIn
+                <h1 className="heading-label"/> Sign In
                 {/* <FontAwesomeIcon id="icon" icon={faSignInAlt} /> */}
             </Nav.Link>
           </Nav>
@@ -40,16 +40,21 @@ const UnauthenMenutest = () => {
         <>
             <nav className="navbar navbar-expand-lg navbar-light bg-light">
             
-            <div className="collapse navbar-collapse" id="navbarNav">
-                <ul style={styleNavBar} className="navbar-nav">
-                <li className="nav-item active">
-                    <Link to="/">Home</Link>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <Link to="/"><img
+                        src="icon.jpg"
+                        width="18"
+                        height="18"
+                        // className="d-inline-block align-top"
+                    /></Link>
                 </li>
-                <li className="nav-item">
-                    <Link to="/signup">Signup</Link>
-                </li>
-                <li className="nav-item">
-                    <Link to="/signin">SignIn</Link>
+                {/* <li class="nav-item" style={{float: "right"}}>
+                    <Link to="/signup">Sign Up</Link>
+                </li> */}
+                <li class="nav-item" style={{float: "right"}}>
+                    <Link to="/signin">Sign In</Link>
                 </li>
                 </ul>
             </div>
@@ -66,23 +71,21 @@ const AuthenMenutest = () => {
     return (<>
        <nav className="navbar navbar-expand-lg navbar-light bg-light">
             
-            <div className="collapse navbar-collapse" id="navbarNav">
-                <ul style={styleNavBar} className="navbar-nav">
-                <li className="nav-item active">
-                    <Link to="/">Home</Link>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                <li class="nav-item active">
+                <Link to="/"><img
+                        src="icon.jpg"
+                        width="18"
+                        height="18"
+                        // className="d-inline-block align-top"
+                    /></Link>
                 </li>
-                <li className="nav-item">
+                <li class="nav-item" style={{float: "right"}}>
+                    <Link to="/" onClick={() => context.handleUserLogout()}>Sign Out</Link>
+                </li>
+                <li class="nav-item" style={{float: "right"}}>
                     <Link to="/">{profile.firstName}</Link>
-                </li>
-                {
-                    (isAdmin)?
-                    <li className="nav-item">
-                        <Link to="/dashboard">Dashboard</Link>
-                    </li>
-                    : ""             
-                }
-                <li className="nav-item">
-                    <Link to="/" onClick={() => context.handleUserLogout()}>SignOut</Link>
                 </li>
                 </ul>
             </div>
