@@ -45,13 +45,8 @@ const UnauthenMenutest = () => {
                 <ul style={styleNavBar} class="navbar-nav">
                 <li class="nav-item active">
                     <Link to="/"><img
-<<<<<<< Updated upstream
                         src="/icon.png"
                         width="30"
-=======
-                        src="./img/icon.jpg"
-                        width="18"
->>>>>>> Stashed changes
                         height="18"
                         // className="d-inline-block align-top"
                     /></Link>

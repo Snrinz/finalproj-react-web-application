@@ -141,16 +141,11 @@ const SignIn = () => {
           >
             Sign In
           </Button>
-<<<<<<< Updated upstream
-          <label>─────────────────── or ─────────────────</label>
-          <Button
-=======
         
           <label> ──────────────────  or  ──────────────────  </label>
           <br></br>
           <br></br>
           <Button 
->>>>>>> Stashed changes
                 href="/signup"
                 type="submit"
                 fullWidth
