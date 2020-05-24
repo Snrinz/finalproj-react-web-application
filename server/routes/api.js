@@ -117,21 +117,6 @@ router.get('/users', async (req , res) =>{
 
 router.get('/movie', async (req , res) =>{
     let filterInstruction = {}
-    let filter = req.query.filter
-
-    if(filter == 'movie')
-        filterInstruction = {
-            $or: [{name: new RegExp('^' + req.query.value, 'i')}, 
-            {description:new RegExp('^' + req.query.value, 'i')}]
-        }
-    else if(filter == 'type')
-        filterInstruction = {
-            type: req.query.value
-        }
-    else if(filter == 'actor')
-        filterInstruction = {
-            actor: new RegExp('^' + req.query.value, 'i')
-        }
     
     Movie.find(filterInstruction)
     .then(async movies =>{
@@ -155,7 +140,24 @@ router.get('/moviemostrating', async (req , res) =>{
     var page = req.query.page
     var startIndex = (page-1) * length
 
-    Movie.find({})
+    let filterInstruction = {}
+    let filter = req.query.filter
+
+    if(filter == 'movie')
+        filterInstruction = {
+            $or: [{name: new RegExp('^' + req.query.value, 'i')}, 
+            {description:new RegExp('^' + req.query.value, 'i')}]
+        }
+    else if(filter == 'type')
+        filterInstruction = {
+            type: req.query.value
+        }
+    else if(filter == 'actor')
+        filterInstruction = {
+            actor: new RegExp('^' + req.query.value, 'i')
+    }
+
+    Movie.find(filterInstruction)
     .skip(startIndex)
     .limit(length)
     .then(async movies =>{
@@ -194,21 +196,46 @@ router.get('/moviemostrating', async (req , res) =>{
         })
 
     })
-
 })
 
 router.get('/moviecomingsoon', async (req , res) =>{
     var today = moment().toDate();
     var page = req.query.page
     var limit = parseInt(req.query.limit)
+    
 
     var startIndex = (page-1) * limit
     // var endIndex = page * limit
     console.log("page: " + page + "limit: " + limit);
-    
-    Movie.find({
-        onAirTime:{ $gte: today },
-    })
+
+    let filterInstruction = {onAirTime:{ $gte: today }}
+    let filter = req.query.filter
+
+    if(filter == 'movie')
+        filterInstruction = {
+            $and: [
+                {onAirTime:{ $gte: today }},
+                {$or: [{name: new RegExp('^' + req.query.value, 'i')}, 
+                    {description:new RegExp('^' + req.query.value, 'i')}]}
+            ]
+        }
+    else if(filter == 'type')
+        filterInstruction = {
+            $and: [{onAirTime:{ $gte: today }},
+            {type: req.query.value}
+            ]
+            
+        }
+    else if(filter == 'actor')
+        filterInstruction = {
+            $and: [{onAirTime:{ $gte: today }},
+            {actor: new RegExp('^' + req.query.value, 'i')}]
+        }
+
+    Movie.find(filterInstruction)
+    // Movie.find({
+    //     onAirTime:{ $gte: today },
+    // })
     .skip(startIndex)
     .limit(limit)
     .sort( { onAirTime: 1 } )
@@ -239,12 +266,40 @@ router.get('/movieonair', async (req , res) =>{
     
     var today = moment().toDate();
     var lenday = moment(today).subtract(14, 'days').toDate();
-    Movie.find({
-        $and:[
+
+    let filterInstruction = {$and:[
         {onAirTime:{ $gte: lenday }},
         {onAirTime:{ $lte: today }},
-        ]
-    })
+        ]}
+    let filter = req.query.filter
+
+    if(filter == 'movie')
+        filterInstruction = {
+            $and:[
+                {onAirTime:{ $gte: lenday }},
+                {onAirTime:{ $lte: today }},
+                {$or: [{name: new RegExp('^' + req.query.value, 'i')}, 
+                {description:new RegExp('^' + req.query.value, 'i')}]}
+                ]
+        }
+    else if(filter == 'type')
+        filterInstruction = {
+            $and:[
+                {onAirTime:{ $gte: lenday }},
+                {onAirTime:{ $lte: today }},
+                {type: req.query.value}
+                ]
+        }
+    else if(filter == 'actor')
+        filterInstruction = {
+            $and:[
+                {onAirTime:{ $gte: lenday }},
+                {onAirTime:{ $lte: today }},
+                {actor: new RegExp('^' + req.query.value, 'i')}
+                ]
+    }
+
+    Movie.find(filterInstruction)
     .skip(startIndex)
     .limit(length)
     .sort( { onAirTime: 1 } )

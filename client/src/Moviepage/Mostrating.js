@@ -111,7 +111,7 @@ export default function Homepage() {
         console.log("Filter is " + filter);
         console.log("Value is " + value);
         
-        fetch(`/api/movie?filter=${filter}&&value=${value}`)
+        fetch(`/api/moviemostrating?filter=${filter}&&value=${value}`)
         .then(res => {
             if (res.ok) return res.json()
             else throw res
