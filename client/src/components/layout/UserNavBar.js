@@ -45,8 +45,8 @@ const UnauthenMenutest = () => {
                 <ul style={styleNavBar} class="navbar-nav">
                 <li class="nav-item active">
                     <Link to="/"><img
-                        src="./img/icon.png"
-                        width="30"
+                        src="./img/icon2.png"
+                        width="25"
                         height="18"
                         // className="d-inline-block align-top"
                     /></Link>
@@ -76,8 +76,8 @@ const AuthenMenutest = () => {
                 <ul style={styleNavBar} class="navbar-nav">
                 <li class="nav-item active">
                 <Link to="/"><img
-                        src="./img/icon.png"
-                        width="30"
+                        src="./img/icon2.png"
+                        width="25"
                         height="18"
                         // className="d-inline-block align-top"
                     /></Link>
