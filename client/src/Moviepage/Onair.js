@@ -18,6 +18,11 @@ import Paper from '@material-ui/core/Paper';
 import IconButton from '@material-ui/core/IconButton';
 import SearchIcon from '@material-ui/icons/Search';
 
+// API for Animation
+import Aos from "aos"
+import 'aos/dist/aos.css'
+
+
 const BootstrapInput = withStyles((theme) => ({
     root: {
       'label + &': {
@@ -105,6 +110,7 @@ export default function Homepage() {
         .catch(err => {
             console.log("error " + JSON.stringify(err)); 
         })    
+        Aos.init({ duration: 2000})
     }, []);
 
     useEffect(() => {

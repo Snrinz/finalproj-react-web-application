@@ -18,6 +18,11 @@ import Paper from '@material-ui/core/Paper';
 import IconButton from '@material-ui/core/IconButton';
 import SearchIcon from '@material-ui/icons/Search';
 
+// API for Animation
+import Aos from "aos"
+import 'aos/dist/aos.css'
+
+
 const BootstrapInput = withStyles((theme) => ({
     root: {
       'label + &': {
@@ -95,7 +100,7 @@ export default function Homepage() {
     }
 
     useEffect(() => {
-        fetch(`/api/moviemostrating`)
+        fetch(`/api/moviemostratingall`)
         .then(res => {
             if (res.ok) return res.json()
             else throw res
@@ -107,6 +112,7 @@ export default function Homepage() {
         .catch(err => {
             console.log("error " + JSON.stringify(err)); 
         })    
+        Aos.init({ duration: 2000})
     }, []);
 
     useEffect(() => {
@@ -114,7 +120,7 @@ export default function Homepage() {
         console.log("Filter is " + filter);
         console.log("Value is " + value);
         
-        fetch(`/api/moviemostrating?filter=${filter}&&value=${value}`)
+        fetch(`/api/moviemostratingall?filter=${filter}&&value=${value}`)
         .then(res => {
             if (res.ok) return res.json()
             else throw res

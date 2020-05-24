@@ -135,14 +135,8 @@ router.get('/movie', async (req , res) =>{
     
 })
 
-router.get('/moviemostrating', async (req , res) =>{
-    var length =parseInt( req.query.limit)
-    var page = req.query.page
-    var startIndex = (page-1) * length
+router.get('/moviemostratingall', async (req , res) => {
 
-    Movie.find({})
-    // .skip(startIndex)
-    // .limit(length)
     let filterInstruction = {}
     let filter = req.query.filter
 
@@ -161,6 +155,44 @@ router.get('/moviemostrating', async (req , res) =>{
     }
 
     Movie.find(filterInstruction)
+    .then(async movies =>{
+        var moviesArr = []
+
+        for (let m of  movies){
+            var rating =  await findRating(m._id);
+            m = JSON.parse(JSON.stringify(m));
+            m.rating = rating;
+            moviesArr.push(m)
+        }
+        return res.json({
+            movies: moviesArr
+        })
+    })
+})
+
+router.get('/moviemostrating', async (req , res) =>{
+    // var length =parseInt( req.query.limit)
+    // var page = req.query.page
+    // var startIndex = (page-1) * length    
+
+    // let filterInstruction = {}
+    // let filter = req.query.filter
+
+    // if(filter == 'movie')
+    //     filterInstruction = {
+    //         $or: [{name: new RegExp('^' + req.query.value, 'i')}, 
+    //         {description:new RegExp('^' + req.query.value, 'i')}]
+    //     }
+    // else if(filter == 'type')
+    //     filterInstruction = {
+    //         type: req.query.value
+    //     }
+    // else if(filter == 'actor')
+    //     filterInstruction = {
+    //         actor: new RegExp('^' + req.query.value, 'i')
+    // }
+
+    Movie.find({})
     .then(async movies =>{
         var moviesArr = []        
         for (let m of  movies){
