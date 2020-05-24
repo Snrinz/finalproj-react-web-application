@@ -298,8 +298,15 @@ textarea {
   resize: vertical;
 }
 input[type=submit] {
-  background-color: lawngreen;
-  padding: 10px;
+  float: right;
+  margin: auto 68px;
+  display: block;
+  border-radius: 4px;
+  box-sizing: border-box;
+  border: 1px solid rgb(231, 231, 231);
+  background-color:  rgb(231, 231, 231);
+  padding: 13px;
+  color: black;
 }
 li {
   float: left;
