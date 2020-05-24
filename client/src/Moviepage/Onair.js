@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 // import for Spinner
 import Loading from '../Loading'
+import moment from'moment';
 
 //library for MovieCard
 import { NavLink } from 'react-router-dom'
@@ -111,7 +112,7 @@ export default function Homepage() {
         console.log("Filter is " + filter);
         console.log("Value is " + value);
         
-        fetch(`/api/movie?filter=${filter}&&value=${value}`)
+        fetch(`/api/movieonair?filter=${filter}&&value=${value}`)
         .then(res => {
             if (res.ok) return res.json()
             else throw res
@@ -226,17 +227,19 @@ const MovieCard = (props) => {
             </div>
 
             <NavLink to={`/detail-movie/${movie._id}`} id="name-movie">
-                <strong>{movie.name}</strong>
+                <h2>{movie.name}</h2>
             </NavLink>
 
-            <WatchListButton />        
+            <WatchListButton movie={movie}/>        
         </div>
     )
 }
 
-const WatchListButton = () => {
+const WatchListButton = (props) => {
+    const { movie } = props
     return (
         <div>
+            <h4>{moment(movie.onAirTime).locale('th').format('LL')}</h4>
             {/* <button className="watch-button">+ Watch</button> */}
         </div>
     )

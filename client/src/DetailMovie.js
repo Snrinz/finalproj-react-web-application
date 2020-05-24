@@ -1,4 +1,4 @@
-import React, { Component , useContext, useEffect } from 'react'
+import React, { Component , useContext, useEffect, useState } from 'react'
 import ReactPlayer from 'react-player'
 //library for Comment.js
 import defaultUser from './img/default_user.png'
@@ -28,7 +28,6 @@ export default class DetailMovie extends Component {
         profile:{}
     }
     
-
     componentDidMount () {
         // const context = useContext(Context);
         // this.setState({profile: context.profileState}) 
@@ -70,7 +69,6 @@ export default class DetailMovie extends Component {
 
         return (
         <div>
-
             <div className="grid-section">
         {
         (this.state.isLoad)?
@@ -207,22 +205,6 @@ const Comment = (props) => {
     )
 }
 
-const PostComment = (props) => {
-    const { movieId } = props
-    const context = useContext(Context);
-    const profile = context.profileState
-    console.log("user",profile);
-    return(
-        <>
-            { context.authState ? 
-                <PostForm userId={profile._id} movieId={movieId} />
-                : <div style={{marginTop: '50px', textAlign: 'center', fontWeight: 'bold'}}>ต้องเข้าสู่ระบบก่อน จึงจะแสดงความคิดเห็นได้</div>
-            }
-        </>
-    )
-}
-
-
 const Rate = (props) => {
     const { movieId } = props
     const context = useContext(Context);
@@ -317,3 +299,66 @@ const Rate = (props) => {
         </>
     )
 }
+
+const PostComment = (props) => {
+    const { movieId } = props
+    const context = useContext(Context);
+    const profile = context.profileState
+    console.log("user",profile);
+    return(
+        <>
+            { (context.authState) ? 
+                <PostForm userId={profile._id} movieId={movieId} />
+                : <div style={{marginTop: '50px', textAlign: 'center', fontWeight: 'bold'}}>ต้องเข้าสู่ระบบก่อน จึงจะแสดงความคิดเห็นได้</div>
+            }
+        </>
+    )
+}
+
+// const PostForm = (props) => {
+//     const [comment, setComment] = useState("")
+
+//     const handleSubmit = () => {
+//         let data = {
+//             userId: props.userId,
+//             movieId: props.movieId,
+//             comment: comment
+//         }
+
+//         fetch('/api/reviews', {
+//             method: 'POST',
+//             withCredentials: true,
+//             credentials: 'include',
+//             body: JSON.stringify(data),
+//             // headers: new Headers({ 'Authorization': localStorage.getItem('token') }),
+//             headers: new Headers({ 'Content-Type': 'application/json' }),
+//           })
+//           .then(response => {
+//             if (response.status !== 200) {
+//               console.log(response.statusText);
+//               throw `Status Code: ${response.status} ${response.statusText}`;
+//             }
+//             return response.json()
+//           })
+//           .catch(err => { 
+//             console.log(err);
+//           });
+//     }
+      
+      
+//     return (
+//         <div className="post-section">
+//             <form onSubmit={handleSubmit}>
+//                 <textarea name="text-post" 
+//                     type="text" 
+//                     placeholder="Type text in here . ."
+//                     onChange={(event) => setComment(event.target.value)}
+//                     name="comment"
+//                     required
+//                     />
+                
+//                 <input type="submit" />
+//             </form>   
+//         </div>
+//     )
+// }

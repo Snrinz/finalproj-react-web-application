@@ -2,6 +2,7 @@ import React from 'react'
 import { withFormik } from 'formik'
 import { withRouter } from 'react-router-dom';
 import * as Yup from 'yup';
+import { Redirect, Switch } from 'react-router-dom'
 
 
 const PostForm = (props) => {
@@ -48,7 +49,7 @@ const CommentFormik = withRouter(withFormik({
         comment: Yup.string()
         .required()
     }),
-    handleSubmit: (values, { setSubmitting}) => {
+    handleSubmit: (values, { setSubmitting, props }) => {
   
       fetch('/api/reviews', {
         method: 'POST',
@@ -60,8 +61,14 @@ const CommentFormik = withRouter(withFormik({
           console.log(response.statusText);
           throw `Status Code: ${response.status} ${response.statusText}`;
         }
-
         return response.json()
+      })
+      .then(res => {
+        // let history = props.history; //useHistory();
+        // let location = props.location; //useLocation();    
+        // let { from } = location.state || { from: { pathname: `/detail-movie/${props.movieId}` } };        
+        // history.replace(from);
+        return <Switch><Redirect to="{`/detail-movie/${props.movieId}`}" /></Switch>
       })
       .catch(err => { 
         console.log(err);

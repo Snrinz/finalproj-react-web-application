@@ -205,6 +205,9 @@
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
+      margin: 'auto auto',
+      width: '50%',
+      // overflow: 'scroll'
     },
     paper: {
       backgroundColor: theme.palette.background.paper,
@@ -409,9 +412,8 @@
             {
               (data[indexSelected])?
               <div>
-                <h2 id="transition-modal-title">แก้ไขข้อมูล {data[indexSelected].name}</h2>
+                <h2 style={{textAlign: 'center'}} id="transition-modal-title">แก้ไขข้อมูล {data[indexSelected].name}</h2>
                 <MovieForm movie={data[indexSelected]} />
-                {/* <p id="transition-modal-description">react-transition-group animates me.</p> */}
               </div>                
               :"Movie Not Found . . ."
             }
