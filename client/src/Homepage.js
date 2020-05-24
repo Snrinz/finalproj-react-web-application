@@ -220,7 +220,7 @@ const MovieCard = (props) => {
             </div>
 
             <NavLink to={`/detail-movie/${movie._id}`} id="name-movie">
-                <strong>{movie.name}</strong>
+                <h2>{movie.name}</h2>
             </NavLink>
 
             <WatchListButton movie={movie} />        
@@ -232,7 +232,7 @@ const WatchListButton = (props) => {
     const { movie } = props
     return (
         <div>
-            <h2>{moment(movie.onAirTime).locale('th').format('LL')}</h2>
+            <h4>{moment(movie.onAirTime).locale('th').format('LL')}</h4>
             {/* <button className="watch-button">+ Watch</button> */}
         </div>
     )

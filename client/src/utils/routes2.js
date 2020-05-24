@@ -101,7 +101,7 @@ console.log("Routes context 2", context.profileState);
               <Route component={()=><NotFoundPage/>} />
             </Switch>
           </div>
-        <hr />
+      
         </Router>
       </div>
   )}
