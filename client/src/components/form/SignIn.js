@@ -19,6 +19,7 @@ import '../../App.css';
 
 import { Formik } from "formik";
 import * as Yup from 'yup';
+import { red } from '@material-ui/core/colors';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -38,6 +39,11 @@ const useStyles = makeStyles((theme) => ({
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
+  body: {
+    backgroundColor : 'blue'
+  }
+
+
 }));
 
 const SignIn = () => {
@@ -71,6 +77,7 @@ const SignIn = () => {
       handleSubmit,
       handleReset
     }) => (
+      
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
@@ -134,8 +141,16 @@ const SignIn = () => {
           >
             Sign In
           </Button>
+<<<<<<< Updated upstream
           <label>─────────────────── or ─────────────────</label>
           <Button
+=======
+        
+          <label> ──────────────────  or  ──────────────────  </label>
+          <br></br>
+          <br></br>
+          <Button 
+>>>>>>> Stashed changes
                 href="/signup"
                 type="submit"
                 fullWidth
