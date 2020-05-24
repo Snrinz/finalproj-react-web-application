@@ -1,7 +1,6 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import {Nav, NavDropdown, Navbar} from 'react-bootstrap';
-import '../../App.css';
 // import Navbar from 'react-bootstrap/Navbar'
 import Context from '../../utils/authUtils/Context';
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
@@ -28,20 +27,28 @@ const UnauthenMenu = () => {
     )
 }
 
+const styleNavBar = {
+    listStyleType: 'none', 
+    margin: '0', 
+    padding: '0', 
+    overflow: 'hidden', 
+    backgroundColor: '#333'
+}
+
 const UnauthenMenutest = () => {
     return (
         <>
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <nav className="navbar navbar-expand-lg navbar-light bg-light">
             
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                <li class="nav-item active">
+            <div className="collapse navbar-collapse" id="navbarNav">
+                <ul style={styleNavBar} className="navbar-nav">
+                <li className="nav-item active">
                     <Link to="/">Home</Link>
                 </li>
-                <li class="nav-item">
+                <li className="nav-item">
                     <Link to="/signup">Signup</Link>
                 </li>
-                <li class="nav-item">
+                <li className="nav-item">
                     <Link to="/signin">SignIn</Link>
                 </li>
                 </ul>
@@ -51,23 +58,30 @@ const UnauthenMenutest = () => {
         </>
     )
 }
-const AuthenMenutest = (props) => {
+const AuthenMenutest = () => {
     const context = useContext(Context);
     const profile = context.profileState
     let isAdmin = profile.memberType === 'ADMIN';
 
     return (<>
-       <nav class="navbar navbar-expand-lg navbar-light bg-light">
+       <nav className="navbar navbar-expand-lg navbar-light bg-light">
             
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                <li class="nav-item active">
+            <div className="collapse navbar-collapse" id="navbarNav">
+                <ul style={styleNavBar} className="navbar-nav">
+                <li className="nav-item active">
                     <Link to="/">Home</Link>
                 </li>
-                <li class="nav-item">
+                <li className="nav-item">
                     <Link to="/">{profile.firstName}</Link>
                 </li>
-                <li class="nav-item">
+                {
+                    (isAdmin)?
+                    <li className="nav-item">
+                        <Link to="/dashboard">Dashboard</Link>
+                    </li>
+                    : ""             
+                }
+                <li className="nav-item">
                     <Link to="/" onClick={() => context.handleUserLogout()}>SignOut</Link>
                 </li>
                 </ul>
