@@ -9,6 +9,7 @@ import Context from '../../utils/authUtils/Context';
 // import { faHome } from "@fortawesome/free-solid-svg-icons"
 // import { faSearch } from "@fortawesome/free-solid-svg-icons"
 // import { faSignInAlt } from "@fortawesome/free-solid-svg-icons"
+
 const UnauthenMenu = () => {
     return (
         <Navbar.Collapse>
@@ -41,7 +42,7 @@ const UnauthenMenutest = () => {
             <nav className="navbar navbar-expand-lg navbar-light bg-light">
             
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
+                <ul style={styleNavBar} class="navbar-nav">
                 <li class="nav-item active">
                     <Link to="/"><img
                         src="icon.jpg"
@@ -72,7 +73,7 @@ const AuthenMenutest = () => {
        <nav className="navbar navbar-expand-lg navbar-light bg-light">
             
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
+                <ul style={styleNavBar} class="navbar-nav">
                 <li class="nav-item active">
                 <Link to="/"><img
                         src="icon.jpg"
@@ -86,6 +87,9 @@ const AuthenMenutest = () => {
                 </li>
                 <li class="nav-item" style={{float: "right"}}>
                     <Link to="/">{profile.firstName}</Link>
+                </li>
+                <li class="nav-item" style={{float: "right"}}>
+                    <Link to="/dashboard">Dashboard</Link>
                 </li>
                 </ul>
             </div>
