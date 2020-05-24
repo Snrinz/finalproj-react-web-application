@@ -140,6 +140,9 @@ router.get('/moviemostrating', async (req , res) =>{
     var page = req.query.page
     var startIndex = (page-1) * length
 
+    Movie.find({})
+    // .skip(startIndex)
+    // .limit(length)
     let filterInstruction = {}
     let filter = req.query.filter
 
@@ -158,8 +161,6 @@ router.get('/moviemostrating', async (req , res) =>{
     }
 
     Movie.find(filterInstruction)
-    .skip(startIndex)
-    .limit(length)
     .then(async movies =>{
         var moviesArr = []        
         for (let m of  movies){
@@ -176,10 +177,10 @@ router.get('/moviemostrating', async (req , res) =>{
         
             for (let i = 0; i < len; i++) {
                 for (let j = 0; j < len-1; j++) {
-                    console.log(moviesArr[j].rating +" "+moviesArr[j+1].rating );
+                    // console.log(moviesArr[j].rating +" "+moviesArr[j+1].rating );
                     let tmp1 = moviesArr[j].rating;
                     let one = j+1;
-                    console.log(one);
+                    // console.log(one);
                     
                     let tmp2 = moviesArr[one].rating;
                     if (tmp1 < tmp2) {
@@ -189,10 +190,24 @@ router.get('/moviemostrating', async (req , res) =>{
                     }
                 }
             }
-         
+        var arr = [];
+        if(startIndex >= len ){
+            startIndex = 0;
+        }
+        let j = startIndex;
+        for (let i = 0 ;i< 4 ;i++){
+            
+            if(j>=moviesArr.length ){
+                break;
+            }
+            arr.push(moviesArr[j])
+            j++;
+        }    
+        // let i = startIndex;
+        // while()
         return res.json({
             msg:"",
-            movies: moviesArr
+            movies: arr
         })
 
     })
@@ -396,27 +411,53 @@ var findRating =async (movieId)=>{
 
 router.post('/rating',async (req, res) => {
     const {  movieId , userId , rating} = req.body;
-
-    var ratings = new Ratings({
-        _user: new mongoose.Types.ObjectId(userId),
-        _movie: new mongoose.Types.ObjectId(movieId),
-        rating: rating
-    }
-    );
-
-   console.log("ขอเพิ่มดาวหน่อยจ้า " + rating + " ดาว มาจาก " + ratings._user + " เป็นคนโหวต ของหนังเรื่อง " + ratings._movie);
-   
-    await ratings.save((error) => {
-        if (error) {
-            res.status(500).json({ msg: 'Sorry, internal server errors' });
-            return;
+    var raingfind=await Ratings.findOne(
+        {
+            _user: new mongoose.Types.ObjectId(userId),
+            _movie: new mongoose.Types.ObjectId(movieId),
         }
-        // BlogPost
-        return res.json({
-            msg: 'Your data has been saved!!!!!!',
-            rating: ratings
+    )
+    if(raingfind){
+        console.log("เจอออออออออออออ");
+        
+        raingfind.rating = rating;
+        await raingfind.save((error) => {
+            if (error) {
+                res.status(500).json({ msg: 'Sorry, internal server errors' });
+                return;
+            }
+         
+            return res.json({
+                msg: 'Your data has been saved!!!!!!',
+                rating: raingfind
+            });
         });
-    });
+    }else{
+        var ratings = new Ratings({
+            _user: new mongoose.Types.ObjectId(userId),
+            _movie: new mongoose.Types.ObjectId(movieId),
+            rating: rating
+        }
+        );
+
+    console.log("ขอเพิ่มดาวหน่อยจ้า " + rating + " ดาว มาจาก " + ratings._user + " เป็นคนโหวต ของหนังเรื่อง " + ratings._movie);
+    
+        await ratings.save((error) => {
+            if (error) {
+                res.status(500).json({ msg: 'Sorry, internal server errors' });
+                return;
+            }
+            // BlogPost
+            return res.json({
+                msg: 'Your data has been saved!!!!!!',
+                rating: ratings
+            });
+        });
+    }
+
+
+
+    
 });
 
 router.post('/reviews',async (req, res) => {

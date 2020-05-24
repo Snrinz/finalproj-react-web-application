@@ -88,11 +88,11 @@ export default class DetailMovie extends Component {
                     </div>
                     <hr style={{opacity: '0'}} />
                     <div className="descrip">
-                        <p>ให้คะแนน: </p><Rate movieId={this.state.movie_detail._id} vote_average={this.state.rating} />
+                        <p>ให้คะแนน : &nbsp;</p><Rate movieId={this.state.movie_detail._id} vote_average={this.state.rating} />
                     </div>
                     <hr />
                     <div className="descrip">
-                        <p>แนวประเภท: </p>
+                        <p>แนวประเภท : </p>
                         {
                         (this.state.movie_detail.type && Object.keys(this.state.movie_detail.type).length > 0)
                             ? this.state.movie_detail.type.map(type => (
@@ -103,7 +103,7 @@ export default class DetailMovie extends Component {
                     </div>
                     <hr />
                     <div className="descrip">
-                    <p>นักแสดงนำ: </p>
+                    <p>นักแสดงนำ : </p>
                         {
                         (this.state.movie_detail.actor && Object.keys(this.state.movie_detail.actor).length > 0)
                             ? this.state.movie_detail.actor.map(actor => (
@@ -114,26 +114,26 @@ export default class DetailMovie extends Component {
                     </div>
                     <hr />
                     <div className="descrip">
-                        <p>ผู้กำกับ: </p>
+                        <p>ผู้กำกับ : &nbsp;</p>
                         <p style={{alignSelf: 'center'}}>{this.state.movie_detail.director}</p>
                     </div>
                     <hr />
                     
                     <div className="descrip">
-                        <p>บริษัทผู้สร้าง: </p>
+                        <p>บริษัทผู้สร้าง : &nbsp;</p>
                         <p style={{alignSelf: 'center'}}>{this.state.movie_detail.company}</p>
                     </div>
 
                     <hr />   
                     <div>
-                         <p>เรื่องย่อ: </p>
+                         <p>เรื่องย่อ : </p>
                             <div className="descrip">
                                 <span> {this.state.movie_detail.description} </span>
                             </div>
                     </div>
                     <hr />   
                     <div className="descrip">
-                         <p>วันที่เข้าฉาย:  </p>
+                         <p>วันที่เข้าฉาย : &nbsp;</p>
                          <p style={{alignSelf: 'center'}}> { moment(this.state.movie_detail.onAirTime).locale('th').format('LL') } </p>
                     </div>
                     <hr />  
