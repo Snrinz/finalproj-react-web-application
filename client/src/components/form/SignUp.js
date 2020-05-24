@@ -15,10 +15,10 @@ import {withFormik} from 'formik'
 import * as Yup from 'yup';
 
 const useStyles = makeStyles((theme) => ({
-  main: {
-      display: 'grid',
-      gridTemplateColumns: '3fr 1fr',
-  },
+  // main: {
+  //     display: 'grid',
+  //     gridTemplateColumns: '1fr 1fr 1fr',
+  // },
   paper: {
     marginTop: theme.spacing(8),
     display: 'flex',
@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.secondary.main,
   },
   form: {
-    width: '100%', // Fix IE 11 issue.
+    width: '40%', // Fix IE 11 issue.
     marginTop: theme.spacing(3),
   },
   submit: {
@@ -59,7 +59,7 @@ function SignUpForm(props) {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Sign up
+          Sign Up
         </Typography>
         { errors.globalError && 
           <Alert severity="error">

@@ -66,6 +66,8 @@ const useStyles = makeStyles((theme) => ({
     iconButton: {
       padding: 10,
     }
+    
+
 }));
 
 export default function Homepage() {
@@ -237,7 +239,7 @@ const MovieCard = (props) => {
 const WatchListButton = () => {
     return (
         <div>
-            <button className="watch-button">+ Watch</button>
+            {/* <button className="watch-button">+ Watch</button> */}
         </div>
     )
 }

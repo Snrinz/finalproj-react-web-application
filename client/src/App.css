@@ -4,14 +4,22 @@
 
 body {
   color: rgb(100, 99, 99);
-  background-color: #FFFCFC;
+  background: linear-gradient(to bottom, #323232 0%, #3F3F3F 40%, #1C1C1C 150%), linear-gradient(to top, rgba(255,255,255,0.40) 0%, rgba(0,0,0,0.25) 200%);
+  background-blend-mode: multiply;;
   font-family: Century Gothic, Opun ,sans-serif;
   padding-bottom: 20px;
 }
-
 div {
   font-family: Century Gothic, Opun ,sans-serif;
 }
+
+
+
+
+
+
+
+
 
 /* Navigation */
 .nav-section {
@@ -149,7 +157,7 @@ div {
 }
 #title-summary h1:hover {
   /* opacity:1; */
-  color: rgb(0, 0, 0);
+  color: rgb(229, 9, 20);
   /* transition: 0.3s; */
   font-size: 2rem;
   font-weight: bolder;
@@ -164,10 +172,10 @@ div {
   transition: 0.3s;
 }
 #title-summary:visited, #title-summary:link {
-  color: rgb(92, 91, 91);
+  color: rgb(255, 255, 255);
 }
 #name-movie:hover, #name-movie:active {
-  color: rgb(151, 150, 150);
+  color: rgb(255, 255, 255);
 }
 .watch-button, input[type=submit]{
   color: rgb(83, 82, 82);

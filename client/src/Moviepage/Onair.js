@@ -159,7 +159,7 @@ export default function Homepage() {
                 </div>
 
                 <div style={{margin: '25px'}}>
-                    <h1  id="title-summary" className="heading-label">Movie On Air</h1>
+                    <h1  id="title-summary" className="heading-label">Movies On Air</h1>
                 {
                     (value !== "")?
                     <div>
@@ -237,7 +237,7 @@ const MovieCard = (props) => {
 const WatchListButton = () => {
     return (
         <div>
-            <button className="watch-button">+ Watch</button>
+            {/* <button className="watch-button">+ Watch</button> */}
         </div>
     )
 }

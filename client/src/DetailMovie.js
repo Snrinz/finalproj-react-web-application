@@ -75,7 +75,7 @@ export default class DetailMovie extends Component {
                 <Loading />
          :
         <>
-                <div style={{marginTop: '20px'}} data-aos="fade-up" className="detail-movie-section">
+                <div style={{marginTop: '20px'}} data-aos="fade-up" className="detail-movie-section" >
                     <img id="image-detail-movie" src={require(`./img/${this.state.movie_detail.photo}`)} alt={this.state.movie_detail.photo}></img>
 
                 <div className="description-section">
