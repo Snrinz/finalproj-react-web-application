@@ -55,7 +55,7 @@ export default class DetailMovie extends Component {
             else throw res
         })
         .then(res =>{ 
-            this.setState({review_list: res.reviews})
+            this.setState({review_list: res.reviews.reverse()})
         })
         .catch(err => {
             console.log("error2 " + JSON.stringify(err)); 
@@ -72,7 +72,7 @@ export default class DetailMovie extends Component {
             else throw res
         })
         .then(res =>{ 
-            this.setState({review_list: res.reviews})            
+            this.setState({review_list: res.reviews.reverse()})            
         })
         .catch(err => {
             console.log("error2 " + JSON.stringify(err)); 
