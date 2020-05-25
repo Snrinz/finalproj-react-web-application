@@ -3,7 +3,7 @@ import { withFormik } from 'formik'
 import { withRouter } from 'react-router-dom';
 import * as Yup from 'yup';
 // import { Redirect, Switch } from 'react-router-dom'
-import history from './utils/authUtils/history' //use if you want to redirect after submit
+// import history from './utils/authUtils/history' //use if you want to redirect after submit
 
 const PostForm = (props) => {
     const {
@@ -49,9 +49,8 @@ const CommentFormik = withRouter(withFormik({
         comment: Yup.string()
         .required()
     }),
-    handleSubmit: (values, { setSubmitting, props }) => {
-  
-      fetch('/api/reviews', {
+    handleSubmit: ( values, { resetForm, setSubmitting, props }) => {  
+        fetch('/api/reviews', {
         method: 'POST',
         body: JSON.stringify(values),
         headers: new Headers({ 'Content-Type': 'application/json' }),
@@ -60,23 +59,20 @@ const CommentFormik = withRouter(withFormik({
         if (response.status !== 200) {
           console.log(response.statusText);
           throw `Status Code: ${response.status} ${response.statusText}`;
-        }
+        }        
         return response.json()
       })
-      // .then(res => {
-      //   // let history = props.history; //useHistory();
-      //   // let location = props.location; //useLocation();    
-      //   // let { from } = location.state || { from: { pathname: `/detail-movie/${props.movieId}` } };        
-      //   // history.replace(from);
-      //   return <Switch><Redirect to="{`/detail-movie/${props.movieId}`}" /></Switch>
-      // })
-      .then(response => {
-        history.push(`/detail-movie/${props.movieId}`);
+      .then( res => {
+        props.edit()
+        console.log("Before: " + values.comment);
+        resetForm({});
+        console.log("After: " + values.comment);
       })
       .catch(err => { 
         console.log(err);
       });
       setSubmitting(false);
+      
     },
     displayName: "PostForm"
   })(PostForm));

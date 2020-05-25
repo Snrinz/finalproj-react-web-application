@@ -145,7 +145,7 @@ const SignIn = () => {
           <br/>
           <div className={classes.test}>
           <br/>
-          <Link to='/signup'>
+          <Link to='/signup' style={{textDecoration: 'none'}}>
             <Button 
                   // href="/signup"
                   type="submit"

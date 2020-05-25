@@ -26,14 +26,13 @@ export default class DetailMovie extends Component {
         rating: 0,
         review_list: [],
         isLoad: true,
-        profile:{}
+        profile:{},
     }
     
     componentDidMount () {
         // const context = useContext(Context);
         // this.setState({profile: context.profileState}) 
         let { movie_id } = this.props.match.params
-        console.log("DID MOUNT");
         // Get Movie Detail
         fetch(`/api/movie/${movie_id}`)
         .then(res => {
@@ -55,8 +54,6 @@ export default class DetailMovie extends Component {
             else throw res
         })
         .then(res =>{ 
-            console.log("Review List: " + res.reviews)     
-            console.log("Before " + this.state.review_list);
             this.setState({review_list: res.reviews})
         })
         .catch(err => {
@@ -64,6 +61,21 @@ export default class DetailMovie extends Component {
         }) 
 
         Aos.init({ duration: 2000})
+    }
+
+    handleEdit = () => {        
+        let { movie_id } = this.props.match.params
+        fetch(`/api/reviews/movie/${movie_id}`)
+        .then(res => {
+            if (res.ok) return res.json()
+            else throw res
+        })
+        .then(res =>{ 
+            this.setState({review_list: res.reviews})            
+        })
+        .catch(err => {
+            console.log("error2 " + JSON.stringify(err)); 
+        })         
     }
 
     render() {
@@ -169,8 +181,7 @@ export default class DetailMovie extends Component {
                         }
                     </React.Fragment>
                 }
-                
-                <PostComment movieId={this.state.movie_detail._id} />                 
+                <PostComment edit={this.handleEdit} movieId={this.state.movie_detail._id} />                 
             </div>
 
 
@@ -306,11 +317,11 @@ const PostComment = (props) => {
     const { movieId } = props
     const context = useContext(Context);
     const profile = context.profileState
-    console.log("user",profile);
+
     return(
         <>
             { (context.authState) ? 
-                <PostForm userId={profile._id} movieId={movieId} />
+                <PostForm edit={props.edit} userId={profile._id} movieId={movieId} />
                 : <div style={{marginTop: '50px', textAlign: 'center', fontWeight: 'bold'}}>ต้องเข้าสู่ระบบก่อน จึงจะแสดงความคิดเห็นได้</div>
             }
         </>
@@ -343,9 +354,9 @@ const PostComment = (props) => {
 //             }
 //             return response.json()
 //           })
-//           .then(response => {
-//               history.push('/');
-//           })
+//         //   .then(response => {
+//         //       history.push('/');
+//         //   })
 //           .catch(err => { 
 //             console.log(err);
 //           });
