@@ -82,7 +82,7 @@ export default class DetailMovie extends Component {
                 <div className="description-section">
                     <div className="descrip">                        
                         <h2>{this.state.movie_detail.name}</h2>
-                        <div className="rating-section">
+                        <div style={{margin: 'auto auto'}} className="rating-section">
                             <h2><FontAwesomeIcon id="star" icon={faStar} /> {this.state.rating.toFixed(1)} </h2>
                         </div>
                     </div>

@@ -135,7 +135,7 @@ export default function Homepage() {
     }, [value, filter])
 
         return (
-            <div>
+            <div data-aos="fade-up">
                 <div style={{display: 'flex', justifyContent: 'center', marginTop: '50px'}}>
                     <Paper component="form" className={classes.root}>
                         <FormControl className={classes.margin}>
@@ -166,7 +166,9 @@ export default function Homepage() {
                 </div>
 
                 <div style={{margin: '25px'}}>
-                    <h1  id="title-summary" className="heading-label">Movies On Air</h1>
+                    <h1  id="title-summary" className="heading-label">
+                        { (value !== "")? "Result": "Movies On Air"}
+                    </h1>
                 {
                     (value !== "")?
                     <div>
