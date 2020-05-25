@@ -43,6 +43,7 @@ const UnauthenMenutest = () => {
                         src={iconHome}
                         width="25"
                         height="18"
+                        alt="home"
                         // className="d-inline-block align-top"
                     /></Link>
                 </li>
@@ -74,6 +75,7 @@ const AuthenMenutest = () => {
                         src={iconHome}
                         width="25"
                         height="18"
+                        alt="home"
                         // className="d-inline-block align-top"
                     /></Link>
                 </li>

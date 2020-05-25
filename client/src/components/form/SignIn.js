@@ -141,7 +141,7 @@ const SignIn = () => {
             Sign In
           </Button>
           <br/>
-          <label> ──────────────  or  ──────────────  </label>
+          <label style={{margin: 'auto auto'}}> ──────────────  or  ──────────────  </label>
           <br/>
           <div className={classes.test}>
           <br/>

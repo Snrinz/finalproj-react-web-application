@@ -1,5 +1,5 @@
 import React from 'react'
-import { withFormik } from 'formik'
+import { withFormik, Formik } from 'formik'
 import { withRouter } from 'react-router-dom';
 import * as Yup from 'yup';
 // import { Redirect, Switch } from 'react-router-dom'
@@ -20,7 +20,7 @@ const PostForm = (props) => {
     return (
         <div className="post-section">
             <form onSubmit={handleSubmit}>
-                <textarea name="text-post" 
+                <textarea name="text-post"
                     type="text" 
                     placeholder="Type text in here . ."
                     onChange={handleChange}
@@ -49,7 +49,7 @@ const CommentFormik = withRouter(withFormik({
         comment: Yup.string()
         .required()
     }),
-    handleSubmit: async( values, { setSubmitting, props }) => {  
+    handleSubmit: async( values, { props, setSubmitting, setErrors, setStatus, resetForm }) => {  
         await fetch('/api/reviews', {
         method: 'POST',
         body: JSON.stringify(values),
@@ -64,11 +64,16 @@ const CommentFormik = withRouter(withFormik({
       })
       .then( res => {
         props.edit()
+        resetForm({values: {
+          comment: ''
+        }})
+        setStatus({success: true})
       })
-      .catch(err => { 
-        console.log(err);
+      .catch(error => { 
+        setSubmitting(false);
+        setErrors({submit: error.message})
+        setStatus({success: false})
       });
-      setSubmitting(false);
       
     },
     displayName: "PostForm"

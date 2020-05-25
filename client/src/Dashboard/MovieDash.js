@@ -221,7 +221,7 @@
       >
         <Fade in={open}>
           <div className={classes.paper}>
-              <AddMovie />
+              <AddMovie handleRefresh={props.handleRefresh} />
           </div>
         </Fade>
       </Modal>
@@ -369,11 +369,28 @@
             console.log("error " + JSON.stringify(err)); 
         })        
     }, []);
+
+    const handleRefresh = () => {
+      console.log("dddd");
+      
+      fetch(`/api/movie`)
+      .then(res => {
+          if (res.ok) return res.json()
+          else throw res
+      })
+      .then(res =>{ 
+          console.log("data is " + res.movies);            
+          setData(res.movies)            
+      })
+      .catch(err => {
+          console.log("error " + JSON.stringify(err)); 
+      })
+    }
   
     return (
       <div className={classes.root}>
         <Paper className={classes.paper}>
-          <EnhancedTableToolbar numSelected={selected.length} />
+          <EnhancedTableToolbar handleRefresh={handleRefresh} numSelected={selected.length} />
           <TableContainer>
             <Table
               className={classes.table}

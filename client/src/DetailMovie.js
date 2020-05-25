@@ -14,6 +14,7 @@ import PostForm from './CommentPost'
 import { makeStyles } from '@material-ui/core/styles';
 import Rating from '@material-ui/lab/Rating';
 import Box from '@material-ui/core/Box';
+import { withStyles } from '@material-ui/core/styles';
 
 // API for Animation
 import Aos from "aos"
@@ -78,6 +79,24 @@ export default class DetailMovie extends Component {
         })         
     }
 
+    handleVote = () => {
+        console.log("VOTEEEEEEEE");        
+        let { movie_id } = this.props.match.params
+        // Get Movie Detail
+        fetch(`/api/movie/${movie_id}`)
+        .then(res => {
+            if (res.ok) return res.json()
+            else throw res
+        })
+        .then(res =>{ 
+            console.log("Movie is " + res.movie)
+            this.setState({movie_detail: res.movie, rating:res.rating, isLoad:false})
+        })
+        .catch(err => {
+            console.log("error " + JSON.stringify(err)); 
+        }) 
+    }
+
     render() {
 
         return (
@@ -100,7 +119,7 @@ export default class DetailMovie extends Component {
                     </div>
                     <hr style={{opacity: '0'}} />
                     <div className="descrip">
-                        <p>ให้คะแนน : &nbsp;</p><Rate movieId={this.state.movie_detail._id} vote_average={this.state.rating} />
+                        <p>ให้คะแนน : &nbsp;</p><Rate movieId={this.state.movie_detail._id} handleVote={this.handleVote} />
                     </div>
                     <hr />
                     <div className="descrip">
@@ -217,6 +236,7 @@ const Comment = (props) => {
     )
 }
 
+
 const Rate = (props) => {
     const { movieId } = props
     const context = useContext(Context);
@@ -233,6 +253,11 @@ const Rate = (props) => {
         },
       });
     const classes = useStyles();
+    const StyledRating = withStyles({
+        iconEmpty: {
+          color: 'white',
+        }
+      })(Rating);
 
     const labels = {
         0.5: '0.5 Stars',
@@ -260,7 +285,6 @@ const Rate = (props) => {
     useEffect(() => {
         if(value === 0) return
 
-        console.log("Rate value is " + value);
         let data = {
             userId: profile._id,
             movieId: movieId,
@@ -279,6 +303,9 @@ const Rate = (props) => {
             }
             return response.json()
         })
+        .then(response => {
+            props.handleVote()
+        })
         .catch(err => { 
             console.log(err);
         });
@@ -288,7 +315,7 @@ const Rate = (props) => {
         <>
             { context.authState ? 
                 <div className={classes.root}>
-                    <Rating
+                    <StyledRating
                     size="small"
                     name="hover-feedback"
                     max={10}

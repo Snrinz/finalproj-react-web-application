@@ -11,6 +11,68 @@ import Ratings  from '../models/rating.js';
 import Reviews  from '../models/reviews.js';
 import User  from '../models/user.js';
 
+router.post("/upload", async (req, res) => {
+
+    const storage = multer.diskStorage({
+        destination: "./public/uploads/",
+        filename: function(req, file, cb){
+           cb(null,"IMAGE-" + Date.now() + path.extname(file.originalname));
+        }
+     });
+     
+    const upload = multer({
+        storage: storage,
+        limits:{fileSize: 1000000},
+     }).single("myImage");
+
+    upload(req, res, (err) => {
+       console.log("Request ---", req.body);
+       console.log("Request file ---", req.file);//Here you get file.
+       /*Now do where ever you want to do*/
+       if(!err)
+          return res.send(200).end();
+    });
+ });
+
+router.post('/newmovie',async (req, res) => {
+    let { name, type, description, trailer, director, actor, company, photo, onAirTime } = req.body
+    console.log("new movie request: " + name);
+    
+    let str = type.replace(/\s/g,'')
+    let typelist = []
+    typelist = str.split(',')
+
+    str = actor.replace(/\s/g,'');
+    let actorlist = str.split(',')
+    
+    var movie = new Movie({
+        name,
+        // typelist,
+        description,    
+        trailer,         // www.youtube /url
+        director,
+        // actorlist,
+        company,
+        photo,
+        onAirTime
+    });
+
+    movie.type = typelist
+    movie.actor = actorlist
+    
+    Movie.init()
+    .then(function() { // avoid dup by wait until finish building index
+        movie.save()
+        .then(movie => {
+            return res.json({success: true, message: 'Movie Created', 
+                      movie: movie.toNewRegisterJSON()});
+        }).catch(err => {
+            return res.status;
+        });
+    });
+
+});
+
 // Routes
 router.get('/', (req, res) => {
 
@@ -44,24 +106,8 @@ router.post('/save',async (req, res) => {
     });
 });
 
-router.post('/movie',async (req, res) => {
+router.post('/movie', async (req, res) => {
     // const { } = req.body;
-    // let { name, type, description, trailer, director, actor, company, photo, onAirTime } = req.body
-
-    // if(!name || !type || !description || !trailer || !director || !actor || !company || !photo || !onAirTime)
-    //     return res.status(422).json(logError('Invalid info.'))
-
-    // const movie = new Movie({
-    //     name,
-    //     type,
-    //     description,    
-    //     trailer,         // www.youtube /url
-    //     director,
-    //     actor,
-    //     company,
-    //     photo,
-    //     onAirTime
-    // });
 
     movie.name = req.body.name;
     movie.type = req.body.type;
