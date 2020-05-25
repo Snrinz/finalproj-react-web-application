@@ -13,7 +13,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Context from '../../utils/authUtils/Context';
 import '../../App.css';
-
+import { Link } from 'react-router-dom';
 
 import { Formik } from "formik";
 import * as Yup from 'yup';
@@ -145,15 +145,18 @@ const SignIn = () => {
           <br/>
           <div className={classes.test}>
           <br/>
-          <Button 
-                href="/signup"
-                type="submit"
-                fullWidth
-                variant="contained"
-                color="secondary"
-              >
-                Create a New Account
-          </Button> 
+          <Link to='/signup'>
+            <Button 
+                  // href="/signup"
+                  type="submit"
+                  fullWidth
+                  variant="contained"
+                  color="secondary"
+                >
+                  Create a New Account
+            </Button>          
+          </Link>
+ 
            </div>   
         </form>
       </div>
