@@ -3,12 +3,7 @@ import { Link } from 'react-router-dom';
 import {Nav, NavDropdown, Navbar} from 'react-bootstrap';
 // import Navbar from 'react-bootstrap/Navbar'
 import Context from '../../utils/authUtils/Context';
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-// import { faCog } from "@fortawesome/free-solid-svg-icons"
-// import { faUser } from "@fortawesome/free-solid-svg-icons"
-// import { faHome } from "@fortawesome/free-solid-svg-icons"
-// import { faSearch } from "@fortawesome/free-solid-svg-icons"
-// import { faSignInAlt } from "@fortawesome/free-solid-svg-icons"
+import iconHome from '../../img/icon2.png'
 
 const UnauthenMenu = () => {
     return (
@@ -45,7 +40,7 @@ const UnauthenMenutest = () => {
                 <ul style={styleNavBar} class="navbar-nav">
                 <li class="nav-item active">
                     <Link to="/"><img
-                        src="./img/icon2.png"
+                        src={iconHome}
                         width="25"
                         height="18"
                         // className="d-inline-block align-top"
@@ -76,7 +71,7 @@ const AuthenMenutest = () => {
                 <ul style={styleNavBar} class="navbar-nav">
                 <li class="nav-item active">
                 <Link to="/"><img
-                        src="./img/icon2.png"
+                        src={iconHome}
                         width="25"
                         height="18"
                         // className="d-inline-block align-top"

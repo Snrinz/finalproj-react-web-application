@@ -134,6 +134,11 @@ router.get('/movie', async (req , res) =>{
     })
     
 })
+// Admin 
+router.post('/movie', async (req , res) =>{
+    let filterInstruction = {}
+    
+})
 
 router.get('/moviemostratingall', async (req , res) => {
 
