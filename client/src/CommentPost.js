@@ -49,8 +49,8 @@ const CommentFormik = withRouter(withFormik({
         comment: Yup.string()
         .required()
     }),
-    handleSubmit: ( values, { resetForm, setSubmitting, props }) => {  
-        fetch('/api/reviews', {
+    handleSubmit: async( values, { setSubmitting, props }) => {  
+        await fetch('/api/reviews', {
         method: 'POST',
         body: JSON.stringify(values),
         headers: new Headers({ 'Content-Type': 'application/json' }),
@@ -58,15 +58,12 @@ const CommentFormik = withRouter(withFormik({
       .then(response => {
         if (response.status !== 200) {
           console.log(response.statusText);
-          throw `Status Code: ${response.status} ${response.statusText}`;
+          throw response.status;
         }        
         return response.json()
       })
       .then( res => {
         props.edit()
-        console.log("Before: " + values.comment);
-        resetForm({});
-        console.log("After: " + values.comment);
       })
       .catch(err => { 
         console.log(err);

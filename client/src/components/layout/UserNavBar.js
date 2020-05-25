@@ -100,7 +100,7 @@ const AuthenMenutest = () => {
 const AuthenMenu = (props) => {
     const context = useContext(Context);
     const profile = context.profileState
-    let isAdmin = profile.memberType === 'ADMIN';
+    // let isAdmin = profile.memberType === 'ADMIN';
 
     return (<>
         <NavDropdown title={profile.firstName} drop="left" id="basic-nav-dropdown">

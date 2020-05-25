@@ -46,21 +46,33 @@ router.post('/save',async (req, res) => {
 
 router.post('/movie',async (req, res) => {
     // const { } = req.body;
-    
-    const movie = new Movie();
+    // let { name, type, description, trailer, director, actor, company, photo, onAirTime } = req.body
+
+    // if(!name || !type || !description || !trailer || !director || !actor || !company || !photo || !onAirTime)
+    //     return res.status(422).json(logError('Invalid info.'))
+
+    // const movie = new Movie({
+    //     name,
+    //     type,
+    //     description,    
+    //     trailer,         // www.youtube /url
+    //     director,
+    //     actor,
+    //     company,
+    //     photo,
+    //     onAirTime
+    // });
 
     movie.name = req.body.name;
     movie.type = req.body.type;
     movie.actor = req.body.actor;
-
-
     movie.description = req.body.description;
     movie.trailer = req.body.trailer;
     movie.director = req.body.director;
     movie.company = req.body.company;
     movie.photo = req.body.photo;
     movie.onAirTime =  moment(req.body.onAirTime, 'DD/MM/YYYY') ;
-    
+    // Movie.init()
     await movie.save((error) => {
         if (error) {
             res.status(500).json({ msg: 'Sorry, internal server errors' });
@@ -134,10 +146,26 @@ router.get('/movie', async (req , res) =>{
     })
     
 })
-// Admin 
-router.post('/movie', async (req , res) =>{
-    let filterInstruction = {}
+// Update a movie identified by the movieId in the request
+router.post('/movie/:movieID', async (req , res) =>{
+    console.log("PUTTTTTTTTTTTTTTTTTTTTTTTTTT");
     
+    if (!req.body) 
+        return res.status(422).json(logError('Need updated data'));
+
+    let { name, type, description, trailer, director, company, photo, movieId, onAirTime } = req.body
+
+    Movie.findByIdAndUpdate(req.params.movieID,
+        {
+            $set: {name, type, description, trailer, director, company, photo, onAirTime}
+        }
+    ).then(movie => {
+        if(!movie) {
+            res.status(404).json(logError("Movie not found with id " + req.params.movieID));
+        }
+        movie.save().then(result => res.json({movie: result.toProfileJSON()}))
+        .catch(err => res.status(422).json(logError(err)))
+    })
 })
 
 router.get('/moviemostratingall', async (req , res) => {
@@ -454,9 +482,7 @@ router.post('/rating',async (req, res) => {
             _movie: new mongoose.Types.ObjectId(movieId),
         }
     )
-    if(raingfind){
-        console.log("เจอออออออออออออ");
-        
+    if(raingfind){        
         raingfind.rating = rating;
         await raingfind.save((error) => {
             if (error) {
@@ -476,8 +502,6 @@ router.post('/rating',async (req, res) => {
             rating: rating
         }
         );
-
-    console.log("ขอเพิ่มดาวหน่อยจ้า " + rating + " ดาว มาจาก " + ratings._user + " เป็นคนโหวต ของหนังเรื่อง " + ratings._movie);
     
         await ratings.save((error) => {
             if (error) {

@@ -275,8 +275,7 @@ const Rate = (props) => {
         fetch('/api/rating', requestOptions)
         .then(response => {
             if (response.status !== 200) {
-              console.log(response.statusText);
-              throw `Status Code: ${response.status} ${response.statusText}`;
+              throw response.status;
             }
             return response.json()
         })
@@ -327,55 +326,3 @@ const PostComment = (props) => {
         </>
     )
 }
-
-// const PostForm = (props) => {
-//     const [comment, setComment] = useState("")
-
-//     const handleSubmit = () => {
-//         let data = {
-//             userId: props.userId,
-//             movieId: props.movieId,
-//             comment: comment
-//         }
-
-//         fetch('/api/reviews', {
-//             method: 'POST',
-//             // withCredentials: true,
-//             // credentials: 'include',
-//             body: JSON.stringify(data),
-//             // headers: new Headers({ 'Authorization': localStorage.getItem('token') }),
-//             // headers: new Headers({ 'Content-Type': 'application/json',
-//             // 'Authorization': localStorage.getItem('token') }),
-//           })
-//           .then(response => {
-//             if (response.status !== 200) {
-//               console.log(response.statusText);
-//               throw `Status Code: ${response.status} ${response.statusText}`;
-//             }
-//             return response.json()
-//           })
-//         //   .then(response => {
-//         //       history.push('/');
-//         //   })
-//           .catch(err => { 
-//             console.log(err);
-//           });
-//     }
-      
-      
-//     return (
-//         <div className="post-section">
-//             <form onSubmit={handleSubmit}>
-//                 <textarea name="text-post" 
-//                     type="text" 
-//                     placeholder="Type text in here . ."
-//                     onChange={(event) => setComment(event.target.value)}
-//                     name="comment"
-//                     required
-//                     />
-                
-//                 <input type="submit" />
-//             </form>   
-//         </div>
-//     )
-// }

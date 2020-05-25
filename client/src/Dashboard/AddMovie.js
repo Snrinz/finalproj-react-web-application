@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { withFormik } from 'formik'
 import { withRouter } from 'react-router-dom';
 import * as Yup from 'yup';
@@ -20,16 +20,15 @@ const useStyles = makeStyles((theme) => ({
 
 const MovieForm = (props) => {      
     const classes = useStyles();
-    const [movie, setMovie] = useState(props.movie)
 
-    const styleImage = {
-        border: '1px solid rgb(231, 231, 231)',
-        display: 'flex',
-        display: 'block',
-        maxWidth: '30%',
-        margin: 'auto auto',
-        marginBottom: '20px',
-    }
+    // const styleImage = {
+    //     border: '1px solid rgb(231, 231, 231)',
+    //     display: 'flex',
+    //     display: 'block',
+    //     maxWidth: '30%',
+    //     margin: 'auto auto',
+    //     marginBottom: '20px',
+    // }
 
     const {
         values,
@@ -40,38 +39,34 @@ const MovieForm = (props) => {
         handleSubmit,
       } = props;
 
-      values.photo = movie.photo
-      values.movieId = movie._id
-      console.log("name movie: " + movie.name);
-      
+      values.photo = ""
       
     return (
-        <form className={classes.root} onSubmit={handleSubmit}>
-            <img style={styleImage} src={require(`../img/${movie.photo}`)} 
-            alt={movie.photo}></img>
+        <form className={classes.form} onSubmit={handleSubmit}>
+            {/* <img style={styleImage} src={require(`../img/${movie.photo}`)} 
+            alt={movie.photo}></img> */}
 
           <Grid container  alignItems="center" spacing={3}>
             <Grid item xs={12} sm={5}>
               <TextField
-                defaultValue={props.movie.name}
+                autoComplete="name"
+                name="name"
                 variant="outlined"
                 required
                 fullWidth
                 id="name"
                 label="ชื่อภาพยนตร์"
-                name="name"
-                autoComplete="name"
+                autoFocus
                 value={values.name}
                 onChange={handleChange}
                 onBlur={handleBlur}
                 helperText={touched.name ? errors.name : ""}
-                error={touched.name && Boolean(errors.name)}    
+                error={touched.name && Boolean(errors.name)}  
               />
             </Grid>
 
             <Grid item xs={12} sm={5}>
               <TextField
-                defaultValue={movie.type}
                 variant="outlined"
                 required
                 fullWidth
@@ -91,15 +86,13 @@ const MovieForm = (props) => {
           <Grid container  alignItems="center" spacing={3} wrap="nowrap">
             <Grid item xs={12} sm={5}>
               <TextField
-                defaultValue={movie.director}
                 variant="outlined"
                 required
                 fullWidth
                 name="director"
                 label="ผู้กำกับ"
-                type="director"
                 id="director"
-                autoComplete="new-director"
+                autoComplete="director"
                 value={values.director}
                 onChange={handleChange}
                 onBlur={handleBlur}
@@ -110,15 +103,13 @@ const MovieForm = (props) => {
 
             <Grid item xs={12} sm={5}>
               <TextField
-                defaultValue={movie.company}
                 variant="outlined"
                 required
                 fullWidth
                 name="company"
                 label="บริษัทผู้สร้าง"
-                type="director"
                 id="company"
-                autoComplete="current-director"
+                autoComplete="company"
                 value={values.company}
                 onChange={handleChange}
                 onBlur={handleBlur}
@@ -131,15 +122,31 @@ const MovieForm = (props) => {
           <Grid container direction="column" justify="flex-start" spacing={3} wrap="nowrap">
 
             <Grid item xs={12} sm={12}>
+                <TextField
+                    variant="outlined"
+                    required
+                    fullWidth
+                    id="actor"
+                    label="นักแสดง"
+                    name="actor"
+                    autoComplete="actor"
+                    value={values.actor}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    helperText={touched.actor ? errors.actor : ""}
+                    error={touched.actor && Boolean(errors.actor)}    
+                />
+            </Grid>
+
+            <Grid item xs={12} sm={12}>
               <TextField
-                defaultValue={movie.onAirTime}
                 variant="outlined"
                 required
                 fullWidth
-                id="trailer"
-                label="ลิงค์ตัวอย่างภาพยนตร์"
-                name="trailer"
-                autoComplete="trailer"
+                id="onAirTime"
+                label="วันฉาย"
+                name="onAirTime"
+                autoComplete="onAirTime"
                 value={values.onAirTime}
                 onChange={handleChange}
                 onBlur={handleBlur}
@@ -150,7 +157,6 @@ const MovieForm = (props) => {
 
             <Grid item xs={12} sm={12}>
               <TextField
-                defaultValue={movie.trailer}
                 variant="outlined"
                 required
                 fullWidth
@@ -170,7 +176,7 @@ const MovieForm = (props) => {
               <TextareaAutosize
                 style = {{width: '100%'}}
                 rowsMax={5}
-                defaultValue={movie.description}
+
                 variant="outlined"
                 required
                 fullWidth
@@ -187,7 +193,7 @@ const MovieForm = (props) => {
             </Grid>     
             <Grid item xs={12} sm={12}>
               <Button type="submit" fullWidth variant="contained" color="primary" className={classes.submit}>
-                Edit
+                Record
               </Button>
             </Grid>     
           </Grid>
@@ -197,36 +203,53 @@ const MovieForm = (props) => {
 }
 
 const MovieFormFormik = withRouter(withFormik({
-    mapPropsToValues: () => ({ name, type, description, trailer, director, company, photo, movieId, onAirTime }) => {
+    mapPropsToValues: ({ name, type, description, trailer, director, actor, company, photo, onAirTime }) => {
       return {
         name: name || "",
         type: type || "",
         description: description || "",
         trailer: trailer || "",
         director: director || "",
+        actor: actor || "",
         company: company || "",
         photo: photo || "",
-        movieId: movieId || "",
         onAirTime: onAirTime || "",
       };
     },
     validationSchema: Yup.object().shape({
-        comment: Yup.string()
-        .required()
+        name: Yup.string()
+        .required(),
+        type: Yup.string()
+        .required(),
+        description: Yup.string()
+        .required(),
+        trailer: Yup.string()
+        .required(),
+        director: Yup.string()
+        .required(),
+        company: Yup.string()
+        .required(),
+        photo: Yup.string()
+        .required(),
+        onAirTime: Yup.string()
+        .required(),
     }),
-    handleSubmit: (values, { setSubmitting}) => {
+    handleSubmit: (values, { setSubmitting }) => {
   
-      fetch(`/api/movie/${values.movieId}`, {
+      fetch(`/api/movie`, {
         method: 'POST',
         body: JSON.stringify(values),
         headers: new Headers({ 'Content-Type': 'application/json' }),
       })
       .then(response => {
+          console.log("dddddddddd");
+          
         if (response.status !== 200) {
           console.log(response.statusText);
           throw `Status Code: ${response.status} ${response.statusText}`;
         }
-
+        console.log("record success!!!");
+        
         return response.json()
       })
       .catch(err => { 
