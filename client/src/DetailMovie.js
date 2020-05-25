@@ -279,6 +279,7 @@ const Rate = (props) => {
             { context.authState ? 
                 <div className={classes.root}>
                     <Rating
+                    size="small"
                     name="hover-feedback"
                     max={10}
                     value={value}
@@ -292,7 +293,7 @@ const Rate = (props) => {
                     }}
                     />
                     {value !== null && 
-                    <Box fontSize={{ xs: 'medium' }}
+                    <Box style={{ whiteSpace: 'nowrap' }} fontSize={{ xs: 'small' }}
                     p={{ xs: 2 }}>{labels[hover !== -1 ? hover : value]}</Box>}
                 </div>
                 : <div style={{alignSelf: 'center'}}> ต้องเข้าสู่ระบบก่อน</div>
